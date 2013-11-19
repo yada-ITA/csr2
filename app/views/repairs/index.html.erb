@@ -1,0 +1,39 @@
+<h1>Listing repairs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Issueno</th>
+      <th>Issuedate</th>
+      <th>Arrivedate</th>
+      <th>Startdate</th>
+      <th>Finishdate</th>
+      <th>Beforecomment</th>
+      <th>Aftercomment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repairs.each do |repair| %>
+      <tr>
+        <td><%= repair.issueNo %></td>
+        <td><%= repair.issueDate %></td>
+        <td><%= repair.arriveDate %></td>
+        <td><%= repair.startDate %></td>
+        <td><%= repair.finishDate %></td>
+        <td><%= repair.beforeComment %></td>
+        <td><%= repair.afterComment %></td>
+        <td><%= link_to 'Show', repair %></td>
+        <td><%= link_to 'Edit', edit_repair_path(repair) %></td>
+        <td><%= link_to 'Destroy', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repair', new_repair_path %>

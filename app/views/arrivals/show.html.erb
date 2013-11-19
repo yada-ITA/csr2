@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Arrivaldate:</strong>
+  <%= @arrival.arrivalDate %>
+</p>
+
+<p>
+  <strong>Arrivalcomment:</strong>
+  <%= @arrival.arrivalComment %>
+</p>
+
+<%= link_to 'Edit', edit_arrival_path(@arrival) %> |
+<%= link_to 'Back', arrivals_path %>

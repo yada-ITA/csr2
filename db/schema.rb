@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118172633) do
+ActiveRecord::Schema.define(version: 20131119075012) do
+
+  create_table "arrivals", force: true do |t|
+    t.date     "arrivalDate"
+    t.text     "arrivalComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -51,6 +58,26 @@ ActiveRecord::Schema.define(version: 20131118172633) do
     t.string   "address"
     t.string   "phoneNo"
     t.string   "destinationName"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "repairs", force: true do |t|
+    t.string   "issueNo"
+    t.date     "issueDate"
+    t.date     "arriveDate"
+    t.date     "startDate"
+    t.date     "finishDate"
+    t.text     "beforeComment"
+    t.text     "afterComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "returns", force: true do |t|
+    t.date     "returnDate"
+    t.text     "returnComment"
+    t.text     "sendingComment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  returnDate: 2013-11-19
+  returnComment: MyText
+  sendingComment: MyText
+
+two:
+  returnDate: 2013-11-19
+  returnComment: MyText
+  sendingComment: MyText

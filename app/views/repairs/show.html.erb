@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Issueno:</strong>
+  <%= @repair.issueNo %>
+</p>
+
+<p>
+  <strong>Issuedate:</strong>
+  <%= @repair.issueDate %>
+</p>
+
+<p>
+  <strong>Arrivedate:</strong>
+  <%= @repair.arriveDate %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @repair.startDate %>
+</p>
+
+<p>
+  <strong>Finishdate:</strong>
+  <%= @repair.finishDate %>
+</p>
+
+<p>
+  <strong>Beforecomment:</strong>
+  <%= @repair.beforeComment %>
+</p>
+
+<p>
+  <strong>Aftercomment:</strong>
+  <%= @repair.afterComment %>
+</p>
+
+<%= link_to 'Edit', edit_repair_path(@repair) %> |
+<%= link_to 'Back', repairs_path %>

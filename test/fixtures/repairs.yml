@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  issueNo: MyString
+  issueDate: 2013-11-19
+  arriveDate: 2013-11-19
+  startDate: 2013-11-19
+  finishDate: 2013-11-19
+  beforeComment: MyText
+  afterComment: MyText
+
+two:
+  issueNo: MyString
+  issueDate: 2013-11-19
+  arriveDate: 2013-11-19
+  startDate: 2013-11-19
+  finishDate: 2013-11-19
+  beforeComment: MyText
+  afterComment: MyText

@@ -1,5 +1,11 @@
 R2::Application.routes.draw do
 
+  resources :arrivals
+
+  resources :repairs
+
+  resources :returns
+
   root to: 'menu#show'
   #root :to => 'menu#show'
 

@@ -1,0 +1,25 @@
+<%= form_for(@arrival) do |f| %>
+  <% if @arrival.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@arrival.errors.count, "error") %> prohibited this arrival from being saved:</h2>
+
+      <ul>
+      <% @arrival.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :arrivalDate %><br>
+    <%= f.date_select :arrivalDate %>
+  </div>
+  <div class="field">
+    <%= f.label :arrivalComment %><br>
+    <%= f.text_area :arrivalComment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
