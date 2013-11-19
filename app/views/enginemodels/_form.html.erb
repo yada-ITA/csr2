@@ -1,0 +1,25 @@
+<%= form_for(@enginemodel) do |f| %>
+  <% if @enginemodel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enginemodel.errors.count, "error") %> prohibited this enginemodel from being saved:</h2>
+
+      <ul>
+      <% @enginemodel.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :modelcode %><br>
+    <%= f.text_field :modelcode %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
