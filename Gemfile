@@ -47,3 +47,5 @@ end
 # devise
 gem 'devise'
 
+# will pagenate
+gem 'will_paginate'

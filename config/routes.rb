@@ -8,6 +8,8 @@ R2::Application.routes.draw do
 
   get 'repairs/engineArrived/:engine_id' => 'repairs#engineArrived'
 
+  get 'engines/index' => 'engines#index'
+
   resources :returnings
 
   resources :arrivals

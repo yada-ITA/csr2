@@ -1,4 +1,23 @@
-<h1>Listing engines</h1>
+<h1 class="title">エンジン一覧</h1>
+<h3><b>検索条件</b></h3>
+<%= form_tag engines_index_path, :method => :get do %>
+<table id = "square">
+  <tr>
+    <td width="80" >所轄会社     </td>
+    <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched.fetch('company_id', ""))%></td>
+  </tr>
+  <tr>
+    <td width="80" >型式   </td>
+    <td width="120"><%= text_field :search, :engineModelName, :value => @searched.fetch('engineModelName', "") %><br /></td>
+    <td width="80" >販売型式   </td>
+    <td width="120"><%= text_field :search, :selesModelName, :value => @searched.fetch('selesModelName', "") %><br /></td>
+  </tr>
+</table>
+<%= submit_tag "検索" %>
+<% end %>
+
+<br />
+<br />
 
 <table>
   <thead>
@@ -6,6 +25,7 @@
       <th>型式</th>
       <th>販売型式</th>
       <th>S/#</th>
+      <th>管轄</th>      
       <th>ステータス</th>      
       <th></th>
       <th></th>
@@ -21,11 +41,12 @@
         <td><%= engine.engineModelName %></td>
         <td><%= engine.salesModelName %></td>
         <td><%= engine.serialno %></td>
+        <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
         <td><%= link_to '詳細', engine %></td>
         <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
         <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td></td>
+        <td>.....</td>
         <td><%= link_to '到着登録', engine_arrived_path(engine) %></td>
         <td><%= link_to '開始登録(一覧へ)', repairs_path %></td>
         <td><%= link_to '完了登録(一覧へ)', repairs_path  %></td>
@@ -35,6 +56,8 @@
   </tbody>
 </table>
 
+<br>
+<%= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br>
 
 <%= link_to 'New Engine', new_engine_path %>
