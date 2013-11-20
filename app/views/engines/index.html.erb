@@ -16,6 +16,10 @@
     <td width="80" >販売型式   </td>
     <td width="120"><%= text_field :search, :selesModelName, :value => @searched.fetch('selesModelName', "") %><br /></td>
   </tr>
+  <tr>
+      <td width="80" >ステータス     </td>
+      <td width="120"><%= collection_select(:search, :enginestatus_id, Enginestatus.all, :id, :name, :include_blank => true, :selected => @searched.fetch('enginestatus_id', ""))%></td>
+  </tr>
 </table>
 <%= submit_tag "検索" %>
 <% end %>
@@ -47,13 +51,14 @@
         <td><%= engine.serialno %></td>
         <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
-        <td><%= link_to '詳細', engine %></td>
-        <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
-        <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>.....</td>
+        <td><%= link_to '返却登録', engine_returning_path(engine) %></td>
         <td><%= link_to '到着登録', engine_arrived_path(engine) %></td>
         <td><%= link_to '開始登録(一覧へ)', repairs_path %></td>
         <td><%= link_to '完了登録(一覧へ)', repairs_path  %></td>
+        <td>.....</td>
+        <td><%= link_to '詳細', engine %></td>
+        <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
+        <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         
       </tr>
     <% end %>

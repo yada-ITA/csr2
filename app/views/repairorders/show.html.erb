@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Issueno:</strong>
+  <%= @repairorder.issueNo %>
+</p>
+
+<p>
+  <strong>Issuedate:</strong>
+  <%= @repairorder.issueDate %>
+</p>
+
+<p>
+  <strong>Orderno:</strong>
+  <%= @repairorder.orderNo %>
+</p>
+
+<p>
+  <strong>Constructionno:</strong>
+  <%= @repairorder.constructionNo %>
+</p>
+
+<p>
+  <strong>Otherbrandpartsarrivealdate:</strong>
+  <%= @repairorder.otherBrandPartsArrivealDate %>
+</p>
+
+<p>
+  <strong>Returndate:</strong>
+  <%= @repairorder.returnDate %>
+</p>
+
+<p>
+  <strong>Returningcomment:</strong>
+  <%= @repairorder.returningComment %>
+</p>
+
+<p>
+  <strong>Sendingcomment:</strong>
+  <%= @repairorder.sendingComment %>
+</p>
+
+<%= link_to 'Edit', edit_repairorder_path(@repairorder) %> |
+<%= link_to 'Back', repairorders_path %>

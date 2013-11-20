@@ -1,5 +1,11 @@
 R2::Application.routes.draw do
 
+  get 'repairorders/engineReturning/:engine_id' => 'repairorders#engineReturning'
+  
+  get 'repairorders/repairOrdered/:id' => 'repairorders#repairOrdered'
+
+  get 'repairorders/repairAccepted/:id' => 'repairorders#repairAccepted'
+
   get 'repairs/new/:engine_id' => 'repairs#new'
 
   get 'repairs/repairStarted/:id' => 'repairs#repairStarted'
@@ -9,14 +15,12 @@ R2::Application.routes.draw do
   get 'repairs/engineArrived/:engine_id' => 'repairs#engineArrived'
 
   get 'engines/index' => 'engines#index'
-
-  resources :returnings
+
+  resources :repairorders
 
   resources :arrivals
 
   resources :repairs
-
-  resources :returns
 
   root to: 'menu#show'
 

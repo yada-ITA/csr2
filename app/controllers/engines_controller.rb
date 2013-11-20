@@ -16,7 +16,6 @@ class EnginesController < ApplicationController
     # 3.ページ繰り時
     #    直前の検索条件をもとにページ繰り
     #    ①検索条件のセッションからの取り出し
-    puts '--------------hrer--------------'
     if params[:page].nil?
       # ページ繰り以外
       @searched = Hash.new()
@@ -35,8 +34,7 @@ class EnginesController < ApplicationController
       @searched = session[:searched]
     end
     # まずはページングを指示
-    @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 3)
-    #@engines = Engine.all()
+    @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 10)
     
     # 検索条件が指定されていれば、抽出条件としてwhere句を追加
     # 会社コード（管轄）
@@ -50,6 +48,10 @@ class EnginesController < ApplicationController
     # お客様名
     if !(@searched.fetch('salesModelName', nil).blank?)
       @engines = @engines.where('engines.salesModelName like ?', "%" + @searched.fetch('salesModelName') + "%")
+    end
+    # ステータス
+    if !(@searched.fetch('enginestatus_id', nil).blank?)
+      @engines = @engines.where('engines.enginestatus_id = ?', @searched.fetch('enginestatus_id'))
     end
 
   end
