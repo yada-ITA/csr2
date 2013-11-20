@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
   
   # validation checks
   validates :userid, :presence => true,
-                   :uniqueness => true,
-                   :length => { :is => 8 }
+                     :uniqueness => true,
+                     :length => { :is => 8 },
+                     :format => { :with => /[A-Za-z][A-Za-z][0-9][0-9][0-9][0-9][0-9][0-9]/}
   
   validates :name, :presence => true
+
 
 end
