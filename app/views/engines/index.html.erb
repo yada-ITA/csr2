@@ -3,8 +3,12 @@
 <table>
   <thead>
     <tr>
-      <th>Enginemodelname</th>
-      <th>Salesmodelname</th>
+      <th>型式</th>
+      <th>販売型式</th>
+      <th>S/#</th>
+      <th>ステータス</th>      
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,9 +20,16 @@
       <tr>
         <td><%= engine.engineModelName %></td>
         <td><%= engine.salesModelName %></td>
-        <td><%= link_to 'Show', engine %></td>
-        <td><%= link_to 'Edit', edit_engine_path(engine) %></td>
-        <td><%= link_to 'Destroy', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= engine.serialno %></td>
+        <td><%= engine.enginestatus.name %></td>
+        <td><%= link_to '詳細', engine %></td>
+        <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
+        <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
+        <td><%= link_to '到着登録', engine_arrived_path(engine) %></td>
+        <td><%= link_to '開始登録(一覧へ)', repairs_path %></td>
+        <td><%= link_to '完了登録(一覧へ)', repairs_path  %></td>
+        
       </tr>
     <% end %>
   </tbody>

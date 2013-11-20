@@ -1,1 +1,1 @@
-json.extract! @engine, :engineModelName, :salesModelName, :created_at, :updated_at
+json.extract! @engine, :engineModelName, :serialno, :salesModelName, :created_at, :updated_at

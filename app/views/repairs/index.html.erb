@@ -3,13 +3,17 @@
 <table>
   <thead>
     <tr>
-      <th>Issueno</th>
-      <th>Issuedate</th>
-      <th>Arrivedate</th>
-      <th>Startdate</th>
-      <th>Finishdate</th>
-      <th>Beforecomment</th>
-      <th>Aftercomment</th>
+      <th>発行番号</th>
+      <th>発行日</th>
+      <th>到着日</th>
+      <th>整備開始日</th>
+      <th>整備完了日</th>
+      <th>整備前コメント</th>
+      <th>完成品コメント</th>
+      <th>型式</th>
+      <th>S/#</th>
+      <th>ステータス</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -26,9 +30,14 @@
         <td><%= repair.finishDate %></td>
         <td><%= repair.beforeComment %></td>
         <td><%= repair.afterComment %></td>
-        <td><%= link_to 'Show', repair %></td>
-        <td><%= link_to 'Edit', edit_repair_path(repair) %></td>
-        <td><%= link_to 'Destroy', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= repair.engine.engineModelName %></td>
+        <td><%= repair.engine.serialno %></td>
+        <td><%= repair.engine.enginestatus.name %></td>
+        <td><%= link_to '詳細', repair %></td>
+        <td><%= link_to '編集(仮)', edit_repair_path(repair) %></td>
+        <td><%= link_to '開始登録', start_repair_path(repair) %></td>
+        <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
+        <td><%= link_to '削除(仮)', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
