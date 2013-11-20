@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119112049) do
+ActiveRecord::Schema.define(version: 20131120043857) do
 
   create_table "arrivals", force: true do |t|
     t.date     "arrivalDate"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20131119112049) do
     t.datetime "updated_at"
     t.integer  "enginestatus_id"
     t.string   "serialno"
+    t.integer  "company_id"
   end
 
   create_table "enginestatuses", force: true do |t|
