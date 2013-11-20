@@ -2,10 +2,14 @@
 <h3><b>検索条件</b></h3>
 <%= form_tag engines_index_path, :method => :get do %>
 <table id = "square">
-  <tr>
-    <td width="80" >所轄会社     </td>
-    <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched.fetch('company_id', ""))%></td>
-  </tr>
+  <% if yesOffice? %>
+    <tr>
+      <td width="80" >所轄会社     </td>
+      <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched.fetch('company_id', ""))%></td>
+    </tr>
+  <% else %>
+    <%= hidden_field(:search, :company_id, :value => current_user.company_id) %>
+  <% end %>
   <tr>
     <td width="80" >型式   </td>
     <td width="120"><%= text_field :search, :engineModelName, :value => @searched.fetch('engineModelName', "") %><br /></td>
