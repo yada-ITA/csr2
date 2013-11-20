@@ -23,6 +23,9 @@
     <%= f.label :salesModelName %><br>
     <%= f.text_field :salesModelName %>
   </div>
+  <div><%= f.label :company %><br>
+    <%= f.collection_select( :company_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
   <div><%= f.label :status %><br>
     <%= f.collection_select( :enginestatus_id, Enginestatus.all, :id, :name, :include_blank => false ) %>
   </div>
