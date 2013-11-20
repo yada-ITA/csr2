@@ -1,0 +1,50 @@
+<h1>整備依頼一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>発行番号</th>
+      <th>発行日</th>
+      <th>注文番号</th>
+      <th>工事番号</th>
+      <th>他社部品仕入日</th>
+      <th>返却日</th>
+      <th>返却コメント</th>
+      <th>送付コメント</th>
+      <th>型式</th>
+      <th>S/#</th>
+      <th>ステータス</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repairorders.each do |repairorder| %>
+      <tr>
+        <td><%= repairorder.issueNo %></td>
+        <td><%= repairorder.issueDate %></td>
+        <td><%= repairorder.orderNo %></td>
+        <td><%= repairorder.constructionNo %></td>
+        <td><%= repairorder.otherBrandPartsArrivealDate %></td>
+        <td><%= repairorder.returnDate %></td>
+        <td><%= repairorder.returningComment %></td>
+        <td><%= repairorder.sendingComment %></td>
+        <td><%= repairorder.engine.engineModelName %></td>
+        <td><%= repairorder.engine.serialno %></td>
+        <td><%= repairorder.engine.enginestatus.name %></td>
+        <td><%= link_to '整備依頼', repair_ordered_path(repairorder) %></td>
+        <td><%= link_to '仕入登録', repair_accepted_path(repairorder) %></td>
+        <td>.....</td>
+        <td><%= link_to 'Show', repairorder %></td>
+        <td><%= link_to 'Edit', edit_repairorder_path(repairorder) %></td>
+        <td><%= link_to 'Destroy', repairorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repairorder', new_repairorder_path %>

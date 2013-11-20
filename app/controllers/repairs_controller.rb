@@ -73,7 +73,8 @@ class RepairsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  # GET /repairs/engineArrived/1
   def engineArrived
     @repair = Repair.new
     # パラメータにengine_idがあれば、エンジンを設定する
@@ -81,10 +82,13 @@ class RepairsController < ApplicationController
       @repair.engine = Engine.find(params[:engine_id])
     end
   end
+
+  # GET /repairs/repairStarted/1
   def repairStarted
     @repair = Repair.find(params[:id])
   end
 
+  # GET /repairs/repairFinished/1
   def repairFinished
     @repair = Repair.find(params[:id])
   end
