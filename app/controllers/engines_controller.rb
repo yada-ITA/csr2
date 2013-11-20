@@ -35,8 +35,8 @@ class EnginesController < ApplicationController
       @searched = session[:searched]
     end
     # まずはページングを指示
-    # @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 3)
-    @engines = Engine.all()
+    @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 3)
+    #@engines = Engine.all()
     
     # 検索条件が指定されていれば、抽出条件としてwhere句を追加
     # 会社コード（管轄）

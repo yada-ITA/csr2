@@ -1,6 +1,6 @@
 <h1 class="title">エンジン一覧</h1>
 <h3><b>検索条件</b></h3>
-<%= form_tag engines_index_path do %>
+<%= form_tag engines_index_path, :method => :get do %>
 <table id = "square">
   <tr>
     <td width="80" >所轄会社     </td>
@@ -57,7 +57,7 @@
 </table>
 
 <br>
-<!--<X= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>-->
+<%= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br>
 
 <%= link_to 'New Engine', new_engine_path %>
