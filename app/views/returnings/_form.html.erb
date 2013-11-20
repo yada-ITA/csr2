@@ -1,0 +1,29 @@
+<%= form_for(@returning) do |f| %>
+  <% if @returning.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@returning.errors.count, "error") %> prohibited this returning from being saved:</h2>
+
+      <ul>
+      <% @returning.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :returnDate %><br>
+    <%= f.date_select :returnDate %>
+  </div>
+  <div class="field">
+    <%= f.label :returningComment %><br>
+    <%= f.text_area :returningComment %>
+  </div>
+  <div class="field">
+    <%= f.label :sendingComment %><br>
+    <%= f.text_area :sendingComment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

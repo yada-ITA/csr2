@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Returndate:</strong>
+  <%= @returning.returnDate %>
+</p>
+
+<p>
+  <strong>Returningcomment:</strong>
+  <%= @returning.returningComment %>
+</p>
+
+<p>
+  <strong>Sendingcomment:</strong>
+  <%= @returning.sendingComment %>
+</p>
+
+<%= link_to 'Edit', edit_returning_path(@returning) %> |
+<%= link_to 'Back', returnings_path %>
