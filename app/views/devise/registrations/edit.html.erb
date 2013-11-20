@@ -4,10 +4,10 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :userid %><br />
-  <%= f.email_field :userid, :autofocus => true %></div>
+  <%= f.text_field :userid, :autofocus => true %></div>
 
   <div><%= f.label :name %><br />
-  <%= f.email_field :name %></div>
+  <%= f.text_field :name %></div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
@@ -26,7 +26,8 @@
   <%= f.password_field :current_password %></div>
 
   <div><%= f.label :company %><br>
-  <%= f.collection_select( :company_id, Company.all, :id, :name, :include_blank => false ) %></div>
+  <%= f.collection_select( :company_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
 
   <div><%= f.submit "Update" %></div>
 <% end %>

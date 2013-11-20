@@ -4,10 +4,17 @@
   <strong>Enginemodelname:</strong>
   <%= @engine.engineModelName %>
 </p>
-
+<p>
+  <strong>serialno:</strong>
+  <%= @engine.serialno %>
+</p>
 <p>
   <strong>Salesmodelname:</strong>
   <%= @engine.salesModelName %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @engine.enginestatus.name %>
 </p>
 
 <%= link_to 'Edit', edit_engine_path(@engine) %> |

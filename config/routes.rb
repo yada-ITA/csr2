@@ -1,5 +1,15 @@
 R2::Application.routes.draw do
 
+  get 'repairs/new/:engine_id' => 'repairs#new'
+
+  get 'repairs/repairStarted/:id' => 'repairs#repairStarted'
+
+  get 'repairs/repairFinished/:id' => 'repairs#repairFinished'
+
+  get 'repairs/engineArrived/:engine_id' => 'repairs#engineArrived'
+
+  resources :returnings
+
   resources :arrivals
 
   resources :repairs
@@ -7,7 +17,6 @@ R2::Application.routes.draw do
   resources :returns
 
   root to: 'menu#show'
-  #root :to => 'menu#show'
 
   devise_for :users
   

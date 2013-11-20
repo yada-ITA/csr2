@@ -13,14 +13,14 @@
   </thead>
 
   <tbody>
-    <% @returns.each do |return| %>
+    <% @returns.each do | aReturn | %>
       <tr>
-        <td><%= return.returnDate %></td>
-        <td><%= return.returnComment %></td>
-        <td><%= return.sendingComment %></td>
-        <td><%= link_to 'Show', return %></td>
-        <td><%= link_to 'Edit', edit_return_path(return) %></td>
-        <td><%= link_to 'Destroy', return, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= aReturn.returnDate %></td>
+        <td><%= aReturn.returnComment %></td>
+        <td><%= aReturn.sendingComment %></td>
+        <td><%= link_to 'Show', aReturn %></td>
+        <td><%= link_to 'Edit', edit_return_path(aReturn) %></td>
+        <td><%= link_to 'Destroy', aReturn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

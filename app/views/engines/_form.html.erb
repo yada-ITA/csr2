@@ -16,8 +16,15 @@
     <%= f.text_field :engineModelName %>
   </div>
   <div class="field">
+    <%= f.label :serialno %><br>
+    <%= f.text_field :serialno %>
+  </div>
+  <div class="field">
     <%= f.label :salesModelName %><br>
     <%= f.text_field :salesModelName %>
+  </div>
+  <div><%= f.label :status %><br>
+    <%= f.collection_select( :enginestatus_id, Enginestatus.all, :id, :name, :include_blank => false ) %>
   </div>
   <div class="actions">
     <%= f.submit %>
