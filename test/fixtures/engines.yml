@@ -6,6 +6,7 @@ engine1:
   updated_at: 2013-11-20 01:39:43.617112
   enginestatus_id: 5
   serialno: 1
+  company_id: 1
 
 engine2:
   id: 2
@@ -15,6 +16,7 @@ engine2:
   updated_at: 2013-11-19 10:28:56.782239
   enginestatus_id: 2
   serialno: 2
+  company_id: 1
 
 engine3:
   id: 3
@@ -24,6 +26,7 @@ engine3:
   updated_at: 2013-11-19 10:32:31.702532
   enginestatus_id: 1
   serialno: 3
+  company_id: 1
 
 engine4:
   id: 4
@@ -33,6 +36,7 @@ engine4:
   updated_at: 2013-11-19 10:35:05.091305
   enginestatus_id: 1
   serialno: 4
+  company_id: 2
 
 engine5:
   id: 5
@@ -42,4 +46,5 @@ engine5:
   updated_at: 2013-11-20 02:01:33.016366
   enginestatus_id: 3
   serialno: 5
+  company_id: 2
 
