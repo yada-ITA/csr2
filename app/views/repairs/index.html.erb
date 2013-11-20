@@ -17,6 +17,8 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -35,9 +37,10 @@
         <td><%= repair.engine.enginestatus.name %></td>
         <td><%= link_to '詳細', repair %></td>
         <td><%= link_to '編集(仮)', edit_repair_path(repair) %></td>
+        <td><%= link_to '削除(仮)', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>.....</td>
         <td><%= link_to '開始登録', start_repair_path(repair) %></td>
         <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
-        <td><%= link_to '削除(仮)', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
