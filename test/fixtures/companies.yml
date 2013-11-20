@@ -1,0 +1,21 @@
+company1:
+  id: 1
+  name: YES本社
+  category: 
+  created_at: 
+  updated_at: 
+
+company2:
+  id: 2
+  name: 整備会社その１
+  category: 
+  created_at: 
+  updated_at: 
+
+company3:
+  id: 3
+  name: 整備会社その２
+  category: 
+  created_at: 
+  updated_at: 
+
