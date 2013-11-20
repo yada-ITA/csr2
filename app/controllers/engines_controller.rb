@@ -4,7 +4,54 @@ class EnginesController < ApplicationController
   # GET /engines
   # GET /engines.json
   def index
-    @engines = Engine.all
+  
+    # 1.初期表示（メニューなどからの遷移時）
+    #    ログインユーザの会社コードのみを条件に抽出
+    #    ①検索条件のクリア
+    #    ②ログインユーザの会社コードという条件のみセッションへの保存
+    # 2.検索ボタン押下時
+    #    画面入力された条件に対して抽出
+    #    ①検索条件のクリア
+    #    ②画面入力された条件のセッションへの保存
+    # 3.ページ繰り時
+    #    直前の検索条件をもとにページ繰り
+    #    ①検索条件のセッションからの取り出し
+    puts '--------------hrer--------------'
+    if params[:page].nil?
+      # ページ繰り以外
+      @searched = Hash.new()
+      session[:searched] = @searched
+      if params[:commit].nil?
+        # 初期表示時：ログインユーザの部門コードという条件のみセッションへの保存
+        @searched.store('company_id', current_user.company_id)
+      else
+        # 検索ボタン押下時：画面入力された条件のセッションへの保存
+        params[:search].each do | key, value |
+          @searched.store(key, value)
+        end
+      end
+    else
+      # ページ繰り時：検索条件のセッションからの取り出し
+      @searched = session[:searched]
+    end
+    # まずはページングを指示
+    # @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 3)
+    @engines = Engine.all()
+    
+    # 検索条件が指定されていれば、抽出条件としてwhere句を追加
+    # 会社コード（管轄）
+    if !(@searched.fetch('company_id', nil).blank?)
+      @engines = @engines.where('engines.company_id = ?', @searched.fetch('company_id'))
+    end
+    # 型式
+    if !(@searched.fetch('engineModelName', nil).blank?)
+      @engines = @engines.where('engines.engineModelName like ?', "%" + @searched.fetch('engineModelName') + "%")
+    end
+    # お客様名
+    if !(@searched.fetch('salesModelName', nil).blank?)
+      @engines = @engines.where('engines.salesModelName like ?', "%" + @searched.fetch('salesModelName') + "%")
+    end
+
   end
 
   # GET /engines/1
@@ -71,6 +118,6 @@ class EnginesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engine_params
-      params.require(:engine).permit(:engineModelName, :serialno, :salesModelName, :enginestatus_id	)
+      params.require(:engine).permit(:engineModelName, :serialno, :salesModelName, :company_id, :enginestatus_id, :page)
     end
 end
