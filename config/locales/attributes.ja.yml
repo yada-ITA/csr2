@@ -1,0 +1,46 @@
+ja:
+  activerecord:
+    attributes:
+      engine:
+        engineModelName: '型式'
+        salesModelName: '販売型式'
+        serialno: 'S/#'
+        company: '管轄'
+        status: 'ステータス'
+      anken:
+        name: 案件名
+        customer: お客様
+        estimatePrice: 想定受注金額
+        memo: メモ
+        ankenstatus: ステータス
+        dept: 主管部署
+      ankenstatus:
+        name: スタータス
+      assignment:
+        from: 開始日
+        to: 終了日
+        roleComment: 役割について
+        status: ステータス
+        num_engineer: ご要望要員数
+      dept:
+        code: 部門コード
+        name: 部門名
+      member:
+        code: 社員コード
+        name: 姓名
+        email: Ｅメール
+      skillset_lang:
+        name: スキル名
+        memo: メモ
+      skillset_rolo:
+        name: スキル名
+        memo: メモ
+      user:
+        code: 社員コード
+        password: パスワード
+        email: Ｅメール
+        remember_me: ログイン状態を維持する。
+        dept: 所属部門
+        password_confirmation: パスワード（確認）
+        current_password: 現在のパスワード
+        
