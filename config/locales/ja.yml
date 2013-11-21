@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      engine: 'エンジン'
+    attributes:
+      engine:
+        engineModelName: '型式'
+        salesModelName: '販売型式'
+        serialno: 'S/#'
+        company: '管轄'
+        status: 'ステータス'
+        
