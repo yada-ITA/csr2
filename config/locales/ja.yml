@@ -1,12 +1,209 @@
 ja:
   activerecord:
     models:
-      engine: 'ã‚¨ãƒ³ã‚¸ãƒ³'
+      engine: 'ƒGƒ“ƒWƒ“'
     attributes:
       engine:
-        engineModelName: 'å‹å¼'
-        salesModelName: 'è²©å£²å‹å¼'
+        engineModelName: 'Œ^®'
+        salesModelName: '”Ì”„Œ^®'
         serialno: 'S/#'
-        company: 'ç®¡è½„'
-        status: 'ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹'
-        
+        company: 'ŠÇŠ'
+        status: 'ƒXƒe[ƒ^ƒX'
+  date:
+    abbr_day_names:
+    - “ú
+    - Œ
+    - ‰Î
+    - …
+    - –Ø
+    - ‹à
+    - “y
+    abbr_month_names:
+    - 
+    - 1Œ
+    - 2Œ
+    - 3Œ
+    - 4Œ
+    - 5Œ
+    - 6Œ
+    - 7Œ
+    - 8Œ
+    - 9Œ
+    - 10Œ
+    - 11Œ
+    - 12Œ
+    day_names:
+    - “ú—j“ú
+    - Œ—j“ú
+    - ‰Î—j“ú
+    - …—j“ú
+    - –Ø—j“ú
+    - ‹à—j“ú
+    - “y—j“ú
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%Y”N%mŒ%d“ú(%a)'
+      short: ! '%m/%d'
+    month_names:
+    - 
+    - 1Œ
+    - 2Œ
+    - 3Œ
+    - 4Œ
+    - 5Œ
+    - 6Œ
+    - 7Œ
+    - 8Œ
+    - 9Œ
+    - 10Œ
+    - 11Œ
+    - 12Œ
+    order:
+      - :year
+      - :month
+      - :day
+    month_names: [~, 1Œ, 2Œ, 3Œ, 4Œ, 5Œ, 6Œ, 7Œ, 8Œ, 9Œ, 10Œ, 11Œ, 12Œ]
+    abbr_month_names: [~, 1Œ, 2Œ, 3Œ, 4Œ, 5Œ, 6Œ, 7Œ, 8Œ, 9Œ, 10Œ, 11Œ, 12Œ]
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: –ñ1ŠÔ
+        other: –ñ%{count}ŠÔ
+      about_x_months:
+        one: –ñ1ƒ–Œ
+        other: –ñ%{count}ƒ–Œ
+      about_x_years:
+        one: –ñ1”N
+        other: –ñ%{count}”N
+      almost_x_years:
+        one: 1”Nã
+        other: ! '%{count}”Nã'
+      half_a_minute: 30•b‘OŒã
+      less_than_x_minutes:
+        one: 1•ªˆÈ“à
+        other: ! '%{count}•ªˆÈ“à'
+      less_than_x_seconds:
+        one: 1•bˆÈ“à
+        other: ! '%{count}•bˆÈ“à'
+      over_x_years:
+        one: 1”NˆÈã
+        other: ! '%{count}”NˆÈã'
+      x_days:
+        one: 1“ú
+        other: ! '%{count}“ú'
+      x_minutes:
+        one: 1•ª
+        other: ! '%{count}•ª'
+      x_months:
+        one: 1ƒ–Œ
+        other: ! '%{count}ƒ–Œ'
+      x_seconds:
+        one: 1•b
+        other: ! '%{count}•b'
+    prompts:
+      day: “ú
+      hour: 
+      minute: •ª
+      month: Œ
+      second: •b
+      year: ”N
+  errors: &errors
+    format: ! '%{attribute}%{message}'
+    messages:
+      accepted: ‚ğó‘ø‚µ‚Ä‚­‚¾‚³‚¢B
+      blank: ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      confirmation: ‚ÆŠm”F‚Ì“ü—Í‚ªˆê’v‚µ‚Ü‚¹‚ñB
+      empty: ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      equal_to: ‚Í%{count}‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      even: ‚Í‹ô”‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      exclusion: ‚Í—\–ñ‚³‚ê‚Ä‚¢‚Ü‚·B
+      greater_than: ‚Í%{count}‚æ‚è‘å‚«‚¢’l‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      greater_than_or_equal_to: ‚Í%{count}ˆÈã‚Ì’l‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      inclusion: ‚Íˆê——‚É‚ ‚è‚Ü‚¹‚ñB
+      invalid: ‚Í•s³‚È’l‚Å‚·B
+      less_than: ‚Í%{count}‚æ‚è¬‚³‚¢’l‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      less_than_or_equal_to: ‚Í%{count}ˆÈ‰º‚Ì’l‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      not_a_number: ‚Í”’l‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      not_an_integer: ‚Í®”‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      odd: ‚ÍŠï”‚É‚µ‚Ä‚­‚¾‚³‚¢B
+      record_invalid: ƒoƒŠƒf[ƒVƒ‡ƒ“‚É¸”s‚µ‚Ü‚µ‚½B %{errors}
+      taken: ‚Í‚·‚Å‚É‘¶İ‚µ‚Ü‚·B
+      too_long: ‚Í%{count}•¶šˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      too_short: ‚Í%{count}•¶šˆÈã‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+      wrong_length: ‚Í%{count}•¶š‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
+    template:
+      body: Ÿ‚Ì€–Ú‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B
+      header:
+        one: ! '%{model}‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B'
+        other: ! '%{model}‚É%{count}ŒÂ‚ÌƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B'
+  helpers:
+    select:
+      prompt: ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B
+    submit:
+      create: “o˜^‚·‚é
+      submit: •Û‘¶‚·‚é
+      update: XV‚·‚é
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%n%u'
+        precision: 0
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: ‰~
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: \‰­
+          million: •S–œ
+          quadrillion: ç’›
+          thousand: ç
+          trillion: ’›
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n%u'
+        units:
+          byte: ƒoƒCƒg
+          gb: ƒMƒKƒoƒCƒg
+          kb: ƒLƒƒoƒCƒg
+          mb: ƒƒKƒoƒCƒg
+          tb: ƒeƒ‰ƒoƒCƒg
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ‚Æ
+      two_words_connector: ‚Æ
+      words_connector: ‚Æ
+  time:
+    am: Œß‘O
+    formats:
+      default: ! '%Y/%m/%d %H:%M:%S'
+      long: ! '%Y”N%mŒ%d“ú(%a) %H%M•ª%S•b %z'
+      short: ! '%y/%m/%d %H:%M'
+    pm: ŒßŒã
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
