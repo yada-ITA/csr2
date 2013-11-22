@@ -29,11 +29,15 @@
   </div>
   <div class="field">
     <%= f.label :arriveDate %><br>
-    <%= @repair.arriveDate %>
+    <%=  f.date_field :arriveDate %>
   </div>
   <div class="field">
     <%= f.label :startDate %><br>
-    <%= f.date_select :startDate %>
+    <%= f.date_field :startDate %>
+  </div>
+  <div class="field">
+    <%= f.label :estimatedFinishDate %><br>
+    <%= f.date_field :estimatedFinishDate %>
   </div>
   <div class="field">
     <%= f.label :beforeComment %><br>

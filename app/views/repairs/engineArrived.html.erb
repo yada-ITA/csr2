@@ -1,4 +1,4 @@
-<h1>整備開始</h1>
+<h1>受領</h1>
 
 <%= form_for(@repair) do |f| %>
   <% if @repair.errors.any? %>
@@ -14,9 +14,9 @@
   <% end %>
 
   <div class="field">
-    Engine Serial No : 
+    エンジン S/# : 
     <%= @repair.engine.serialno %><br>
-    Engine Model : 
+    型式 : 
     <%= @repair.engine.engineModelName %><br>
   </div>
   <div class="field">
@@ -25,11 +25,23 @@
   </div>
   <div class="field">
     <%= f.label :issueDate %><br>
-    <%= f.date_select :issueDate %>
+    <%= f.date_field :issueDate %>
   </div>
   <div class="field">
-    <%= f.label :arriveDate %><br>
-    <%= f.date_select :arriveDate %>
+    <%= f.label :timeOfRunning %><br>
+    <%= f.number_field :timeOfRunning %>
+  </div>
+  <div class="field">
+    <%= f.label :dayOfTest %><br>
+    <%= f.date_field :dayOfTest %>
+  </div>
+  <div class="field">
+    <%= f.label :yearsOfUse %><br>
+    <%= f.number_field :timeOfRunning %>
+  </div>
+  <div class="field">
+    <%= f.label :arrivalDate %><br>
+    <%= f.date_field :arriveDate %>
   </div>
   <div>
     <%= f.hidden_field :engine_id %>

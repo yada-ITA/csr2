@@ -197,3 +197,4 @@ ja:
   activerecord:
     errors:
       <<: *errors
+      

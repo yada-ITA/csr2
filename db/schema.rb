@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120145533) do
+ActiveRecord::Schema.define(version: 20131122103429) do
+
+  create_table "arrivals", force: true do |t|
+    t.date     "arrivalDate"
+    t.text     "arrivalComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -83,6 +90,14 @@ ActiveRecord::Schema.define(version: 20131120145533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "engine_id"
+    t.integer  "timeOfRunning"
+    t.date     "dayOfTest"
+    t.text     "arrivalComment"
+    t.string   "orderNo"
+    t.date     "orderDate"
+    t.string   "constructionNo"
+    t.date     "desirableFinishDate"
+    t.date     "estimatedFinishDate"
   end
 
   create_table "returnings", force: true do |t|
@@ -92,6 +107,14 @@ ActiveRecord::Schema.define(version: 20131120145533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "engine_id"
+  end
+
+  create_table "returns", force: true do |t|
+    t.date     "returnDate"
+    t.text     "returnComment"
+    t.text     "sendingComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -110,7 +133,7 @@ ActiveRecord::Schema.define(version: 20131120145533) do
     t.string   "userid"
     t.string   "category"
     t.string   "name"
-    t.integer  "company_id"
+    t.string   "company_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

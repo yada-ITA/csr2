@@ -7,40 +7,31 @@ ja:
         serialno: 'S/#'
         company: '管轄'
         status: 'ステータス'
-      anken:
-        name: 案件名
-        customer: お客様
-        estimatePrice: 想定受注金額
-        memo: メモ
-        ankenstatus: ステータス
-        dept: 主管部署
-      ankenstatus:
-        name: スタータス
-      assignment:
-        from: 開始日
-        to: 終了日
-        roleComment: 役割について
-        status: ステータス
-        num_engineer: ご要望要員数
-      dept:
-        code: 部門コード
-        name: 部門名
-      member:
-        code: 社員コード
-        name: 姓名
-        email: Ｅメール
-      skillset_lang:
-        name: スキル名
-        memo: メモ
-      skillset_rolo:
-        name: スキル名
-        memo: メモ
+      repair:
+        issueNo: 発行番号
+        issueDate: 発行日
+        timeOfRunning: 運転時間
+        dayOfTest: 試運転日
+        yearsOfUse: 使用年数
+        returningComment: 返却コメント
+        arrivalComment: 到着コメント
+        arriveDate: 受領日
+        startDate: 整備開始日
+        beforeComment: 整備前コメント
+        finishDate: 整備完了日
+        afterComment: 整備前コメント
+        estimatedFinishDate: 予定完成日
+        finishDate: 完了日
       user:
+        userid: 社員コード
         code: 社員コード
+        name: 氏名
         password: パスワード
         email: Ｅメール
         remember_me: ログイン状態を維持する。
         dept: 所属部門
         password_confirmation: パスワード（確認）
         current_password: 現在のパスワード
+        company: 会社
+        
         

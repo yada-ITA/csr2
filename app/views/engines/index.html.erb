@@ -51,8 +51,8 @@
         <td><%= engine.serialno %></td>
         <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
+        <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td><%= link_to '返却登録', engine_returning_path(engine) %></td>
-        <td><%= link_to '到着登録', engine_arrived_path(engine) %></td>
         <td><%= link_to '開始登録(一覧へ)', repairs_path %></td>
         <td><%= link_to '完了登録(一覧へ)', repairs_path  %></td>
         <td>.....</td>
