@@ -6,6 +6,7 @@
       <th>発行番号</th>
       <th>発行日</th>
       <th>到着日</th>
+      <th>完成希望日</th>
       <th>整備開始日</th>
       <th>整備完了日</th>
       <th>整備前コメント</th>
@@ -28,6 +29,7 @@
         <td><%= repair.issueNo %></td>
         <td><%= repair.issueDate %></td>
         <td><%= repair.arriveDate %></td>
+        <td><%= repair.desirableFinishDate %></td>
         <td><%= repair.startDate %></td>
         <td><%= repair.finishDate %></td>
         <td><%= repair.beforeComment %></td>
@@ -35,6 +37,7 @@
         <td><%= repair.engine.engineModelName %></td>
         <td><%= repair.engine.serialno %></td>
         <td><%= repair.engine.enginestatus.name %></td>
+        <td><%= link_to '整備依頼', order_repair_path(repair) %></td>
         <td><%= link_to '開始登録', start_repair_path(repair) %></td>
         <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
         <td>.....</td>
