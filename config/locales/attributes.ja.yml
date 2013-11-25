@@ -15,6 +15,10 @@ ja:
         yearsOfUse: 使用年数
         returningComment: 返却コメント
         arrivalComment: 到着コメント
+        orderNo: 注文No
+        orderDate: 注文日
+        constructionNo: 工事No(仮)
+        desirableFinishDate: 希望完成日
         arriveDate: 受領日
         startDate: 整備開始日
         beforeComment: 整備前コメント

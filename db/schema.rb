@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122103429) do
+ActiveRecord::Schema.define(version: 20131125002615) do
 
   create_table "arrivals", force: true do |t|
     t.date     "arrivalDate"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20131122103429) do
     t.string   "constructionNo"
     t.date     "desirableFinishDate"
     t.date     "estimatedFinishDate"
+    t.text     "returningComment"
   end
 
   create_table "returnings", force: true do |t|

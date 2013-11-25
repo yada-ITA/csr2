@@ -13,23 +13,35 @@
     </div>
   <% end %>
 
-  <div class="field">
-    Engine Serial No : 
-    <%= @repair.engine.serialno %><br>
-    Engine Model : 
-    <%= @repair.engine.engineModelName %><br>
-  </div>
+  <%= render 'engineInfo' %>
+  
   <div class="field">
     <%= f.label :issueNo %><br>
-    <%= @repair.issueNo %>
+    <%= f.text_field :issueNo, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :issueDate %><br>
-    <%= @repair.issueDate %>
+    <%= f.text_field :issueDate, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :arriveDate %><br>
     <%=  f.date_field :arriveDate %>
+  </div>
+  <div class="field">
+    <%= f.label :orderNo %><br>
+    <%= f.text_field :orderNo, :disabled=>'true' %>
+  </div>
+  <div class="field">
+    <%= f.label :orderDate %><br>
+    <%= f.text_field :orderDate, :disabled=>'true' %>
+  </div>
+  <div class="field">
+    <%= f.label :constructionNo %><br>
+    <%= f.text_field :constructionNo, :disabled=>'true' %>
+  </div>
+  <div class="field">
+    <%= f.label :desirableFinishDate %><br>
+    <%= f.date_field :desirableFinishDate, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :startDate %><br>

@@ -15,9 +15,11 @@ class RepairsController < ApplicationController
   # GET /repairs/new
   def new
     @repair = Repair.new
-    # パラメータにengine_idがあれば、エンジンを設定する
+    # パラメータにengine_idがあり、整備にまだエンジンが紐づけられていなければ、エンジンを紐づける
     if !(params[:engine_id].nil?)
-      @repair.engine = Engine.find(params[:engine_id])
+      if @repair.engine.nil?
+        @repair.engine = Engine.find(params[:engine_id])
+      end
     end
   end
 
@@ -29,10 +31,17 @@ class RepairsController < ApplicationController
   # POST /repairs.json
   def create
     @repair = Repair.new(repair_params)
-    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定する
+    # パラメータにengine_idがあり、整備にまだエンジンが紐づけられていなければ、エンジンを紐づける
+    if !(params[:engine_id].nil?)
+      if @repair.engine.nil?
+        @repair.engine = Engine.find(params[:engine_id])
+      end
+    end
+    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
     if !(params[:enginestatus_id].nil?)
       @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-      @repair.engine.save
+      @repair.engine.company = current_user.company
+      @repair.engine.save     
     end
     respond_to do |format|
       if @repair.save
@@ -50,9 +59,10 @@ class RepairsController < ApplicationController
   def update
     respond_to do |format|
       if @repair.update(repair_params)
-		    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定する
+        # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
 		    if !(params[:enginestatus_id].nil?)
 		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+          @repair.engine.company = current_user.company
 		      @repair.engine.save
 		    end
         format.html { redirect_to @repair, notice: 'Repair was successfully updated.' }
@@ -77,20 +87,27 @@ class RepairsController < ApplicationController
   # GET /repairs/engineArrived/1
   def engineArrived
     @repair = Repair.new
-    # パラメータにengine_idがあれば、エンジンを設定する
+    # パラメータにengine_idがあり、整備にまだエンジンが紐づけられていなければ、エンジンを紐づける
     if !(params[:engine_id].nil?)
-      @repair.engine = Engine.find(params[:engine_id])
+      if @repair.engine.nil?
+        @repair.engine = Engine.find(params[:engine_id])
+      end
     end
   end
 
   # GET /repairs/repairStarted/1
   def repairStarted
-    @repair = Repair.find(params[:id])
+    set_repair
   end
 
   # GET /repairs/repairFinished/1
   def repairFinished
-    @repair = Repair.find(params[:id])
+    set_repair
+  end
+  
+  # GET /repairs/repairOrder/1  
+  def repairOrder
+    set_repair
   end
   
   private
@@ -101,6 +118,6 @@ class RepairsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_params
-      params.require(:repair).permit(:id, :issueNo, :issueDate, :arriveDate, :startDate, :finishDate, :beforeComment, :afterComment, :dayOfTest, :arrivalComment, :orderNo, :orderDate, :constructionNo, :desirableFinishDate, :estimatedFinishDate, :engine_id, :enginestatus_id)
+      params.require(:repair).permit(:id, :issueNo, :issueDate, :arriveDate, :startDate, :finishDate, :beforeComment, :afterComment, :timeOfRunning, :dayOfTest, :arrivalComment, :orderNo, :orderDate, :constructionNo, :desirableFinishDate, :estimatedFinishDate, :engine_id, :enginestatus_id)
     end
 end
