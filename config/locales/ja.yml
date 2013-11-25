@@ -1,14 +1,4 @@
 ja:
-  activerecord:
-    models:
-      engine: 'エンジン'
-    attributes:
-      engine:
-        engineModelName: '型式'
-        salesModelName: '販売型式'
-        serialno: 'S/#'
-        company: '管轄'
-        status: 'ステータス'
   date:
     abbr_day_names:
     - 日
@@ -207,3 +197,4 @@ ja:
   activerecord:
     errors:
       <<: *errors
+      
