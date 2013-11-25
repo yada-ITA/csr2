@@ -34,6 +34,9 @@ class RepairordersController < ApplicationController
       @repairorder.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
       @repairorder.engine.save
     end
+  
+    #発行Noはここで自動採番
+    @repairorder.issueNo = Repairorder.createIssueNo
 
     respond_to do |format|
       if @repairorder.save
