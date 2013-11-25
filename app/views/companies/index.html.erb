@@ -5,6 +5,10 @@
     <tr>
       <th>Name</th>
       <th>Category</th>
+      <th>Postcode</th>
+      <th>Address</th>
+      <th>Phoneno</th>
+      <th>Destinationname</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +20,10 @@
       <tr>
         <td><%= company.name %></td>
         <td><%= company.category %></td>
+        <td><%= company.postcode %></td>
+        <td><%= company.address %></td>
+        <td><%= company.phoneNo %></td>
+        <td><%= company.destinationName %></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
