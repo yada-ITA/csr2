@@ -49,3 +49,6 @@ gem 'devise'
 
 # will pagenate
 gem 'will_paginate'
+
+# Use rspec  for development
+gem 'rspec', group: [:development, :test]
