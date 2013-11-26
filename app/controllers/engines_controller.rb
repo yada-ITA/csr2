@@ -74,8 +74,6 @@ class EnginesController < ApplicationController
   # POST /engines.json
   def create
     @engine = Engine.new(engine_params)
-    # ステータスを初期設定する。ひとまず５（出荷済）を設定している →画面からの設定とした
-    # @engine.enginestatus = Enginestatus.find(5)
 
     respond_to do |format|
       if @engine.save

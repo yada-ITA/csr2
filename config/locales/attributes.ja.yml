@@ -14,7 +14,7 @@ ja:
         dayOfTest: 試運転日
         yearsOfUse: 使用年数
         returningComment: 返却コメント
-        arrivalComment: 到着コメント
+        arriveComment: 到着コメント
         orderNo: 注文No
         orderDate: 注文日
         constructionNo: 工事No(仮)
