@@ -37,5 +37,15 @@ ja:
         password_confirmation: パスワード（確認）
         current_password: 現在のパスワード
         company: 会社
+      inquiry:
+        loginUserId: ログイン担当者
+        branchCode: 拠点
+        userId: 担当者
+        placeCode: 設置先
+        orderer: 元受
+        machineNo: 機体No
+        timeOfRunning: エンジン運転時間
+        dayOfTest: 試運転日
+        changeComment: コメント(交換理由)
         
         
