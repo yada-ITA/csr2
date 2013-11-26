@@ -1,0 +1,47 @@
+<h1>引合一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= Inquiry.human_attribute_name('loginUserId') %></th>
+      <th><%= Inquiry.human_attribute_name('branchCode') %></th>
+      <th><%= Inquiry.human_attribute_name('userId') %></th>
+      <th><%= Inquiry.human_attribute_name('placeCode') %></th>
+      <th><%= Inquiry.human_attribute_name('orderer') %></th>
+      <th><%= Inquiry.human_attribute_name('machineNo') %></th>
+      <th><%= Inquiry.human_attribute_name('timeOfRunning') %></th>
+      <th><%= Inquiry.human_attribute_name('dayOfTest') %></th>
+      <th><%= Inquiry.human_attribute_name('changeComment') %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inquiries.each do |inquiry| %>
+      <tr>
+        <td><%= User.find(inquiry.loginUserId).name %></td>
+        <td><%= Company.find(inquiry.branchCode).name %></td>
+        <td><%= User.find(inquiry.userId).name %></td>
+        <td><%= Company.find(inquiry.placeCode).name %></td>
+        <td><%= inquiry.orderer %></td>
+        <td><%= inquiry.machineNo %></td>
+        <td><%= inquiry.timeOfRunning %></td>
+        <td><%= inquiry.dayOfTest %></td>
+        <td><%= inquiry.changeComment %></td>
+        <td><%= link_to '受注登録(未実装)', '' %></td>
+        <td>.....</td>
+        <td><%= link_to '詳細', inquiry %></td>
+        <td><%= link_to '修正(仮)', edit_inquiry_path(inquiry) %></td>
+        <td><%= link_to '削除(仮)', inquiry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inquiry', new_inquiry_path %>
