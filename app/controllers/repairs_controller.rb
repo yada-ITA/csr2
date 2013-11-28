@@ -30,12 +30,15 @@ class RepairsController < ApplicationController
   # POST /repairs
   # POST /repairs.json
   def create
-    @repair = Repair.new(repair_params)
-    # パラメータにengine_idがあり、整備にまだエンジンが紐づけられていなければ、エンジンを紐づける
-    if !(params[:engine_id].nil?)
-      if @repair.engine.nil?
-        @repair.engine = Engine.find(params[:engine_id])
-      end
+    # パラメータにエンジンIDがある場合、まずエンジンに、作業中の整備オブジェクトの取得を試みる
+    engine = Engine.find(params[:repair][:engine_id])
+    @reapir = engine.current_repair
+    # 作業中の整備オブジェクトが存在しない場合、整備オブジェクトを作って、当該のエンジンに紐づける
+    if @reapir.nil?
+      @repair = Repair.new(repair_params)  
+	    if !(params[:repair][:engine_id].nil?)
+        @repair.engine = engine
+	    end   
     end
     # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
     if !(params[:enginestatus_id].nil?)
@@ -86,12 +89,15 @@ class RepairsController < ApplicationController
 
   # GET /repairs/engineArrived/1
   def engineArrived
-    @repair = Repair.new
-    # パラメータにengine_idがあり、整備にまだエンジンが紐づけられていなければ、エンジンを紐づける
-    if !(params[:engine_id].nil?)
-      if @repair.engine.nil?
-        @repair.engine = Engine.find(params[:engine_id])
-      end
+    # パラメータにエンジンIDがある場合、まずエンジンに、作業中の整備オブジェクトの取得を試みる
+    engine = Engine.find(params[:engine_id])
+    @repair = engine.current_repair
+    # 作業中の整備オブジェクトが存在しない場合、整備オブジェクトを作って、当該のエンジンに紐づける
+    if @repair.nil?
+      @repair = Repair.new()  
+	    if !(params[:engine_id].nil?)
+        @repair.engine = engine
+	    end   
     end
   end
 
@@ -118,6 +124,6 @@ class RepairsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_params
-      params.require(:repair).permit(:id, :issueNo, :issueDate, :arriveDate, :startDate, :finishDate, :beforeComment, :afterComment, :timeOfRunning, :dayOfTest, :arrivalComment, :orderNo, :orderDate, :constructionNo, :desirableFinishDate, :estimatedFinishDate, :engine_id, :enginestatus_id)
+      params.require(:repair).permit(:id, :issueNo, :issueDate, :arriveDate, :startDate, :finishDate, :beforeComment, :afterComment, :timeOfRunning, :dayOfTest, :returningComment, :arrivalComment, :orderNo, :orderDate, :constructionNo, :desirableFinishDate, :estimatedFinishDate, :engine_id, :enginestatus_id)
     end
 end

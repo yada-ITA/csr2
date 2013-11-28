@@ -10,9 +10,13 @@ group :development do
 end
 group :production do
   gem 'pg'
+<<<<<<< HEAD
   gem 'rails_12factor'
 end
 
+=======
+end
+>>>>>>> 22b171169156720056f3bd3e974c809f357c2910
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

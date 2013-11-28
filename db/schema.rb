@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20131127085045) do
 
+  create_table "arrivals", force: true do |t|
+    t.date     "arrivalDate"
+    t.text     "arrivalComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -67,6 +74,15 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.datetime "updated_at"
   end
 
+  create_table "locations", force: true do |t|
+    t.string   "postcode"
+    t.string   "address"
+    t.string   "phoneNo"
+    t.string   "destinationName"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "repairorders", force: true do |t|
     t.string   "issueNo"
     t.date     "inquiryDate"
@@ -108,6 +124,23 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.text     "returningComment"
   end
 
+  create_table "returnings", force: true do |t|
+    t.date     "returnDate"
+    t.text     "returningComment"
+    t.text     "sendingComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "engine_id"
+  end
+
+  create_table "returns", force: true do |t|
+    t.date     "returnDate"
+    t.text     "returnComment"
+    t.text     "sendingComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -124,7 +157,7 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.string   "userid"
     t.string   "category"
     t.string   "name"
-    t.integer  "company_id"
+    t.string   "company_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
