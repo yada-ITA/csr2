@@ -47,9 +47,10 @@ ja:
         timeOfRunning: エンジン運転時間
         dayOfTest: 試運転日
         changeComment: コメント(交換理由)
-      repairorder:
+      engineorder:
         issueNo: 発行番号
         inquiryDate: 引合発生日
+        orderDate: 受注日
         loginUserId: ログイン担当者
         branchCode: 拠点コード
         userId: 担当者

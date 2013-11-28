@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  issueNo: MyString
+  inquiryDate: 2013-11-28
+  loginUserId: 1
+  branchCode: 1
+  userId: 1
+  placeCode: 1
+  orderer: MyString
+  machineNo: MyString
+  timeOfRunning: 1
+  changeComment: MyText
+  orderDate: 2013-11-28
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-28
+
+two:
+  issueNo: MyString
+  inquiryDate: 2013-11-28
+  loginUserId: 1
+  branchCode: 1
+  userId: 1
+  placeCode: 1
+  orderer: MyString
+  machineNo: MyString
+  timeOfRunning: 1
+  changeComment: MyText
+  orderDate: 2013-11-28
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-28

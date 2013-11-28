@@ -1,0 +1,60 @@
+<h1>Listing engineorders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= Engineorder.human_attribute_name('businessstatus') %></th>
+      <th><%= Engineorder.human_attribute_name('issueNo') %></th>
+      <th><%= Engineorder.human_attribute_name('inquiryDate') %></th>
+      <th><%= Engineorder.human_attribute_name('branchCode') %></th>
+      <th><%= Engineorder.human_attribute_name('userId') %></th>
+      <th><%= Engineorder.human_attribute_name('placeCode') %></th>
+      <th><%= Engineorder.human_attribute_name('orderer') %></th>
+      <th><%= Engineorder.human_attribute_name('machineNo') %></th>
+      <th><%= Engineorder.human_attribute_name('timeOfRunning') %></th>
+      <th><%= Engineorder.human_attribute_name('changeComment') %></th>
+      <th><%= Engineorder.human_attribute_name('orderDate') %></th>
+      <th><%= Engineorder.human_attribute_name('sendingCompanyCode') %></th>
+      <th><%= Engineorder.human_attribute_name('sendingComment') %></th>
+      <th><%= Engineorder.human_attribute_name('deliveryDate') %></th>
+      <th><%= Engineorder.human_attribute_name('loginUserId') %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @engineorders.each do |engineorder| %>
+      <tr>
+        <td><%= Businessstatus.find(engineorder.businessstatus_id).name unless engineorder.businessstatus_id.nil? %></td>
+        <td><%= engineorder.issueNo %></td>
+        <td><%= engineorder.inquiryDate %></td>
+        <td><%= Company.find(engineorder.branchCode).name unless engineorder.branchCode.nil? %></td>
+        <td><%= User.find(engineorder.userId).name unless engineorder.userId.nil? %></td>
+        <td><%= Company.find(engineorder.placeCode).name unless engineorder.placeCode.nil? %></td>
+        <td><%= engineorder.orderer %></td>
+        <td><%= engineorder.machineNo %></td>
+        <td><%= engineorder.timeOfRunning %></td>
+        <td><%= engineorder.changeComment %></td>
+       <td><%= engineorder.orderDate %></td>
+        <td><%= Company.find(engineorder.sendingCompanyCode).name unless engineorder.sendingCompanyCode.nil? %></td>
+        <td><%= engineorder.sendingComment %></td>
+        <td><%= engineorder.deliveryDate %></td>
+        <td><%= User.find(engineorder.loginUserId).name unless engineorder.loginUserId.nil? %></td>
+        <td><%= link_to '受注登録', edit_engineorder_path(engineorder) %></td>
+        <td>.....</td>
+
+        <td><%= link_to '詳細', engineorder %></td>
+        <td><%= link_to '修正(仮)', edit_engineorder_path(engineorder) %></td>
+        <td><%= link_to '削除(仮)', engineorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Engineorder', new_engineorder_path %>
