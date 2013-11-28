@@ -1,19 +1,24 @@
-<h1>整備依頼一覧</h1>
+<h1>Listing repairorders</h1>
 
 <table>
   <thead>
     <tr>
-      <th>発行番号</th>
-      <th>発行日</th>
-      <th>注文番号</th>
-      <th>工事番号</th>
-      <th>他社部品仕入日</th>
-      <th>返却日</th>
-      <th>返却コメント</th>
-      <th>送付コメント</th>
-      <th>型式</th>
-      <th>S/#</th>
-      <th>ステータス</th>
+      <th><%= Repairorder.human_attribute_name('businessstatus') %></th>
+      <th><%= Repairorder.human_attribute_name('issueNo') %></th>
+      <th><%= Repairorder.human_attribute_name('inquiryDate') %></th>
+      <th><%= Repairorder.human_attribute_name('branchCode') %></th>
+      <th><%= Repairorder.human_attribute_name('userId') %></th>
+      <th><%= Repairorder.human_attribute_name('placeCode') %></th>
+      <th><%= Repairorder.human_attribute_name('orderer') %></th>
+      <th><%= Repairorder.human_attribute_name('machineNo') %></th>
+      <th><%= Repairorder.human_attribute_name('timeOfRunning') %></th>
+      <th><%= Repairorder.human_attribute_name('changeComment') %></th>
+      <th><%= Repairorder.human_attribute_name('sendingCompanyCode') %></th>
+      <th><%= Repairorder.human_attribute_name('sendingComment') %></th>
+      <th><%= Repairorder.human_attribute_name('deliveryDate') %></th>
+      <th><%= Repairorder.human_attribute_name('loginUserId') %></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -23,26 +28,31 @@
   <tbody>
     <% @repairorders.each do |repairorder| %>
       <tr>
+        <td><%= Businessstatus.find(repairorder.businessstatus_id).name unless repairorder.businessstatus_id.nil? %></td>
         <td><%= repairorder.issueNo %></td>
-        <td><%= repairorder.issueDate %></td>
-        <td><%= repairorder.orderNo %></td>
-        <td><%= repairorder.constructionNo %></td>
-        <td><%= repairorder.otherBrandPartsArrivealDate %></td>
-        <td><%= repairorder.returnDate %></td>
-        <td><%= repairorder.returningComment %></td>
+        <td><%= repairorder.inquiryDate %></td>
+        <td><%= Company.find(repairorder.branchCode).name unless repairorder.branchCode.nil? %></td>
+        <td><%= User.find(repairorder.userId).name unless repairorder.userId.nil? %></td>
+        <td><%= Company.find(repairorder.placeCode).name unless repairorder.placeCode.nil? %></td>
+        <td><%= repairorder.orderer %></td>
+        <td><%= repairorder.machineNo %></td>
+        <td><%= repairorder.timeOfRunning %></td>
+        <td><%= repairorder.changeComment %></td>
+        <td><%= Company.find(repairorder.sendingCompanyCode).name unless repairorder.sendingCompanyCode.nil? %></td>
         <td><%= repairorder.sendingComment %></td>
-        <td><%= repairorder.engine.engineModelName %></td>
-        <td><%= repairorder.engine.serialno %></td>
-        <td><%= repairorder.engine.enginestatus.name %></td>
-        <td><%= link_to '整備依頼', repair_ordered_path(repairorder) %></td>
-        <td><%= link_to '仕入登録', repair_accepted_path(repairorder) %></td>
+        <td><%= repairorder.deliveryDate %></td>
+        <td><%= User.find(repairorder.loginUserId).name unless repairorder.loginUserId.nil? %></td>
+        <td><%= link_to '受注登録', edit_repairorder_path(repairorder) %></td>
         <td>.....</td>
-        <td><%= link_to 'Show', repairorder %></td>
-        <td><%= link_to 'Edit', edit_repairorder_path(repairorder) %></td>
-        <td><%= link_to 'Destroy', repairorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <td><%= link_to '詳細', repairorder %></td>
+        <td><%= link_to '修正(仮)', edit_repairorder_path(repairorder) %></td>
+        <td><%= link_to '削除(仮)', repairorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+
+<%= link_to 'New Repairorder', new_repairorder_path %>

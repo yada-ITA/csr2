@@ -1,38 +1,56 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Issueno:</strong>
   <%= @repairorder.issueNo %>
 </p>
 
 <p>
-  <strong>Issuedate:</strong>
-  <%= @repairorder.issueDate %>
+  <strong>Inquirydate:</strong>
+  <%= @repairorder.inquiryDate %>
 </p>
 
 <p>
-  <strong>Orderno:</strong>
-  <%= @repairorder.orderNo %>
+  <strong>Loginuserid:</strong>
+  <%= User.find(@repairorder.loginUserId).name unless @repairorder.loginUserId.nil? %>
 </p>
 
 <p>
-  <strong>Constructionno:</strong>
-  <%= @repairorder.constructionNo %>
+  <strong>Branchcode:</strong>
+  <%= Company.find(@repairorder.branchCode).name unless @repairorder.branchCode.nil? %>
 </p>
 
 <p>
-  <strong>Otherbrandpartsarrivealdate:</strong>
-  <%= @repairorder.otherBrandPartsArrivealDate %>
+  <strong>Userid:</strong>
+  <%= User.find(@repairorder.userId).name unless @repairorder.userId.nil? %>
 </p>
 
 <p>
-  <strong>Returndate:</strong>
-  <%= @repairorder.returnDate %>
+  <strong>Placecode:</strong>
+  <%= Company.find(@repairorder.placeCode).name unless @repairorder.placeCode.nil? %>
 </p>
 
 <p>
-  <strong>Returningcomment:</strong>
-  <%= @repairorder.returningComment %>
+  <strong>Orderer:</strong>
+  <%= @repairorder.orderer %>
+</p>
+
+<p>
+  <strong>Machineno:</strong>
+  <%= @repairorder.machineNo %>
+</p>
+
+<p>
+  <strong>Timeofrunning:</strong>
+  <%= @repairorder.timeOfRunning %>
+</p>
+
+<p>
+  <strong>Changecomment:</strong>
+  <%= @repairorder.changeComment %>
+</p>
+
+<p>
+  <strong>Sendingcompanycode:</strong>
+  <%= @repairorder.sendingCompanyCode %>
 </p>
 
 <p>
@@ -40,5 +58,15 @@
   <%= @repairorder.sendingComment %>
 </p>
 
+<p>
+  <strong>Deliverydate:</strong>
+  <%= @repairorder.deliveryDate %>
+</p>
+<!--
+<p>
+  <strong>Businessstatus:</strong>
+  <%= @repairorder.businessstatus_id %>
+</p>
+-->
 <%= link_to 'Edit', edit_repairorder_path(@repairorder) %> |
 <%= link_to 'Back', repairorders_path %>
