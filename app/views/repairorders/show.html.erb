@@ -10,22 +10,22 @@
 
 <p>
   <strong>Loginuserid:</strong>
-  <%= @repairorder.loginUserId %>
+  <%= User.find(@repairorder.loginUserId).name unless @repairorder.loginUserId.nil? %>
 </p>
 
 <p>
   <strong>Branchcode:</strong>
-  <%= @repairorder.branchCode %>
+  <%= Company.find(@repairorder.branchCode).name unless @repairorder.branchCode.nil? %>
 </p>
 
 <p>
   <strong>Userid:</strong>
-  <%= @repairorder.userId %>
+  <%= User.find(@repairorder.userId).name unless @repairorder.userId.nil? %>
 </p>
 
 <p>
   <strong>Placecode:</strong>
-  <%= @repairorder.placeCode %>
+  <%= Company.find(@repairorder.placeCode).name unless @repairorder.placeCode.nil? %>
 </p>
 
 <p>
@@ -62,11 +62,11 @@
   <strong>Deliverydate:</strong>
   <%= @repairorder.deliveryDate %>
 </p>
-
+<!--
 <p>
   <strong>Businessstatus:</strong>
   <%= @repairorder.businessstatus_id %>
 </p>
-
+-->
 <%= link_to 'Edit', edit_repairorder_path(@repairorder) %> |
 <%= link_to 'Back', repairorders_path %>
