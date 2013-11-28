@@ -34,7 +34,11 @@
 
   <div class="field">
     <%= f.label :loginUserId %><br>
-    <%= f.number_field :loginUserId %>
+    <% if @engineorder.loginUserId.nil? %>
+      <% @engineorder.loginUserId = current_user.id  %>
+    <% end %>
+      <%=  User.find(@engineorder.loginUserId).name  %>
+    <%= f.hidden_field :loginUserId %>
   </div>
   <div class="field">
     <%= f.label :branchCode %><br>
