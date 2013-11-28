@@ -56,22 +56,19 @@
     <%= f.text_area :changeComment %>
   </div>
 
-<% #引合登録以外で、以下の項目を表示する。 %>
-  <% unless @repairorder.registInquiry? %>
-     <div class="field">
-       <%= f.label :sendingCompanyCode %><br>
-    <%= f.collection_select( :sendingCompanyCode, Company.all, :id, :name, :include_blank => false ) %>
-    </div>
+  <div class="field">
+    <%= f.label :sendingCompanyCode %><br>
+    <%= f.collection_select( :sendingCompanyCode, Company.all, :id, :name, :include_blank => true ) %>
+  </div>
 
-    <div class="field">
-      <%= f.label :sendingComment %><br>
-      <%= f.text_area :sendingComment %>
-    </div>
-    <div class="field">
-      <%= f.label :deliveryDate %><br>
-      <%= f.date_select :deliveryDate %>
-    </div>
-  <% end %>
+  <div class="field">
+    <%= f.label :sendingComment %><br>
+    <%= f.text_area :sendingComment %>
+   </div>
+   <div class="field">
+     <%= f.label :deliveryDate %><br>
+     <%= f.date_select :deliveryDate %>
+   </div>
 
 
   <%= f.hidden_field :businessstatus_id %>
