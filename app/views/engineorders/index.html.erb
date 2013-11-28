@@ -12,10 +12,14 @@
       <th><%= Engineorder.human_attribute_name('orderer') %></th>
       <th><%= Engineorder.human_attribute_name('machineNo') %></th>
       <th><%= Engineorder.human_attribute_name('timeOfRunning') %></th>
+<!--
       <th><%= Engineorder.human_attribute_name('changeComment') %></th>
+-->
       <th><%= Engineorder.human_attribute_name('orderDate') %></th>
       <th><%= Engineorder.human_attribute_name('sendingCompanyCode') %></th>
+<!--
       <th><%= Engineorder.human_attribute_name('sendingComment') %></th>
+-->
       <th><%= Engineorder.human_attribute_name('deliveryDate') %></th>
       <th><%= Engineorder.human_attribute_name('loginUserId') %></th>
       <th></th>
@@ -38,10 +42,14 @@
         <td><%= engineorder.orderer %></td>
         <td><%= engineorder.machineNo %></td>
         <td><%= engineorder.timeOfRunning %></td>
+<!--
         <td><%= engineorder.changeComment %></td>
+-->
        <td><%= engineorder.orderDate %></td>
         <td><%= Company.find(engineorder.sendingCompanyCode).name unless engineorder.sendingCompanyCode.nil? %></td>
+<!--
         <td><%= engineorder.sendingComment %></td>
+ -->       
         <td><%= engineorder.deliveryDate %></td>
         <td><%= User.find(engineorder.loginUserId).name unless engineorder.loginUserId.nil? %></td>
         <td><%= link_to '受注登録', edit_engineorder_path(engineorder) %></td>
