@@ -9,7 +9,6 @@ class Repairorder < ActiveRecord::Base
   #現時点での発行Noの生成(年月-枝番3桁)
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
-<<<<<<< HEAD
     maxseq = Repairorder.where("issueNo like ?", issuedate + "%").max()
     issueseq = '001'
 
@@ -29,10 +28,6 @@ class Repairorder < ActiveRecord::Base
   #流通ステータスに「受注」をセットする
   def setOrdered
     self.businessstatus_id = 2
-=======
-    return issuedate + "-" + 
-           sprintf("%03d", self.where("issueNo like ?", issuedate + "%").max() + 1 )
->>>>>>> 22b171169156720056f3bd3e974c809f357c2910
   end
 
 end
