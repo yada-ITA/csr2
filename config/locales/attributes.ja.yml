@@ -14,7 +14,7 @@ ja:
         dayOfTest: 試運転日
         yearsOfUse: 使用年数
         returningComment: 返却コメント
-        arrivalComment: 到着コメント
+        arriveComment: 到着コメント
         orderNo: 注文No
         orderDate: 注文日
         constructionNo: 工事No(仮)
@@ -47,18 +47,19 @@ ja:
         timeOfRunning: エンジン運転時間
         dayOfTest: 試運転日
         changeComment: コメント(交換理由)
-      repairorder:
+      engineorder:
         issueNo: 発行番号
         inquiryDate: 引合発生日
+        orderDate: 受注日
         loginUserId: ログイン担当者
-        branchCode: 拠点コード
+        branchCode: 拠点
         userId: 担当者
-        placeCode: 設置先コード
+        placeCode: 設置先
         orderer: 元受
         machineNo: 機体No
         timeOfRunning: エンジン運転時間
         changeComment: コメント(交換理由)
-        sendingCompanyCode: 送付先コード
+        sendingCompanyCode: 送付先
         sendingComment: 送付コメント
         deliveryDate: 希望納期
         businessstatus: ステータス

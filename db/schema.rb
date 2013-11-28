@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127085045) do
+ActiveRecord::Schema.define(version: 20131128090849) do
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -37,6 +37,26 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.datetime "updated_at"
   end
 
+  create_table "engineorders", force: true do |t|
+    t.string   "issueNo"
+    t.date     "inquiryDate"
+    t.integer  "loginUserId"
+    t.integer  "branchCode"
+    t.integer  "userId"
+    t.integer  "placeCode"
+    t.string   "orderer"
+    t.string   "machineNo"
+    t.integer  "timeOfRunning"
+    t.text     "changeComment"
+    t.date     "orderDate"
+    t.integer  "sendingCompanyCode"
+    t.text     "sendingComment"
+    t.date     "deliveryDate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "businessstatus_id"
+  end
+
   create_table "engines", force: true do |t|
     t.string   "engineModelName"
     t.string   "salesModelName"
@@ -45,6 +65,7 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.integer  "enginestatus_id"
     t.string   "serialno"
     t.integer  "company_id"
+    t.integer  "businessstatus_id"
   end
 
   create_table "enginestatuses", force: true do |t|
@@ -63,6 +84,25 @@ ActiveRecord::Schema.define(version: 20131127085045) do
     t.integer  "timeOfRunning"
     t.date     "dayOfTest"
     t.text     "changeComment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orderings", force: true do |t|
+    t.string   "issueNo"
+    t.date     "inquiryDate"
+    t.integer  "loginUserId"
+    t.integer  "branchCode"
+    t.integer  "userId"
+    t.integer  "placeCode"
+    t.string   "orderer"
+    t.string   "machineNo"
+    t.integer  "timeOfRunning"
+    t.text     "changeComment"
+    t.date     "orderDate"
+    t.integer  "sendingCompanyCode"
+    t.text     "sendingComment"
+    t.date     "deliveryDate"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

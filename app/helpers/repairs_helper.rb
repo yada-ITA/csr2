@@ -1,21 +1,21 @@
 module RepairsHelper
 
-  # ƒGƒ“ƒWƒ““’…“o˜^‚Ì‚½‚ß‚ÌƒpƒX‚ğ¶¬‚·‚é  
+  # ã‚¨ãƒ³ã‚¸ãƒ³åˆ°ç€ç™»éŒ²ã®ãŸã‚ã®ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹  
   def engine_arrived_path(engine)
     return '/repairs/engineArrived/' + engine.id.to_s
   end
 
-  # ®”õˆË—Š‚Ì‚½‚ß‚ÌƒpƒX‚ğ¶¬‚·‚é
+  # æ•´å‚™ä¾é ¼ã®ãŸã‚ã®ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
   def order_repair_path(repair)
     return '/repairs/repairOrder/' +  repair.id.to_s
   end
   
-  # ®”õŠJn“o˜^‚Ì‚½‚ß‚ÌƒpƒX‚ğ¶¬‚·‚é
+  # æ•´å‚™é–‹å§‹ç™»éŒ²ã®ãŸã‚ã®ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
   def start_repair_path(repair)
     return '/repairs/repairStarted/' +  repair.id.to_s
   end
 
-  # ®”õŠ®—¹“o˜^‚Ì‚½‚ß‚ÌƒpƒX‚ğ¶¬‚·‚é
+  # æ•´å‚™å®Œäº†ç™»éŒ²ã®ãŸã‚ã®ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
   def finish_repair_path(repair)
     return '/repairs/repairFinished/' +  repair.id.to_s
   end

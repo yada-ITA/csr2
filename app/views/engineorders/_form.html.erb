@@ -1,0 +1,87 @@
+<%= form_for(@engineorder) do |f| %>
+  <% if @engineorder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@engineorder.errors.count, "error") %> prohibited this engineorder from being saved:</h2>
+
+      <ul>
+      <% @engineorder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% #引合登録以外で、以下の項目を表示する。 %>
+  <% unless @engineorder.registInquiry? %>
+  　　<div class="field">
+    　　<%= f.label :issueNo %><br>
+    　　<%=  @engineorder.issueNo %>
+  　　</div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :inquiryDate %><br>
+    <%= f.date_select :inquiryDate %>
+  </div>
+
+<% #引合登録以外で、以下の項目を表示する。 %>
+  <% unless @engineorder.registInquiry? %>
+  <div class="field">
+    <%= f.label :orderDate %><br>
+    <%= f.date_select :orderDate %>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :loginUserId %><br>
+    <%= f.number_field :loginUserId %>
+  </div>
+  <div class="field">
+    <%= f.label :branchCode %><br>
+   <%= f.collection_select( :branchCode, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+  <div class="field">
+    <%= f.label :userId %><br>
+   <%= f.collection_select( :userId, User.all, :id, :name, :include_blank => false ) %>
+   </div>
+  <div class="field">
+    <%= f.label :placeCode %><br>
+    <%= f.collection_select( :placeCode, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+  <div class="field">
+    <%= f.label :orderer %><br>
+    <%= f.text_field :orderer %>
+  </div>
+  <div class="field">
+    <%= f.label :machineNo %><br>
+    <%= f.text_field :machineNo %>
+  </div>
+  <div class="field">
+    <%= f.label :timeOfRunning %><br>
+    <%= f.number_field :timeOfRunning %>
+  </div>
+  <div class="field">
+    <%= f.label :changeComment %><br>
+    <%= f.text_area :changeComment %>
+  </div>
+  <div class="field">
+    <%= f.label :sendingCompanyCode %><br>
+    <%= f.collection_select( :sendingCompanyCode, Company.all, :id, :name, :include_blank => true ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sendingComment %><br>
+    <%= f.text_area :sendingComment %>
+   </div>
+   <div class="field">
+     <%= f.label :deliveryDate %><br>
+     <%= f.date_select :deliveryDate %>
+   </div>
+
+
+  <%= f.hidden_field :businessstatus_id %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
