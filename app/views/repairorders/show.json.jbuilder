@@ -1,1 +1,0 @@
-json.extract! @repairorder, :issueNo, :inquiryDate, :loginUserId, :branchCode, :userId, :placeCode, :orderer, :machineNo, :timeOfRunning, :changeComment, :sendingCompanyCode, :sendingComment, :deliveryDate, :businessstatus_id, :created_at, :updated_at

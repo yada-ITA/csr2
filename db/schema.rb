@@ -65,63 +65,10 @@ ActiveRecord::Schema.define(version: 20131128090849) do
     t.integer  "enginestatus_id"
     t.string   "serialno"
     t.integer  "company_id"
-    t.integer  "businessstatus_id"
   end
 
   create_table "enginestatuses", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "inquiries", force: true do |t|
-    t.integer  "loginUserId"
-    t.integer  "branchCode"
-    t.integer  "userId"
-    t.integer  "placeCode"
-    t.string   "orderer"
-    t.string   "machineNo"
-    t.integer  "timeOfRunning"
-    t.date     "dayOfTest"
-    t.text     "changeComment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "orderings", force: true do |t|
-    t.string   "issueNo"
-    t.date     "inquiryDate"
-    t.integer  "loginUserId"
-    t.integer  "branchCode"
-    t.integer  "userId"
-    t.integer  "placeCode"
-    t.string   "orderer"
-    t.string   "machineNo"
-    t.integer  "timeOfRunning"
-    t.text     "changeComment"
-    t.date     "orderDate"
-    t.integer  "sendingCompanyCode"
-    t.text     "sendingComment"
-    t.date     "deliveryDate"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "repairorders", force: true do |t|
-    t.string   "issueNo"
-    t.date     "inquiryDate"
-    t.integer  "loginUserId"
-    t.integer  "branchCode"
-    t.integer  "userId"
-    t.integer  "placeCode"
-    t.string   "orderer"
-    t.string   "machineNo"
-    t.integer  "timeOfRunning"
-    t.text     "changeComment"
-    t.integer  "sendingCompanyCode"
-    t.text     "sendingComment"
-    t.date     "deliveryDate"
-    t.integer  "businessstatus_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
