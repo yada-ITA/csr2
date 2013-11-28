@@ -7,7 +7,7 @@ class Repairorder < ActiveRecord::Base
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
     return issuedate + "-" + 
-           sprintf("%03d", Repairorder.where("issueNo like ?", issuedate + "%").count() + 1 )
+           sprintf("%03d", self.where("issueNo like ?", issuedate + "%").max() + 1 )
   end
 
 end

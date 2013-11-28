@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(version: 20131126062407) do
     t.datetime "updated_at"
   end
 
+  create_table "locations", force: true do |t|
+    t.string   "postcode"
+    t.string   "address"
+    t.string   "phoneNo"
+    t.string   "destinationName"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "repairorders", force: true do |t|
     t.string   "issueNo"
     t.date     "issueDate"
