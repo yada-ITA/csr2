@@ -18,7 +18,7 @@ class RepairordersControllerTest < ActionController::TestCase
 
   test "should create repairorder" do
     assert_difference('Repairorder.count') do
-      post :create, repairorder: { constructionNo: @repairorder.constructionNo, issueDate: @repairorder.issueDate, issueNo: @repairorder.issueNo, orderNo: @repairorder.orderNo, otherBrandPartsArrivealDate: @repairorder.otherBrandPartsArrivealDate, returnDate: @repairorder.returnDate, returningComment: @repairorder.returningComment, sendingComment: @repairorder.sendingComment }
+      post :create, repairorder: { branchCode: @repairorder.branchCode, businessstatus_id: @repairorder.businessstatus_id, changeComment: @repairorder.changeComment, deliveryDate: @repairorder.deliveryDate, inquiryDate: @repairorder.inquiryDate, issueNo: @repairorder.issueNo, loginUserId: @repairorder.loginUserId, machineNo: @repairorder.machineNo, orderer: @repairorder.orderer, placeCode: @repairorder.placeCode, sendingComment: @repairorder.sendingComment, sendingCompanyCode: @repairorder.sendingCompanyCode, timeOfRunning: @repairorder.timeOfRunning, userId: @repairorder.userId }
     end
 
     assert_redirected_to repairorder_path(assigns(:repairorder))
@@ -35,7 +35,7 @@ class RepairordersControllerTest < ActionController::TestCase
   end
 
   test "should update repairorder" do
-    patch :update, id: @repairorder, repairorder: { constructionNo: @repairorder.constructionNo, issueDate: @repairorder.issueDate, issueNo: @repairorder.issueNo, orderNo: @repairorder.orderNo, otherBrandPartsArrivealDate: @repairorder.otherBrandPartsArrivealDate, returnDate: @repairorder.returnDate, returningComment: @repairorder.returningComment, sendingComment: @repairorder.sendingComment }
+    patch :update, id: @repairorder, repairorder: { branchCode: @repairorder.branchCode, businessstatus_id: @repairorder.businessstatus_id, changeComment: @repairorder.changeComment, deliveryDate: @repairorder.deliveryDate, inquiryDate: @repairorder.inquiryDate, issueNo: @repairorder.issueNo, loginUserId: @repairorder.loginUserId, machineNo: @repairorder.machineNo, orderer: @repairorder.orderer, placeCode: @repairorder.placeCode, sendingComment: @repairorder.sendingComment, sendingCompanyCode: @repairorder.sendingCompanyCode, timeOfRunning: @repairorder.timeOfRunning, userId: @repairorder.userId }
     assert_redirected_to repairorder_path(assigns(:repairorder))
   end
 

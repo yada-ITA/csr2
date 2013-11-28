@@ -1,5 +1,7 @@
 R2::Application.routes.draw do
 
+  resources :repairorders
+
   resources :inquiries
 
   get 'repairs/new/:engine_id' => 'repairs#new'
@@ -14,8 +16,6 @@ R2::Application.routes.draw do
 
   get 'engines/index' => 'engines#index'
 
-  resources :repairorders
-
   resources :arrivals
 
   resources :repairs

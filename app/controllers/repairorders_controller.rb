@@ -15,27 +15,18 @@ class RepairordersController < ApplicationController
   # GET /repairorders/new
   def new
     @repairorder = Repairorder.new
-    # パラメータにengine_idがあれば、エンジンを設定する
-    if !(params[:engine_id].nil?)
-      @repairorder.engine = Engine.find(params[:engine_id])
-    end
   end
 
   # GET /repairorders/1/edit
   def edit
+     @repairorder.setOrdered
   end
 
   # POST /repairorders
   # POST /repairorders.json
   def create
     @repairorder = Repairorder.new(repairorder_params)
-    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定する
-    if !(params[:enginestatus_id].nil?)
-      @repairorder.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-      @repairorder.engine.save
-    end
-  
-    #発行Noはここで自動採番
+    @repairorder.setInquiry
     @repairorder.issueNo = Repairorder.createIssueNo
 
     respond_to do |format|
@@ -54,11 +45,6 @@ class RepairordersController < ApplicationController
   def update
     respond_to do |format|
       if @repairorder.update(repairorder_params)
-		    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定する
-		    if !(params[:enginestatus_id].nil?)
-		      @repairorder.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-		      @repairorder.engine.save
-		    end
         format.html { redirect_to @repairorder, notice: 'Repairorder was successfully updated.' }
         format.json { head :no_content }
       else
@@ -77,25 +63,6 @@ class RepairordersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  # GET /repairorders/engineReturning/1
-  def engineReturning
-    @repairorder = Repairorder.new
-    # パラメータにengine_idがあれば、エンジンを設定する
-    if !(params[:engine_id].nil?)
-      @repairorder.engine = Engine.find(params[:engine_id])
-    end
-  end
-
-  # GET /repairorders/repairOrdered/1
-  def repairOrdered
-    @repairorder = Repairorder.find(params[:id])
-  end
-
-  # GET /repairorders/repairAccepted/1
-  def repairAccepted
-    @repairorder = Repairorder.find(params[:id])
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -105,6 +72,6 @@ class RepairordersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repairorder_params
-      params.require(:repairorder).permit(:issueNo, :issueDate, :orderNo, :constructionNo, :otherBrandPartsArrivealDate, :returnDate, :returningComment, :sendingComment, :engine_id, :enginestatus_id)
+      params.require(:repairorder).permit(:issueNo, :inquiryDate, :loginUserId, :branchCode, :userId, :placeCode, :orderer, :machineNo, :timeOfRunning, :changeComment, :sendingCompanyCode, :sendingComment, :deliveryDate, :businessstatus_id)
     end
 end

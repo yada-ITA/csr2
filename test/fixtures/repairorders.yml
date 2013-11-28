@@ -1,41 +1,33 @@
-repairorder1:
-  id: 1
-  issueNo: IN001
-  issueDate: 2013-11-20
-  orderNo: ON-20131120001
-  constructionNo: CC-000001
-  otherBrandPartsArrivealDate: 2013-11-21
-  returnDate: 2013-11-21
-  returningComment: 返却コメントです。
-  sendingComment: 送付コメントです
-  created_at: 2013-11-21 00:01:39
-  updated_at: 2013-11-21 01:20:05.249271
-  engine_id: 1
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-repairorder2:
-  id: 2
-  issueNo: IN002
-  issueDate: 2013-11-21
-  orderNo: ON-20131120002
-  constructionNo: CC-000002
-  otherBrandPartsArrivealDate: 2013-11-22
-  returnDate: 2013-11-23
-  returningComment: 返却コメントです
-  sendingComment: 送付コメントです
-  created_at: 2013-11-21 00:01:39
-  updated_at: 2013-11-21 01:20:05.249271
-  engine_id: 2
+one:
+  issueNo: MyString
+  inquiryDate: 2013-11-27
+  loginUserId: 1
+  branchCode: 1
+  userId: 1
+  placeCode: 1
+  orderer: MyString
+  machineNo: MyString
+  timeOfRunning: 1
+  changeComment: MyText
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-27
+  businessstatus_id: 1
 
-repairorder3:
-  id: 3
-  issueNo: IN003
-  issueDate: 2013-11-21
-  orderNo: ON-20131120003
-  constructionNo: CC-000003
-  otherBrandPartsArrivealDate: 2013-11-28
-  returnDate: 2013-11-30
-  returningComment: 返却コメントです
-  sendingComment: 送付コメントです
-  created_at: 2013-11-21 00:01:39
-  updated_at: 2013-11-21 01:20:05.249271
-  engine_id: 3
+two:
+  issueNo: MyString
+  inquiryDate: 2013-11-27
+  loginUserId: 1
+  branchCode: 1
+  userId: 1
+  placeCode: 1
+  orderer: MyString
+  machineNo: MyString
+  timeOfRunning: 1
+  changeComment: MyText
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-27
+  businessstatus_id: 1
