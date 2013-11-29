@@ -7,7 +7,7 @@ class Engineorder < ActiveRecord::Base
   #現時点での発行Noの生成 (年月-枝番3桁)
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
-    maxseq = self.where("\"issueNo\" like ?", issuedate + "%").max()
+    maxseq = self.where("issueno like ?", issuedate + "%").max()
     issueseq = '001'
 
    unless maxseq.nil?

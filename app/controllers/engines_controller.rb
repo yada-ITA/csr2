@@ -43,11 +43,11 @@ class EnginesController < ApplicationController
     end
     # 型式
     if !(@searched.fetch('engineModelName', nil).blank?)
-      @engines = @engines.where("\"engines.engineModelName\" like ?", "%" + @searched.fetch('engineModelName') + "%")
+      @engines = @engines.where('engines.enginemodelname like ?', "%" + @searched.fetch('engineModelName') + "%")
     end
     # お客様名
     if !(@searched.fetch('salesModelName', nil).blank?)
-      @engines = @engines.where('\"engines.salesModelName\" like ?', "%" + @searched.fetch('salesModelName') + "%")
+      @engines = @engines.where('engines.salesmodelname like ?', "%" + @searched.fetch('salesModelName') + "%")
     end
     # ステータス
     if !(@searched.fetch('enginestatus_id', nil).blank?)
