@@ -4,10 +4,10 @@ class Engineorder < ActiveRecord::Base
    return true if businessstatus_id.nil?
  end 
 
-  #現時点での発行Noの生成(年月-枝番3桁)
+  #現時点での発行Noの生成 (年月-枝番3桁)
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
-    maxseq = Engineorder.where("issueNo like ?", issuedate + "%").max()
+    maxseq = self.where("\"issueNo\" like ?", issuedate + "%").max()
     issueseq = '001'
 
    unless maxseq.nil?
