@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RepairorderTest < ActiveSupport::TestCase
+class EngineorderTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,6 +1,4 @@
-#coding: UTF-8
-class Repairorder < ActiveRecord::Base
-
+class Engineorder < ActiveRecord::Base
  #引合の登録かどうか？
  def registInquiry?
    return true if businessstatus_id.nil?
@@ -9,7 +7,11 @@ class Repairorder < ActiveRecord::Base
   #現時点での発行Noの生成(年月-枝番3桁)
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
+<<<<<<< HEAD:app/models/repairorder.rb
     maxseq = self.where("issueNo like ?", issuedate + "%").max()
+=======
+    maxseq = Engineorder.where("issueNo like ?", issuedate + "%").max()
+>>>>>>> 0483240baf55f16082f1f3c6030e65973d99e787:app/models/engineorder.rb
     issueseq = '001'
 
    unless maxseq.nil?
@@ -28,7 +30,9 @@ class Repairorder < ActiveRecord::Base
   #流通ステータスに「受注」をセットする
   def setOrdered
     self.businessstatus_id = 2
+<<<<<<< HEAD:app/models/repairorder.rb
 >>>>>>> 23e156e05ee615d15271f037d2bccfea865c6d34
+=======
+>>>>>>> 0483240baf55f16082f1f3c6030e65973d99e787:app/models/engineorder.rb
   end
-
 end

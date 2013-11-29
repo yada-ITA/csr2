@@ -1,6 +1,8 @@
-class CreateInquiries < ActiveRecord::Migration
+class CreateEngineorders < ActiveRecord::Migration
   def change
-    create_table :inquiries do |t|
+    create_table :engineorders do |t|
+      t.string :issueNo
+      t.date :inquiryDate
       t.integer :loginUserId
       t.integer :branchCode
       t.integer :userId
@@ -8,8 +10,11 @@ class CreateInquiries < ActiveRecord::Migration
       t.string :orderer
       t.string :machineNo
       t.integer :timeOfRunning
-      t.date :dayOfTest
       t.text :changeComment
+      t.date :orderDate
+      t.integer :sendingCompanyCode
+      t.text :sendingComment
+      t.date :deliveryDate
 
       t.timestamps
     end

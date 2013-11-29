@@ -1,6 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  issueNo: MyString
+  inquiryDate: 2013-11-28
   loginUserId: 1
   branchCode: 1
   userId: 1
@@ -8,10 +10,15 @@ one:
   orderer: MyString
   machineNo: MyString
   timeOfRunning: 1
-  dayOfTest: 2013-11-26
   changeComment: MyText
+  orderDate: 2013-11-28
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-28
 
 two:
+  issueNo: MyString
+  inquiryDate: 2013-11-28
   loginUserId: 1
   branchCode: 1
   userId: 1
@@ -19,5 +26,8 @@ two:
   orderer: MyString
   machineNo: MyString
   timeOfRunning: 1
-  dayOfTest: 2013-11-26
   changeComment: MyText
+  orderDate: 2013-11-28
+  sendingCompanyCode: 1
+  sendingComment: MyText
+  deliveryDate: 2013-11-28

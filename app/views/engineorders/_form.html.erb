@@ -1,10 +1,10 @@
-<%= form_for(@repairorder) do |f| %>
-  <% if @repairorder.errors.any? %>
+<%= form_for(@engineorder) do |f| %>
+  <% if @engineorder.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@repairorder.errors.count, "error") %> prohibited this repairorder from being saved:</h2>
+      <h2><%= pluralize(@engineorder.errors.count, "error") %> prohibited this engineorder from being saved:</h2>
 
       <ul>
-      <% @repairorder.errors.full_messages.each do |msg| %>
+      <% @engineorder.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,10 +12,10 @@
   <% end %>
 
 <% #引合登録以外で、以下の項目を表示する。 %>
-  <% unless @repairorder.registInquiry? %>
+  <% unless @engineorder.registInquiry? %>
   　　<div class="field">
     　　<%= f.label :issueNo %><br>
-    　　<%=  @repairorder.issueNo %>
+    　　<%=  @engineorder.issueNo %>
   　　</div>
   <% end %>
 
@@ -23,9 +23,22 @@
     <%= f.label :inquiryDate %><br>
     <%= f.date_select :inquiryDate %>
   </div>
+
+<% #引合登録以外で、以下の項目を表示する。 %>
+  <% unless @engineorder.registInquiry? %>
+  <div class="field">
+    <%= f.label :orderDate %><br>
+    <%= f.date_select :orderDate %>
+  </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :loginUserId %><br>
-    <%= f.number_field :loginUserId %>
+    <% if @engineorder.loginUserId.nil? %>
+      <% @engineorder.loginUserId = current_user.id  %>
+    <% end %>
+      <%=  User.find(@engineorder.loginUserId).name  %>
+    <%= f.hidden_field :loginUserId %>
   </div>
   <div class="field">
     <%= f.label :branchCode %><br>
@@ -55,7 +68,6 @@
     <%= f.label :changeComment %><br>
     <%= f.text_area :changeComment %>
   </div>
-
   <div class="field">
     <%= f.label :sendingCompanyCode %><br>
     <%= f.collection_select( :sendingCompanyCode, Company.all, :id, :name, :include_blank => true ) %>
