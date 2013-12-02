@@ -42,12 +42,12 @@ class EnginesController < ApplicationController
       @engines = @engines.where('engines.company_id = ?', @searched.fetch('company_id'))
     end
     # 型式
-    if !(@searched.fetch('engineModelName', nil).blank?)
-      @engines = @engines.where('engines.enginemodelname like ?', "%" + @searched.fetch('engineModelName') + "%")
+    if !(@searched.fetch('engine_model_name', nil).blank?)
+      @engines = @engines.where('engines.engine_model_name like ?', "%" + @searched.fetch('engine_model_name') + "%")
     end
     # お客様名
-    if !(@searched.fetch('salesModelName', nil).blank?)
-      @engines = @engines.where('engines.salesmodelname like ?', "%" + @searched.fetch('salesModelName') + "%")
+    if !(@searched.fetch('sales_model_name', nil).blank?)
+      @engines = @engines.where('engines.sales_model_name like ?', "%" + @searched.fetch('sales_model_name') + "%")
     end
     # ステータス
     if !(@searched.fetch('enginestatus_id', nil).blank?)
@@ -118,6 +118,6 @@ class EnginesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engine_params
-      params.require(:engine).permit(:engineModelName, :serialno, :salesModelName, :company_id, :enginestatus_id, :page)
+      params.require(:engine).permit(:engine_model_name, :serialno, :sales_model_name, :company_id, :enginestatus_id, :page)
     end
 end

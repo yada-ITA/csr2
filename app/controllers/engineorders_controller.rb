@@ -19,7 +19,6 @@ class EngineordersController < ApplicationController
 
   # GET /engineorders/1/edit
   def edit
-    @engineorder.setOrdered
   end
 
   # POST /engineorders
@@ -27,7 +26,7 @@ class EngineordersController < ApplicationController
   def create
     @engineorder = Engineorder.new(engineorder_params)
     @engineorder.setInquiry
-    @engineorder.issueNo = Engineorder.createIssueNo
+    @engineorder.issue_no = Engineorder.createIssueNo
 
     respond_to do |format|
       if @engineorder.save
@@ -64,6 +63,22 @@ class EngineordersController < ApplicationController
     end
   end
 
+  # GET /repairs/engineInquiry/1
+  def inquiry
+    @engineorder = Engineorder.new
+    # パラメータにengine_idがあれば、旧エンジンに紐づける
+    if !(params[:engine_id].nil?)
+        @engineorder.old_engine = Engine.find(params[:engine_id])
+    end
+    render :template => "engineorders/new"
+   end
+
+ def ordered
+      set_engineorder
+      @engineorder.setOrdered
+    render :template => "engineorders/edit"
+ end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_engineorder
@@ -72,6 +87,6 @@ class EngineordersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engineorder_params
-      params.require(:engineorder).permit(:issueNo, :inquiryDate, :loginUserId, :branchCode, :userId, :placeCode, :orderer, :machineNo, :timeOfRunning, :changeComment, :orderDate, :sendingCompanyCode, :sendingComment, :deliveryDate, :businessstatus_id)
+      params.require(:engineorder).permit(:issue_no, :inquiry_date, :registered_user_id, :updated_user_id, :branch_id, :salesman_id, :install_place_id, :orderer, :machine_no, :time_of_running, :change_comment, :order_date, :sending_place_id, :sending_comment, :desirable_delivery_date, :businessstatus_id, :new_engine_id, :old_engine_id)
     end
 end

@@ -1,31 +1,38 @@
 ja:
   activerecord:
     attributes:
+      company:
+        name: 会社名
+        category: 分類
+        postcode: 郵便番号
+        address: 住所
+        phone_no: 電話番号
+        destination_name: 宛先
       engine:
-        engineModelName: '型式'
-        salesModelName: '販売型式'
+        engine_model_name: '型式'
+        sales_model_name: '販売型式'
         serialno: 'S/#'
         company: '管轄'
         status: 'ステータス'
       repair:
-        issueNo: 発行番号
-        issueDate: 発行日
-        timeOfRunning: 運転時間
-        dayOfTest: 試運転日
-        yearsOfUse: 使用年数
-        returningComment: 返却コメント
-        arriveComment: 到着コメント
-        orderNo: 注文No
-        orderDate: 注文日
-        constructionNo: 工事No(仮)
-        desirableFinishDate: 希望完成日
-        arriveDate: 受領日
-        startDate: 整備開始日
-        beforeComment: 整備前コメント
-        finishDate: 整備完了日
-        afterComment: 整備前コメント
-        estimatedFinishDate: 予定完成日
-        finishDate: 完了日
+        issue_no: 発行番号
+        issue_date: 発行日
+        time_of_running: 運転時間
+        day_of_test: 試運転日
+        years_of_use: 使用年数
+        returning_comment: 返却コメント
+        arrive_comment: 到着コメント
+        order_no: 注文No
+        order_date: 注文日
+        construction_no: 工事No(仮)
+        desirable_finish_date: 希望完成日
+        arrive_date: 受領日
+        start_date: 整備開始日
+        before_comment: 整備前コメント
+        finish_date: 整備完了日
+        after_comment: 整備前コメント
+        estimated_finish_date: 予定完成日
+        finish_date: 完了日
       user:
         userid: 社員コード
         code: 社員コード
@@ -37,29 +44,22 @@ ja:
         password_confirmation: パスワード（確認）
         current_password: 現在のパスワード
         company: 会社
-      inquiry:
-        loginUserId: ログイン担当者
-        branchCode: 拠点
-        userId: 担当者
-        placeCode: 設置先
-        orderer: 元受
-        machineNo: 機体No
-        timeOfRunning: エンジン運転時間
-        dayOfTest: 試運転日
-        changeComment: コメント(交換理由)
       engineorder:
-        issueNo: 発行番号
-        inquiryDate: 引合発生日
-        orderDate: 受注日
-        loginUserId: ログイン担当者
-        branchCode: 拠点
-        userId: 担当者
-        placeCode: 設置先
+        issue_no: 発行番号
+        inquiry_date: 引合発生日
+        order_date: 受注日
+        registered_user_id: ログイン担当者
+        updated_user_id: 更新担当者
+        branch_id: 拠点
+        salesman_id: 担当者
+        install_place_id: 設置先
         orderer: 元受
-        machineNo: 機体No
-        timeOfRunning: エンジン運転時間
-        changeComment: コメント(交換理由)
-        sendingCompanyCode: 送付先
-        sendingComment: 送付コメント
-        deliveryDate: 希望納期
-        businessstatus: ステータス
+        machine_no: 機体No
+        time_of_running: エンジン運転時間
+        change_comment: コメント(交換理由)
+        sending_place_id: 送付先
+        sending_comment: 送付コメント
+        desirable_delivery_date: 希望納期
+        businessstatus_id: ステータス
+        new_engine_id: 新規エンジン
+        old_engine_id: 返却エンジン

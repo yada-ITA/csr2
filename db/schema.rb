@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128090849) do
+ActiveRecord::Schema.define(version: 20131202061518) do
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 20131128090849) do
   create_table "companies", force: true do |t|
     t.string   "name"
     t.string   "category"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "postcode"
     t.string   "address"
-    t.string   "phoneNo"
-    t.string   "destinationName"
+    t.string   "phone_no"
+    t.string   "destination_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "enginemodels", force: true do |t|
@@ -38,33 +38,36 @@ ActiveRecord::Schema.define(version: 20131128090849) do
   end
 
   create_table "engineorders", force: true do |t|
-    t.string   "issueNo"
-    t.date     "inquiryDate"
-    t.integer  "loginUserId"
-    t.integer  "branchCode"
-    t.integer  "userId"
-    t.integer  "placeCode"
+    t.string   "issue_no"
+    t.date     "inquiry_date"
+    t.integer  "registered_user_id"
+    t.integer  "updated_user_id"
+    t.integer  "branch_id"
+    t.integer  "salesman_id"
+    t.integer  "install_place_id"
     t.string   "orderer"
-    t.string   "machineNo"
-    t.integer  "timeOfRunning"
-    t.text     "changeComment"
-    t.date     "orderDate"
-    t.integer  "sendingCompanyCode"
-    t.text     "sendingComment"
-    t.date     "deliveryDate"
+    t.string   "machine_no"
+    t.integer  "time_of_running"
+    t.text     "change_comment"
+    t.date     "order_date"
+    t.integer  "sending_place_id"
+    t.text     "sending_comment"
+    t.date     "desirable_delivery_date"
+    t.integer  "businessstatus_id"
+    t.integer  "new_engine_id"
+    t.integer  "old_engine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "businessstatus_id"
   end
 
   create_table "engines", force: true do |t|
-    t.string   "engineModelName"
-    t.string   "salesModelName"
+    t.string   "engine_model_name"
+    t.string   "sales_model_name"
+    t.string   "serialno"
+    t.integer  "enginestatus_id"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "enginestatus_id"
-    t.string   "serialno"
-    t.integer  "company_id"
   end
 
   create_table "enginestatuses", force: true do |t|
@@ -74,25 +77,25 @@ ActiveRecord::Schema.define(version: 20131128090849) do
   end
 
   create_table "repairs", force: true do |t|
-    t.string   "issueNo"
-    t.date     "issueDate"
-    t.date     "arriveDate"
-    t.date     "startDate"
-    t.date     "finishDate"
-    t.text     "beforeComment"
-    t.text     "afterComment"
+    t.string   "issue_no"
+    t.date     "issue_date"
+    t.date     "arrive_date"
+    t.date     "start_date"
+    t.date     "finish_date"
+    t.text     "before_comment"
+    t.text     "after_comment"
+    t.integer  "time_of_running"
+    t.date     "day_of_test"
+    t.text     "arrival_comment"
+    t.string   "order_no"
+    t.date     "order_date"
+    t.string   "construction_no"
+    t.date     "desirable_finish_date"
+    t.date     "estimated_finish_date"
+    t.text     "returning_comment"
+    t.integer  "engine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "engine_id"
-    t.integer  "timeOfRunning"
-    t.date     "dayOfTest"
-    t.text     "arrivalComment"
-    t.string   "orderNo"
-    t.date     "orderDate"
-    t.string   "constructionNo"
-    t.date     "desirableFinishDate"
-    t.date     "estimatedFinishDate"
-    t.text     "returningComment"
   end
 
   create_table "users", force: true do |t|
@@ -106,12 +109,12 @@ ActiveRecord::Schema.define(version: 20131128090849) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "userid"
+    t.string   "name"
+    t.string   "category"
+    t.string   "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "userid"
-    t.string   "category"
-    t.string   "name"
-    t.integer  "company_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

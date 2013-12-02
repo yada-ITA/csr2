@@ -1,27 +1,29 @@
-<h1>Listing engineorders</h1>
+<h1>引合一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th><%= Engineorder.human_attribute_name('businessstatus') %></th>
-      <th><%= Engineorder.human_attribute_name('issueNo') %></th>
-      <th><%= Engineorder.human_attribute_name('inquiryDate') %></th>
-      <th><%= Engineorder.human_attribute_name('branchCode') %></th>
-      <th><%= Engineorder.human_attribute_name('userId') %></th>
-      <th><%= Engineorder.human_attribute_name('placeCode') %></th>
+      <th><%= Engineorder.human_attribute_name('businessstatus_id') %></th>
+      <th><%= Engineorder.human_attribute_name('issue_no') %></th>
+      <th><%= Engineorder.human_attribute_name('inquiry_date') %></th>
+      <th><%= Engineorder.human_attribute_name('branch_id') %></th>
+      <th><%= Engineorder.human_attribute_name('salesman_id') %></th>
+      <th><%= Engineorder.human_attribute_name('install_place_id') %></th>
       <th><%= Engineorder.human_attribute_name('orderer') %></th>
-      <th><%= Engineorder.human_attribute_name('machineNo') %></th>
-      <th><%= Engineorder.human_attribute_name('timeOfRunning') %></th>
+      <th><%= Engineorder.human_attribute_name('old_engine_id') %></th>
 <!--
-      <th><%= Engineorder.human_attribute_name('changeComment') %></th>
+      <th><%= Engineorder.human_attribute_name('new_engine_id') %></th>
+      <th><%= Engineorder.human_attribute_name('time_of_running') %></th>
+      <th><%= Engineorder.human_attribute_name('machine_no') %></th>
+      <th><%= Engineorder.human_attribute_name('change_comment') %></th>
 -->
-      <th><%= Engineorder.human_attribute_name('orderDate') %></th>
-      <th><%= Engineorder.human_attribute_name('sendingCompanyCode') %></th>
+      <th><%= Engineorder.human_attribute_name('order_date') %></th>
+      <th><%= Engineorder.human_attribute_name('sending_place_id') %></th>
 <!--
-      <th><%= Engineorder.human_attribute_name('sendingComment') %></th>
+      <th><%= Engineorder.human_attribute_name('sending_comment') %></th>
 -->
-      <th><%= Engineorder.human_attribute_name('deliveryDate') %></th>
-      <th><%= Engineorder.human_attribute_name('loginUserId') %></th>
+      <th><%= Engineorder.human_attribute_name('desirable_delivery_date') %></th>
+      <th><%= Engineorder.human_attribute_name('registered_user_id') %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -34,25 +36,29 @@
     <% @engineorders.each do |engineorder| %>
       <tr>
         <td><%= Businessstatus.find(engineorder.businessstatus_id).name unless engineorder.businessstatus_id.nil? %></td>
-        <td><%= engineorder.issueNo %></td>
-        <td><%= engineorder.inquiryDate %></td>
-        <td><%= Company.find(engineorder.branchCode).name unless engineorder.branchCode.nil? %></td>
-        <td><%= User.find(engineorder.userId).name unless engineorder.userId.nil? %></td>
-        <td><%= Company.find(engineorder.placeCode).name unless engineorder.placeCode.nil? %></td>
+        <td><%= engineorder.issue_no %></td>
+        <td><%= engineorder.inquiry_date %></td>
+        <td><%= Company.find(engineorder.branch_id).name unless engineorder.branch_id.nil? %></td>
+        <td><%= User.find(engineorder.salesman_id).name unless engineorder.salesman_id.nil? %></td>
+        <td><%= Company.find(engineorder.install_place_id).name unless engineorder.install_place_id.nil? %></td>
         <td><%= engineorder.orderer %></td>
-        <td><%= engineorder.machineNo %></td>
-        <td><%= engineorder.timeOfRunning %></td>
+        <td><%= Engine.find(engineorder.old_engine_id).engine_name unless engineorder.old_engine_id.nil?%></td>
 <!--
-        <td><%= engineorder.changeComment %></td>
+        <td><%= Engine.find(engineorder.new_engine_id).engine_name unless engineorder.new_engine_id.nil?%></td>
+        <td><%= engineorder.time_of_running %></td>
+        <td><%= engineorder.machine_no %></td>
+        <td><%= engineorder.change_comment %></td>
 -->
-       <td><%= engineorder.orderDate %></td>
-        <td><%= Company.find(engineorder.sendingCompanyCode).name unless engineorder.sendingCompanyCode.nil? %></td>
+
+       <td><%= engineorder.order_date %></td>
+        <td><%= Company.find(engineorder.sending_place_id).name unless engineorder.sending_place_id.nil? %></td>
 <!--
-        <td><%= engineorder.sendingComment %></td>
+        <td><%= engineorder.sending_comment %></td>
  -->       
-        <td><%= engineorder.deliveryDate %></td>
-        <td><%= User.find(engineorder.loginUserId).name unless engineorder.loginUserId.nil? %></td>
-        <td><%= link_to '受注登録', edit_engineorder_path(engineorder) %></td>
+        <td><%= engineorder.desirable_delivery_date %></td>
+        <td><%= User.find(engineorder.registered_user_id).name unless engineorder.registered_user_id.nil? %></td>
+
+        <td><%= link_to '受注登録', ordered_path(engineorder) %></td>
         <td>.....</td>
 
         <td><%= link_to '詳細', engineorder %></td>
@@ -65,4 +71,4 @@
 
 <br>
 
-<%= link_to 'New Engineorder', new_engineorder_path %>
+<%= link_to '新規登録', new_engineorder_path %>
