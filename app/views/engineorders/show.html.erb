@@ -1,31 +1,36 @@
 <p>
-  <strong>Issueno:</strong>
-  <%= @engineorder.issueNo %>
+  <strong>Issue no:</strong>
+  <%= @engineorder.issue_no %>
 </p>
 
 <p>
-  <strong>Inquirydate:</strong>
-  <%= @engineorder.inquiryDate %>
+  <strong>Inquiry date:</strong>
+  <%= @engineorder.inquiry_date %>
 </p>
 
 <p>
-  <strong>Loginuserid:</strong>
-  <%= @engineorder.loginUserId %>
+  <strong>Registered user:</strong>
+  <%= @engineorder.registered_user_id %>
 </p>
 
 <p>
-  <strong>Branchcode:</strong>
-  <%= @engineorder.branchCode %>
+  <strong>Updated user:</strong>
+  <%= @engineorder.updated_user_id %>
 </p>
 
 <p>
-  <strong>Userid:</strong>
-  <%= @engineorder.userId %>
+  <strong>Branch:</strong>
+  <%= @engineorder.branch_id %>
 </p>
 
 <p>
-  <strong>Placecode:</strong>
-  <%= @engineorder.placeCode %>
+  <strong>Salesman:</strong>
+  <%= @engineorder.salesman_id %>
+</p>
+
+<p>
+  <strong>Install place:</strong>
+  <%= @engineorder.install_place_id %>
 </p>
 
 <p>
@@ -34,38 +39,53 @@
 </p>
 
 <p>
-  <strong>Machineno:</strong>
-  <%= @engineorder.machineNo %>
+  <strong>Machine no:</strong>
+  <%= @engineorder.machine_no %>
 </p>
 
 <p>
-  <strong>Timeofrunning:</strong>
-  <%= @engineorder.timeOfRunning %>
+  <strong>Time of running:</strong>
+  <%= @engineorder.time_of_running %>
 </p>
 
 <p>
-  <strong>Changecomment:</strong>
-  <%= @engineorder.changeComment %>
+  <strong>Change comment:</strong>
+  <%= @engineorder.change_comment %>
 </p>
 
 <p>
-  <strong>Orderdate:</strong>
-  <%= @engineorder.orderDate %>
+  <strong>Order date:</strong>
+  <%= @engineorder.order_date %>
 </p>
 
 <p>
-  <strong>Sendingcompanycode:</strong>
-  <%= @engineorder.sendingCompanyCode %>
+  <strong>Sending place:</strong>
+  <%= @engineorder.sending_place_id %>
 </p>
 
 <p>
-  <strong>Sendingcomment:</strong>
-  <%= @engineorder.sendingComment %>
+  <strong>Sending comment:</strong>
+  <%= @engineorder.sending_comment %>
 </p>
 
 <p>
-  <strong>Deliverydate:</strong>
-  <%= @engineorder.deliveryDate %>
+  <strong>Desirable delivery date:</strong>
+  <%= @engineorder.desirable_delivery_date %>
+</p>
+
+<p>
+  <strong>Businessstatus:</strong>
+  <%= @engineorder.businessstatus_id %>
+</p>
+
+<p>
+  <strong>New engine:</strong>
+  <%= @engineorder.new_engine_id %>
+</p>
+
+<p>
+  <strong>Old engine:</strong>
+  <%= @engineorder.old_engine_id %>
 </p>
 
 <%= link_to 'Edit', edit_engineorder_path(@engineorder) %> |

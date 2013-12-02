@@ -37,29 +37,22 @@ ja:
         password_confirmation: パスワード（確認）
         current_password: 現在のパスワード
         company: 会社
-      inquiry:
-        loginUserId: ログイン担当者
-        branchCode: 拠点
-        userId: 担当者
-        placeCode: 設置先
-        orderer: 元受
-        machineNo: 機体No
-        timeOfRunning: エンジン運転時間
-        dayOfTest: 試運転日
-        changeComment: コメント(交換理由)
       engineorder:
-        issueNo: 発行番号
-        inquiryDate: 引合発生日
-        orderDate: 受注日
-        loginUserId: ログイン担当者
-        branchCode: 拠点
-        userId: 担当者
-        placeCode: 設置先
+        issue_no: 発行番号
+        inquiry_date: 引合発生日
+        order_date: 受注日
+        registered_user_id: ログイン担当者
+        updated_user_id: 更新担当者
+        branch_id: 拠点
+        salesman_id: 担当者
+        install_place_id: 設置先
         orderer: 元受
-        machineNo: 機体No
-        timeOfRunning: エンジン運転時間
-        changeComment: コメント(交換理由)
-        sendingCompanyCode: 送付先
-        sendingComment: 送付コメント
-        deliveryDate: 希望納期
-        businessstatus: ステータス
+        machine_no: 機体No
+        time_of_running: エンジン運転時間
+        change_comment: コメント(交換理由)
+        sending_place_id: 送付先
+        sending_comment: 送付コメント
+        desirable_delivery_date: 希望納期
+        businessstatus_id: ステータス
+        new_engine_id: 新規エンジン
+        old_engine_id: 返却エンジン

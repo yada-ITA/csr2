@@ -5,6 +5,7 @@ class Engine < ActiveRecord::Base
   belongs_to :company
   
   has_many :repairs
+  has_many :engineorders
   
   # Validation
   validates :engineModelName, :presence => true  
@@ -23,4 +24,8 @@ class Engine < ActiveRecord::Base
     return nil
   end
   
+  #エンジン型式とシリアルNoを併せてエンジン名として表示する。(engineのselect_collectionで使用)
+  def engine_name
+    "#{engineModelName} ( #{serialno} )"
+  end
 end

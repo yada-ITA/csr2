@@ -1,33 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  issueNo: MyString
-  inquiryDate: 2013-11-28
-  loginUserId: 1
-  branchCode: 1
-  userId: 1
-  placeCode: 1
+  issue_no: MyString
+  inquiry_date: 2013-12-02
+  registered_user_id: 1
+  updated_user_id: 1
+  branch_id: 1
+  salesman_id: 1
+  install_place_id: 1
   orderer: MyString
-  machineNo: MyString
-  timeOfRunning: 1
-  changeComment: MyText
-  orderDate: 2013-11-28
-  sendingCompanyCode: 1
-  sendingComment: MyText
-  deliveryDate: 2013-11-28
+  machine_no: MyString
+  time_of_running: 1
+  change_comment: MyText
+  order_date: 2013-12-02
+  sending_place_id: 1
+  sending_comment: MyText
+  desirable_delivery_date: 2013-12-02
+  businessstatus_id: 1
+  new_engine_id: 1
+  old_engine_id: 1
 
 two:
-  issueNo: MyString
-  inquiryDate: 2013-11-28
-  loginUserId: 1
-  branchCode: 1
-  userId: 1
-  placeCode: 1
+  issue_no: MyString
+  inquiry_date: 2013-12-02
+  registered_user_id: 1
+  updated_user_id: 1
+  branch_id: 1
+  salesman_id: 1
+  install_place_id: 1
   orderer: MyString
-  machineNo: MyString
-  timeOfRunning: 1
-  changeComment: MyText
-  orderDate: 2013-11-28
-  sendingCompanyCode: 1
-  sendingComment: MyText
-  deliveryDate: 2013-11-28
+  machine_no: MyString
+  time_of_running: 1
+  change_comment: MyText
+  order_date: 2013-12-02
+  sending_place_id: 1
+  sending_comment: MyText
+  desirable_delivery_date: 2013-12-02
+  businessstatus_id: 1
+  new_engine_id: 1
+  old_engine_id: 1

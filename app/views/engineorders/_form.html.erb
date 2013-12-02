@@ -11,77 +11,99 @@
     </div>
   <% end %>
 
-<% #引合登録以外で、以下の項目を表示する。 %>
-  <% unless @engineorder.registInquiry? %>
-  　　<div class="field">
-    　　<%= f.label :issueNo %><br>
-    　　<%=  @engineorder.issueNo %>
-  　　</div>
-  <% end %>
-
   <div class="field">
-    <%= f.label :inquiryDate %><br>
-    <%= f.date_select :inquiryDate %>
-  </div>
-
-<% #引合登録以外で、以下の項目を表示する。 %>
-  <% unless @engineorder.registInquiry? %>
-  <div class="field">
-    <%= f.label :orderDate %><br>
-    <%= f.date_select :orderDate %>
-  </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :loginUserId %><br>
-    <% if @engineorder.loginUserId.nil? %>
-      <% @engineorder.loginUserId = current_user.id  %>
+    <%= f.label :registered_user_id %>：
+    <% if @engineorder.registered_user_id.nil? %>
+      <% @engineorder.registered_user_id = current_user.id  %>
     <% end %>
-      <%=  User.find(@engineorder.loginUserId).name  %>
-    <%= f.hidden_field :loginUserId %>
+      <%=  User.find(@engineorder.registered_user_id).name  %>
+    <%= f.hidden_field :registered_user_id %>
   </div>
+
+  <% #引合登録以外は、発注Noを表示する(引合登録はまだ未発番のため) %>
+  <% unless @engineorder.registInquiry? %>
   <div class="field">
-    <%= f.label :branchCode %><br>
-   <%= f.collection_select( :branchCode, Company.all, :id, :name, :include_blank => false ) %>
+    <%= f.label :issue_no %><br>
+    <%=  @engineorder.issue_no %>
   </div>
+  <% end %>
+
   <div class="field">
-    <%= f.label :userId %><br>
-   <%= f.collection_select( :userId, User.all, :id, :name, :include_blank => false ) %>
-   </div>
-  <div class="field">
-    <%= f.label :placeCode %><br>
-    <%= f.collection_select( :placeCode, Company.all, :id, :name, :include_blank => false ) %>
+    <%= f.label :inquiry_date %><br>
+    <%= f.date_select :inquiry_date %>
   </div>
+
+  <% #引合登録以外の場合は、order_dateを表示 %>
+  <% unless @engineorder.registInquiry? %>
+  <div class="field">
+    <%= f.label :order_date %><br>
+    <%= f.date_select :order_date %>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :branch_id %><br>
+   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :salesman_id %><br>
+   <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :install_place_id %><br>
+    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+
   <div class="field">
     <%= f.label :orderer %><br>
     <%= f.text_field :orderer %>
   </div>
-  <div class="field">
-    <%= f.label :machineNo %><br>
-    <%= f.text_field :machineNo %>
-  </div>
-  <div class="field">
-    <%= f.label :timeOfRunning %><br>
-    <%= f.number_field :timeOfRunning %>
-  </div>
-  <div class="field">
-    <%= f.label :changeComment %><br>
-    <%= f.text_area :changeComment %>
-  </div>
-  <div class="field">
-    <%= f.label :sendingCompanyCode %><br>
-    <%= f.collection_select( :sendingCompanyCode, Company.all, :id, :name, :include_blank => true ) %>
-  </div>
 
   <div class="field">
-    <%= f.label :sendingComment %><br>
-    <%= f.text_area :sendingComment %>
-   </div>
-   <div class="field">
-     <%= f.label :deliveryDate %><br>
-     <%= f.date_select :deliveryDate %>
-   </div>
+    <%= f.label :old_engine_id %><br>
+    <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
+  </div>
+<!--
+  <div class="field">
+    <%= f.label :machine_no %><br>
+    <%= f.text_field :machine_no %>
+  </div>
+-->
+  <div class="field">
+    <%= f.label :time_of_running %><br>
+    <%= f.number_field :time_of_running %>
+  </div>
+  <div class="field">
+    <%= f.label :change_comment %><br>
+    <%= f.text_area :change_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :order_date %><br>
+    <%= f.date_select :order_date %>
+  </div>
+  <div class="field">
+    <%= f.label :sending_place_id %><br>
+    <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
+  </div>
 
+
+  <div class="field">
+    <%= f.label :sending_comment %><br>
+    <%= f.text_area :sending_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :desirable_delivery_date %><br>
+    <%= f.date_select :desirable_delivery_date %>
+  </div>
+
+<!--  
+  <div class="field">
+    <%= f.label :new_engine_id %><br>
+    <%= f.number_field :new_engine_id %>
+  </div>
+-->
 
   <%= f.hidden_field :businessstatus_id %>
 
