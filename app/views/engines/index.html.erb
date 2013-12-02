@@ -51,6 +51,7 @@
         <td><%= engine.serialno %></td>
         <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
+        <td><%= link_to '引合登録', inquiry_path(engine) %></td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td>.....</td>
         <td><%= link_to '詳細', engine %></td>

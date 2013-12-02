@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128090849) do
+ActiveRecord::Schema.define(version: 20131202061518) do
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -38,23 +38,26 @@ ActiveRecord::Schema.define(version: 20131128090849) do
   end
 
   create_table "engineorders", force: true do |t|
-    t.string   "issueNo"
-    t.date     "inquiryDate"
-    t.integer  "loginUserId"
-    t.integer  "branchCode"
-    t.integer  "userId"
-    t.integer  "placeCode"
+    t.string   "issue_no"
+    t.date     "inquiry_date"
+    t.integer  "registered_user_id"
+    t.integer  "updated_user_id"
+    t.integer  "branch_id"
+    t.integer  "salesman_id"
+    t.integer  "install_place_id"
     t.string   "orderer"
-    t.string   "machineNo"
-    t.integer  "timeOfRunning"
-    t.text     "changeComment"
-    t.date     "orderDate"
-    t.integer  "sendingCompanyCode"
-    t.text     "sendingComment"
-    t.date     "deliveryDate"
+    t.string   "machine_no"
+    t.integer  "time_of_running"
+    t.text     "change_comment"
+    t.date     "order_date"
+    t.integer  "sending_place_id"
+    t.text     "sending_comment"
+    t.date     "desirable_delivery_date"
+    t.integer  "businessstatus_id"
+    t.integer  "new_engine_id"
+    t.integer  "old_engine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "businessstatus_id"
   end
 
   create_table "engines", force: true do |t|
@@ -69,19 +72,6 @@ ActiveRecord::Schema.define(version: 20131128090849) do
 
   create_table "enginestatuses", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "repairorders", force: true do |t|
-    t.string   "issueNo"
-    t.date     "issueDate"
-    t.string   "orderNo"
-    t.string   "constructionNo"
-    t.date     "otherBrandPartsArrivealDate"
-    t.date     "returnDate"
-    t.text     "returningComment"
-    t.string   "sendingComment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

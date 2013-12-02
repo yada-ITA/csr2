@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   # Association
   belongs_to :company
+  has_many :engineorders
   
   # validation checks
   validates :userid, :presence => true,
