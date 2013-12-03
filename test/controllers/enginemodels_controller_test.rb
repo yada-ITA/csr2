@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EnginemodelsControllerTest < ActionController::TestCase
+=begin
   setup do
     @enginemodel = enginemodels(:one)
   end
@@ -46,4 +47,5 @@ class EnginemodelsControllerTest < ActionController::TestCase
 
     assert_redirected_to enginemodels_path
   end
+=end
 end
