@@ -57,5 +57,5 @@ gem 'devise'
 # will pagenate
 gem 'will_paginate'
 
-# Use rspec  for development
-gem 'rspec', group: [:development, :test]
+# Use rails-erd  for development
+gem 'rails-erd', group: [:development, :test]
