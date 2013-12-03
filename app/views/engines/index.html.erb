@@ -12,9 +12,9 @@
   <% end %>
   <tr>
     <td width="80" >型式   </td>
-    <td width="120"><%= text_field :search, :engineModelName, :value => @searched.fetch('engineModelName', "") %><br /></td>
+    <td width="120"><%= text_field :search, :engine_model_name, :value => @searched.fetch('engine_model_name', "") %><br /></td>
     <td width="80" >販売型式   </td>
-    <td width="120"><%= text_field :search, :salesModelName, :value => @searched.fetch('salesModelName', "") %><br /></td>
+    <td width="120"><%= text_field :search, :sales_model_name, :value => @searched.fetch('sales_model_name', "") %><br /></td>
   </tr>
   <tr>
       <td width="80" >ステータス     </td>
@@ -46,8 +46,8 @@
   <tbody>
     <% @engines.each do |engine| %>
       <tr>
-        <td><%= engine.engineModelName %></td>
-        <td><%= engine.salesModelName %></td>
+        <td><%= engine.engine_model_name	 %></td>
+        <td><%= engine.sales_model_name %></td>
         <td><%= engine.serialno %></td>
         <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
@@ -67,4 +67,4 @@
 <%= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br>
 
-<%= link_to 'New Engine', new_engine_path %>
+<%= link_to '新規登録', new_engine_path %>

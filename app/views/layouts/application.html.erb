@@ -7,12 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
   <% if user_signed_in? %>
     <%= link_to "メインメニューへ戻る", "/" %>
     <%= link_to "サインアウト", destroy_user_session_path, :method => :delete %>
   <% end %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
       
 <%= yield %>
 

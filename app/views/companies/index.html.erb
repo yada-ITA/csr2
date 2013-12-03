@@ -1,14 +1,14 @@
-<h1>Listing companies</h1>
+<h1>会社一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Postcode</th>
-      <th>Address</th>
-      <th>Phoneno</th>
-      <th>Destinationname</th>
+      <th>会社名</th>
+      <th>分類</th>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>電話番号</th>
+      <th>宛先</th>
       <th></th>
       <th></th>
       <th></th>
@@ -22,8 +22,8 @@
         <td><%= company.category %></td>
         <td><%= company.postcode %></td>
         <td><%= company.address %></td>
-        <td><%= company.phoneNo %></td>
-        <td><%= company.destinationName %></td>
+        <td><%= company.phone_no %></td>
+        <td><%= company.destination_name %></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to '新規登録', new_company_path %>

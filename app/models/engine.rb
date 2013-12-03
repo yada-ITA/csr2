@@ -8,9 +8,9 @@ class Engine < ActiveRecord::Base
   has_many :engineorders
   
   # Validation
-  validates :engineModelName, :presence => true  
+  validates :engine_model_name, :presence => true  
   validates :serialno, :presence => true,
-                       :uniqueness =>{:scope => :engineModelName }
+                       :uniqueness =>{:scope => :engine_model_name }
   
   # Get unclosed repair
   def current_repair
@@ -26,6 +26,6 @@ class Engine < ActiveRecord::Base
   
   #エンジン型式とシリアルNoを併せてエンジン名として表示する。(engineのselect_collectionで使用)
   def engine_name
-    "#{engineModelName} ( #{serialno} )"
+    "#{engine_model_name} ( #{serialno} )"
   end
 end
