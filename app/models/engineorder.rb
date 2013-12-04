@@ -14,9 +14,19 @@ class Engineorder < ActiveRecord::Base
   belongs_to :salesman, :class_name => 'User' 
 
 
-  #引合の登録かどうか？
+  #新規引合かどうか？
   def registInquiry?
     return true if self.businessstatus_id.nil?
+  end 
+
+  #引合以降かどうか？
+  def afterInquiry?
+    return true if self.businessstatus_id.to_i >= 1 
+  end 
+
+  #受注以降かどうか？
+  def afterOrdered?
+    return true if self.businessstatus_id.to_i >= 2 
   end 
 
   #引当登録以降かどうか？
@@ -62,6 +72,22 @@ class Engineorder < ActiveRecord::Base
   #流通ステータスに「出荷済み」をセットする
   def setShipped
     self.businessstatus_id = 4
+  end
+
+  def createRepair
+    # 整備オブジェクトを受領前の状態で新規作成して返す
+    repair = Repair.new
+    repair.issue_no          = Repair.createIssueNo
+    repair.issue_date        = self.order_date         # 暫定で受注日をセット
+    repair.time_of_running   = self.time_of_running
+    # @repair.day_of_test       = self.day_of_test        # 試運転日が無い！
+    # @repair.returning_comment = self.returning_comment  # 引当画面に返却コメントが必要
+    # 整備オブジェクトに旧エンジンを紐づける
+    repair.engine            = self.old_engine
+    repair.engine.enginestatus_id = 1
+    # 整備オブジェクトの会社として、拠点コードを紐づける
+    repair.engine.company    = self.branch             # 暫定で拠点をセット
+    return repair
   end
 
 end

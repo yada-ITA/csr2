@@ -30,11 +30,11 @@
 <table>
   <thead>
     <tr>
-      <th>型式</th>
-      <th>販売型式</th>
-      <th>S/#</th>
-      <th>管轄</th>      
       <th>ステータス</th>      
+      <th>型式</th>
+      <th>S/#</th>
+      <th>販売型式</th>
+      <th>管轄</th>      
       <th></th>
       <th></th>
       <th></th>
@@ -46,11 +46,11 @@
   <tbody>
     <% @engines.each do |engine| %>
       <tr>
-        <td><%= engine.engine_model_name	 %></td>
-        <td><%= engine.sales_model_name %></td>
-        <td><%= engine.serialno %></td>
-        <td><%= engine.company.name %></td>
         <td><%= engine.enginestatus.name %></td>
+        <td><%= engine.engine_model_name	 %></td>
+        <td><%= engine.serialno %></td>
+        <td><%= engine.sales_model_name %></td>
+        <td><%= engine.company.name %></td>
         <td><%= link_to '引合登録', inquiry_path(engine) %></td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td>.....</td>

@@ -30,9 +30,10 @@ ja:
         start_date: 整備開始日
         before_comment: 整備前コメント
         finish_date: 整備完了日
-        after_comment: 整備前コメント
+        after_comment: 完了時コメント
         estimated_finish_date: 予定完成日
         finish_date: 完了日
+        shipped_date: 出荷日
       user:
         userid: 社員コード
         code: 社員コード
@@ -56,6 +57,7 @@ ja:
         orderer: 元受
         machine_no: 機体No
         time_of_running: エンジン運転時間
+        day_of_test: 試運転日
         change_comment: コメント(交換理由)
         sending_place_id: 送付先
         sending_comment: 送付コメント
@@ -64,3 +66,5 @@ ja:
         new_engine_id: 新規エンジン
         old_engine_id: 返却エンジン
         invoice_no: 送り状No
+        returning_comment: 返却コメント
+        shipped_date: 出荷日

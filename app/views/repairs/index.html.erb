@@ -9,6 +9,8 @@
       <th>完成希望日</th>
       <th>整備開始日</th>
       <th>整備完了日</th>
+      <th>出荷日</th>
+      <th>返却コメント</th>
       <th>整備前コメント</th>
       <th>完成品コメント</th>
       <th>型式</th>
@@ -32,6 +34,8 @@
         <td><%= repair.desirable_finish_date %></td>
         <td><%= repair.start_date %></td>
         <td><%= repair.finish_date %></td>
+        <td><%= repair.shipped_date %></td>
+        <td><%= repair.returning_comment %></td>
         <td><%= repair.before_comment %></td>
         <td><%= repair.after_comment %></td>
         <td><%= repair.engine.engine_model_name %></td>

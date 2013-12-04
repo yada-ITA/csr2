@@ -31,7 +31,7 @@ class Engine < ActiveRecord::Base
 
   #完成品のエンジン一覧を取得する。
   def self.completedEngine
-     return Engine.where(enginestatus_id = 3)
+     return Engine.where(:enginestatus_id => 3)
   end
 
   #ステータスを整備前にする
