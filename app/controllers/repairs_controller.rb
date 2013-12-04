@@ -66,7 +66,9 @@ class RepairsController < ApplicationController
         # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
 		    if !(params[:enginestatus_id].nil?)
 		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-          @repair.engine.company = current_user.company
+		      if params[:enginestatus_id].to_i = 1
+            @repair.engine.company = current_user.company
+		      end
 		      @repair.engine.save
 		    end
         format.html { redirect_to @repair, notice: 'Repair was successfully updated.' }
@@ -125,6 +127,6 @@ class RepairsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repair_params
-      params.require(:repair).permit(:id, :issue_no, :issue_date, :arrive_date, :start_date, :finish_date, :before_comment, :after_comment, :time_of_running, :day_of_test, :returning_comment, :arrival_comment, :order_no, :order_date, :construction_no, :desirable_finish_date, :estimated_finish_date, :engine_id, :enginestatus_id)
+      params.require(:repair).permit(:id, :issue_no, :issue_date, :arrive_date, :start_date, :finish_date, :before_comment, :after_comment, :time_of_running, :day_of_test, :returning_comment, :arrival_comment, :order_no, :order_date, :construction_no, :desirable_finish_date, :estimated_finish_date, :engine_id, :enginestatus_id, :shipped_date)
     end
 end
