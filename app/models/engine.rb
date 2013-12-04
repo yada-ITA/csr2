@@ -44,25 +44,23 @@ class Engine < ActiveRecord::Base
   end 
 
   #ステータスを完成品にする
-  def setComp
+  def setCompleted
      self.enginestatus_id = 3
   end 
 
   #ステータスを出荷準備中にする
-  def setBeforeRepair
+  def setBeforeShipping
      self.enginestatus_id = 4
   end 
 
   #ステータスを出荷済にする
-  def setAfterRepair
+  def setAfterShipping
      self.enginestatus_id = 5
   end 
 
   #ステータスを廃棄済にする
-    def setBeforeRepair
+    def setAbolishment
      self.enginestatus_id = 6
   end 
-
-
 
 end

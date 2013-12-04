@@ -2,8 +2,8 @@ class Engineorder < ActiveRecord::Base
   #Association
   belongs_to :businessstatus
 
-  belongs_to :old_engine, :class_name => 'Engine' ,:autosave => 'true'
-  belongs_to :new_engine, :class_name => 'Engine' ,:autosave => 'true'
+  belongs_to :old_engine, :class_name => 'Engine' 
+  belongs_to :new_engine, :class_name => 'Engine' 
 
   belongs_to :branch, :class_name => 'Company' 
   belongs_to :install_place, :class_name => 'Company' 
@@ -19,15 +19,16 @@ class Engineorder < ActiveRecord::Base
     return true if self.businessstatus_id.nil?
   end 
 
-  #引当登録かどうか？
-  def registAccepted?
-    return true if self.businessstatus_id.to_i == 3 
-  end 
-
   #引当登録以降かどうか？
   def afterAccepted?
     return true if self.businessstatus_id.to_i >= 3 
   end 
+
+  #出荷登録以降かどうか？
+  def afterShipped?
+    return true if self.businessstatus_id.to_i >= 4 
+  end 
+
 
   #現時点での発行Noの生成 (年月-枝番3桁)
   def self.createIssueNo
@@ -56,6 +57,11 @@ class Engineorder < ActiveRecord::Base
   #流通ステータスに「出荷準備中」をセットする
   def setAllocated
     self.businessstatus_id = 3
+  end
+
+  #流通ステータスに「出荷済み」をセットする
+  def setShipped
+    self.businessstatus_id = 4
   end
 
 end

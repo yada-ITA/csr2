@@ -63,3 +63,4 @@ ja:
         businessstatus_id: ステータス
         new_engine_id: 新規エンジン
         old_engine_id: 返却エンジン
+        invoice_no: 送り状No
