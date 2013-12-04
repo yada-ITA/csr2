@@ -1,7 +1,9 @@
 class Engineorder < ActiveRecord::Base
   #Association
-  belongs_to :old_engine, :class_name => 'Engine' 
-  belongs_to :new_engine, :class_name => 'Engine' 
+  belongs_to :businessstatus
+
+  belongs_to :old_engine, :class_name => 'Engine' ,:autosave => 'true'
+  belongs_to :new_engine, :class_name => 'Engine' ,:autosave => 'true'
 
   belongs_to :branch, :class_name => 'Company' 
   belongs_to :install_place, :class_name => 'Company' 
@@ -15,6 +17,11 @@ class Engineorder < ActiveRecord::Base
   #引合の登録かどうか？
   def registInquiry?
     return true if self.businessstatus_id.nil?
+  end 
+
+  #引当登録かどうか？
+  def registAccepted?
+    return true if self.businessstatus_id.to_i == 3 
   end 
 
   #引当登録以降かどうか？

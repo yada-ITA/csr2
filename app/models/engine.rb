@@ -34,4 +34,35 @@ class Engine < ActiveRecord::Base
      return Engine.where(enginestatus_id = 3)
   end
 
+  #ステータスを整備前にする
+  def setBeforeRepair
+     self.enginestatus_id = 1
+  end 
+  #ステータスを整備中にする
+  def setUnderRepair
+     self.enginestatus_id = 2
+  end 
+
+  #ステータスを完成品にする
+  def setComp
+     self.enginestatus_id = 3
+  end 
+
+  #ステータスを出荷準備中にする
+  def setBeforeRepair
+     self.enginestatus_id = 4
+  end 
+
+  #ステータスを出荷済にする
+  def setAfterRepair
+     self.enginestatus_id = 5
+  end 
+
+  #ステータスを廃棄済にする
+    def setBeforeRepair
+     self.enginestatus_id = 6
+  end 
+
+
+
 end
