@@ -20,13 +20,22 @@
     <%= f.hidden_field :registered_user_id %>
   </div>
 
-  <% #引合登録以外は、発注Noを表示する(引合登録はまだ未発番のため) %>
+  <% #引合登録以外は、発注Noを表示する(引合登録時発注Noは、まだ未発番のため) %>
   <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :issue_no %><br>
     <%=  @engineorder.issue_no %>
   </div>
   <% end %>
+
+  <% #出荷登録の場合のみ送り状Noを表示する %>
+  <% if @engineorder.afterShipped? %>
+  <div class="field">
+    <%= f.label :invoice_no %><br>
+    <%= f.text_field :invoice_no %>
+  </div>
+  <% end %>
+
 
   <div class="field">
     <%= f.label :inquiry_date %><br>
@@ -65,6 +74,15 @@
     <%= f.label :old_engine_id %><br>
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
+
+<% #引当登録以降の場合は、order_dateを表示 %> 
+<% if @engineorder.afterAccepted? %>
+  <div class="field">
+    <%= f.label :new_engine_id %><br>
+    <%= f.collection_select( :new_engine_id, Engine.completedEngine, :id, :engine_name, :include_blank => true ) %>
+  </div>
+<% end %>
+
 <!--
   <div class="field">
     <%= f.label :machine_no %><br>
@@ -79,10 +97,12 @@
     <%= f.label :change_comment %><br>
     <%= f.text_area :change_comment %>
   </div>
+
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
+  
   <div class="field">
     <%= f.label :sending_place_id %><br>
     <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
@@ -97,13 +117,6 @@
     <%= f.label :desirable_delivery_date %><br>
     <%= f.date_select :desirable_delivery_date %>
   </div>
-
-<!--  
-  <div class="field">
-    <%= f.label :new_engine_id %><br>
-    <%= f.number_field :new_engine_id %>
-  </div>
--->
 
   <%= f.hidden_field :businessstatus_id %>
 
