@@ -18,6 +18,10 @@ R2::Application.routes.draw do
 
   get 'engineorders/engineOrdered/:id' => 'engineorders#ordered',:as => :ordered
 
+  get 'engineorders/engineAllocated/:id' => 'engineorders#allocated',:as => :allocated
+
+  get 'engineorders/engineShipped/:id' => 'engineorders#shipped',:as => :shipped
+
   resources :arrivals
 
   resources :repairs

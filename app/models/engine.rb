@@ -24,8 +24,43 @@ class Engine < ActiveRecord::Base
     return nil
   end
   
-  #エンジン型式とシリアルNoを併せてエンジン名として表示する。(engineのselect_collectionで使用)
+  #エンジン型式とシリアルNoを併せてエンジン名として表示する。
   def engine_name
     "#{engine_model_name} ( #{serialno} )"
   end
+
+  #完成品のエンジン一覧を取得する。
+  def self.completedEngine
+     return Engine.where(enginestatus_id = 3)
+  end
+
+  #ステータスを整備前にする
+  def setBeforeRepair
+     self.enginestatus_id = 1
+  end 
+  #ステータスを整備中にする
+  def setUnderRepair
+     self.enginestatus_id = 2
+  end 
+
+  #ステータスを完成品にする
+  def setCompleted
+     self.enginestatus_id = 3
+  end 
+
+  #ステータスを出荷準備中にする
+  def setBeforeShipping
+     self.enginestatus_id = 4
+  end 
+
+  #ステータスを出荷済にする
+  def setAfterShipping
+     self.enginestatus_id = 5
+  end 
+
+  #ステータスを廃棄済にする
+    def setAbolishment
+     self.enginestatus_id = 6
+  end 
+
 end

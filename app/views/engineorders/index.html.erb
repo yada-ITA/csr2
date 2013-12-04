@@ -11,8 +11,8 @@
       <th><%= Engineorder.human_attribute_name('install_place_id') %></th>
       <th><%= Engineorder.human_attribute_name('orderer') %></th>
       <th><%= Engineorder.human_attribute_name('old_engine_id') %></th>
-<!--
       <th><%= Engineorder.human_attribute_name('new_engine_id') %></th>
+<!--
       <th><%= Engineorder.human_attribute_name('time_of_running') %></th>
       <th><%= Engineorder.human_attribute_name('machine_no') %></th>
       <th><%= Engineorder.human_attribute_name('change_comment') %></th>
@@ -24,6 +24,7 @@
 -->
       <th><%= Engineorder.human_attribute_name('desirable_delivery_date') %></th>
       <th><%= Engineorder.human_attribute_name('registered_user_id') %></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -43,8 +44,9 @@
         <td><%= Company.find(engineorder.install_place_id).name unless engineorder.install_place_id.nil? %></td>
         <td><%= engineorder.orderer %></td>
         <td><%= Engine.find(engineorder.old_engine_id).engine_name unless engineorder.old_engine_id.nil?%></td>
-<!--
+
         <td><%= Engine.find(engineorder.new_engine_id).engine_name unless engineorder.new_engine_id.nil?%></td>
+<!--
         <td><%= engineorder.time_of_running %></td>
         <td><%= engineorder.machine_no %></td>
         <td><%= engineorder.change_comment %></td>
@@ -59,6 +61,8 @@
         <td><%= User.find(engineorder.registered_user_id).name unless engineorder.registered_user_id.nil? %></td>
 
         <td><%= link_to '受注登録', ordered_path(engineorder) %></td>
+        <td><%= link_to '引当登録', allocated_path(engineorder) %></td>
+        <td><%= link_to '出荷登録', shipped_path(engineorder) %></td>
         <td>.....</td>
 
         <td><%= link_to '詳細', engineorder %></td>
