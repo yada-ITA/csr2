@@ -36,6 +36,7 @@ class RepairsController < ApplicationController
     # 作業中の整備オブジェクトが存在しない場合、整備オブジェクトを作って、当該のエンジンに紐づける
     if @reapir.nil?
       @repair = Repair.new(repair_params)  
+      @repair.issue_no = Repair.createIssueNo
 	    if !(params[:repair][:engine_id].nil?)
         @repair.engine = engine
 	    end   
