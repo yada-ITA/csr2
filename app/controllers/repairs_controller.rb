@@ -67,7 +67,7 @@ class RepairsController < ApplicationController
 		    if !(params[:enginestatus_id].nil?)
 		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
 		      if params[:enginestatus_id].to_i = 1
-            @repair.engine.company = current_user.company
+            @repair.engine.company_id = current_user.company_id.to_i
 		      end
 		      @repair.engine.save
 		    end
