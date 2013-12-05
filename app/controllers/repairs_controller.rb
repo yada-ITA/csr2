@@ -65,9 +65,9 @@ class RepairsController < ApplicationController
       if @repair.update(repair_params)
         # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
 		    if !(params[:enginestatus_id].nil?)
-		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id])
 		      if params[:enginestatus_id].to_i = 1
-            @repair.engine.company_id = current_user.company_id.to_i
+            @repair.engine.company = current_user.company
 		      end
 		      @repair.engine.save
 		    end
