@@ -5,12 +5,12 @@ class Repair < ActiveRecord::Base
   # Association
   belongs_to :engine
   
-  # ì‹Æ’†‚©‚Ç‚¤‚©‚ð”»’è‚·‚é
+  # ä½œæ¥­ä¸­ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹
   def opened?
     return self.finish_date.nil?
   end
 
-  # Œ»Žž“_‚Å‚Ì”­sNo‚Ì¶¬(”NŒŽ-Ž}”Ô3Œ…)
+  # ç¾æ™‚ç‚¹ã§ã®ç™ºè¡ŒNoã®ç”Ÿæˆ(å¹´æœˆ-æžç•ª3æ¡)
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
     maxseq = self.where("issue_no like ?", issuedate + "%").max()

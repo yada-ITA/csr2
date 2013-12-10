@@ -30,37 +30,41 @@ class Engine < ActiveRecord::Base
   end
 
   #完成品のエンジン一覧を取得する。
-  def self.completedEngine
+  def self.completedEngines
      return Engine.where(:enginestatus_id => 3)
   end
 
   #ステータスを整備前にする
-  def setBeforeRepair
+  def setBeforeArrive
      self.enginestatus_id = 1
+  end 
+  #ステータスを整備前にする
+  def setBeforeRepair
+     self.enginestatus_id = 2
   end 
   #ステータスを整備中にする
   def setUnderRepair
-     self.enginestatus_id = 2
+     self.enginestatus_id = 3
   end 
 
   #ステータスを完成品にする
   def setCompleted
-     self.enginestatus_id = 3
+     self.enginestatus_id = 4
   end 
 
   #ステータスを出荷準備中にする
   def setBeforeShipping
-     self.enginestatus_id = 4
+     self.enginestatus_id = 5
   end 
 
   #ステータスを出荷済にする
   def setAfterShipping
-     self.enginestatus_id = 5
+     self.enginestatus_id = 6
   end 
 
   #ステータスを廃棄済にする
     def setAbolishment
-     self.enginestatus_id = 6
+     self.enginestatus_id = 7
   end 
 
 end

@@ -41,12 +41,6 @@ class RepairsController < ApplicationController
         @repair.engine = engine
 	    end   
     end
-    # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
-    if !(params[:enginestatus_id].nil?)
-      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-      @repair.engine.company = current_user.company
-      @repair.engine.save     
-    end
     respond_to do |format|
       if @repair.save
         format.html { redirect_to @repair, notice: 'Repair was successfully created.' }
@@ -65,8 +59,8 @@ class RepairsController < ApplicationController
       if @repair.update(repair_params)
         # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
 		    if !(params[:enginestatus_id].nil?)
-		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id])
-		      if params[:enginestatus_id] = '1'
+		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+		      if params[:enginestatus_id].to_i == 1
             @repair.engine.company = current_user.company
 		      end
 		      @repair.engine.save
@@ -117,6 +111,15 @@ class RepairsController < ApplicationController
   # GET /repairs/repairOrder/1  
   def repairOrder
     set_repair
+  end
+
+  # 必要に応じて、エンジンのステータスと所轄を設定する
+  def  changeEngine
+    if !(params[:enginestatus_id].nil?)
+      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+      @repair.engine.company = current_user.company
+      @repair.engine.save     
+    end
   end
   
   private
