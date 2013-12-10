@@ -34,37 +34,72 @@ class Engine < ActiveRecord::Base
      return Engine.where(:enginestatus_id => 3)
   end
 
-  #ステータスを整備前にする
+  # ステータスを受領前にする
   def setBeforeArrive
      self.enginestatus_id = 1
   end 
-  #ステータスを整備前にする
+  # ステータスを整備前にする
   def setBeforeRepair
      self.enginestatus_id = 2
   end 
-  #ステータスを整備中にする
+  # ステータスを整備中にする
   def setUnderRepair
      self.enginestatus_id = 3
   end 
 
-  #ステータスを完成品にする
+  # ステータスを完成品にする
   def setCompleted
      self.enginestatus_id = 4
   end 
 
-  #ステータスを出荷準備中にする
+  # ステータスを出荷準備中にする
   def setBeforeShipping
      self.enginestatus_id = 5
   end 
 
-  #ステータスを出荷済にする
+  # ステータスを出荷済にする
   def setAfterShipping
      self.enginestatus_id = 6
   end 
 
-  #ステータスを廃棄済にする
+  # ステータスを廃棄済にする
     def setAbolishment
      self.enginestatus_id = 7
+  end 
+
+  # 受領前状態かどうか？
+  def beforeArrive?
+    return self.enginestatus_id.to_i == 1 
+  end 
+
+  # 整備前状態かどうか？
+  def beforeRepair?
+    return self.enginestatus_id.to_i == 2 
+  end 
+
+  # 整備中状態かどうか？
+  def underRepair?
+    return self.enginestatus_id.to_i == 3 
+  end 
+
+  # 完成品状態かどうか？
+  def completed?
+    return self.enginestatus_id.to_i == 4 
+  end 
+
+  # 出荷準備中状態かどうか？
+  def beforeShipping?
+    return self.enginestatus_id.to_i == 5 
+  end 
+  
+  # 出荷済状態かどうか？
+  def afterShipped?
+    return self.enginestatus_id.to_i == 6 
+  end 
+
+  # 廃却状態かどうか？
+  def abolished?
+    return self.enginestatus_id.to_i == 7 
   end 
 
 end

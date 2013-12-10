@@ -24,7 +24,32 @@ class RepairsController < ApplicationController
   end
 
   # GET /repairs/1/edit
+  # 流通ステータスでレンダリング先を変える。
   def edit
+    
+    if @repair.engine.beforeArrive?
+      render :template => "repairs/returning	"
+    end
+    
+    if @repair.engine.beforeRepair?
+      render :template => "engineorders/engineArrived"
+    end
+    
+    if @repair.engine.underRepair?
+      render :template => "engineorders/repairStarted"
+    end
+    
+    if @repair.engine.finishedRepair?
+      render :template => "engineorders/repairFinished"
+    end
+  
+    #if @repair.engine.beforeShipping?
+    #  render :template => "engineorders/?"
+    #end
+    #if @repair.engine.afterShipped?
+    #  render :template => "engineorders/?"
+    #end
+  
   end
 
   # POST /repairs
@@ -58,13 +83,17 @@ class RepairsController < ApplicationController
     respond_to do |format|
       if @repair.update(repair_params)
         # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
-		    if !(params[:enginestatus_id].nil?)
-		      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
-		      if params[:enginestatus_id].to_i == 1
-            @repair.engine.company = current_user.company
-		      end
-		      @repair.engine.save
-		    end
+        self.setEngineStatus
+        
+		    #if !(params[:enginestatus_id].nil?)
+		    #  @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+		    #  if params[:enginestatus_id].to_i == 1
+        #    @repair.engine.company = current_user.company
+		    #  end
+		    #end
+		    
+		    @repair.engine.save
+		    
         format.html { redirect_to @repair, notice: 'Repair was successfully updated.' }
         format.json { head :no_content }
       else
@@ -114,12 +143,24 @@ class RepairsController < ApplicationController
   end
 
   # 必要に応じて、エンジンのステータスと所轄を設定する
-  def  changeEngine
-    if !(params[:enginestatus_id].nil?)
-      @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
+  def  setEngineStatus
+  
+    # 受領登録時→整備前
+    if params[:commit] == t('views.buttun_arrived')
+      @repair.engine.setBeforeRepair
       @repair.engine.company = current_user.company
-      @repair.engine.save     
     end
+    # 整備開始→整備中
+    if params[:commit] == t('views.buttun_repairStarted')
+      @repair.engine.setUnderRepair
+      @repair.engine.company = current_user.company
+    end
+    # 整備完了→完成品
+    if params[:commit] == t('views.buttun_repairFinished')
+      @repair.engine.setCompleted
+      @repair.engine.company = current_user.company
+    end
+
   end
   
   private
