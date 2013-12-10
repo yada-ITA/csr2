@@ -1,29 +1,4 @@
-<script>
-function update_branch_id() {
-  var selected = document.getElementById("branch_id").value
-  $.ajax({
-    url: "/companies/" + selected,
-    type: "GET", 
-    success: function(data) { document.getElementById("branch_location").value = data }
-  })
-  }
-</script>
-
-<% if @engineorder.registInquiry? %>
-  <h1>引合登録</h1>
-<% elsif %>
-<% @engineorder.afterShipped? %>
-  <h1>出荷登録</h1>
-<% elsif %>
-<% @engineorder.afterAllocated? %>
-  <h1>引当登録</h1>
-<% elsif %>
-<% @engineorder.afterOrdered? %>
-  <h1>受注登録</h1>
-<% elsif %>
-<% @engineorder.afterInquiry? %>
-  <h1>引合登録</h1>
-<% end %>
+  <h1>受注登録_v2</h1>
 
 <%= form_for(@engineorder) do |f| %>
   <% if @engineorder.errors.any? %>
@@ -47,21 +22,10 @@ function update_branch_id() {
     <%= f.hidden_field :registered_user_id %>
   </div>
 
-  <% #引合登録以外は、発注Noを表示する(引合登録時発注Noは、まだ未発番のため) %>
-  <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :issue_no %><br>
     <%=  @engineorder.issue_no %>
   </div>
-  <% end %>
-
-  <% #出荷登録の場合のみ送り状Noを表示する %>
-  <% if @engineorder.afterShipped? %>
-  <div class="field">
-    <%= f.label :invoice_no %><br>
-    <%= f.text_field :invoice_no %>
-  </div>
-  <% end %>
 
 
   <div class="field">
@@ -69,20 +33,14 @@ function update_branch_id() {
     <%= f.date_select :inquiry_date %>
   </div>
 
-  <% #引合登録以外の場合は、order_dateを表示 %>
-  <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :branch_id %><br>
-    <%= f.collection_select( :branch_id, Company.all, :id, :name, options = {:include_blank => false}, html_options = {:onchange => "update_branch_id()", :id => "branch_id" }  ) %>
-  </div>
-  <input type="text" size=40 id="branch_location" disabled="true">
-  <div id="branch_location2">
+   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
   </div>
 
   <div class="field">
@@ -105,13 +63,6 @@ function update_branch_id() {
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
 
-<% #引当登録以降の場合は、新エンジンを表示 %> 
-<% if @engineorder.afterAllocated? %>
-  <div class="field">
-    <%= f.label :new_engine_id %><br>
-    <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
-  </div>
-<% end %>
 
 <!--
   <div class="field">
@@ -132,14 +83,6 @@ function update_branch_id() {
     <%= f.text_area :change_comment %>
   </div>
 
-<% #引当登録以降の場合は、受注日を表示 %> 
-<% if @engineorder.afterInquiry? %>
-  <div class="field">
-    <%= f.label :order_date %><br>
-    <%= f.date_select :order_date %>
-  </div>
-<% end %>
-  
   <div class="field">
     <%= f.label :sending_place_id %><br>
     <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
@@ -155,25 +98,12 @@ function update_branch_id() {
     <%= f.date_select :desirable_delivery_date %>
   </div>
   
-<% #引当登録以降の場合は、返却コメントと出荷日を表示 %> 
-<% if @engineorder.afterAllocated? %>
-  <div class="field">
-    <%= f.label :returning_comment %><br>
-    <%= text_area_tag 'returning_comment' %>
-  </div>
-<% end %>
-<% if @engineorder.afterShipped? %>
-  <div class="field">
-    <%= f.label :shipped_date %><br>
-    <%= f.date_select :shipped_date %>
-  </div>
-  <div id="shipment location"></div>
-<% end %>
 
 
   <%= f.hidden_field :businessstatus_id %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  :value => t('views.buttun_ordered') %>
   </div>
 <% end %>
+<%= link_to 'Back', engineorders_path %>

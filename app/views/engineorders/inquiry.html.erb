@@ -1,0 +1,110 @@
+  <h1>引合登録_v2</h1>
+
+<%= form_for(@engineorder) do |f| %>
+  <% if @engineorder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@engineorder.errors.count, "error") %> prohibited this engineorder from being saved:</h2>
+
+      <ul>
+      <% @engineorder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :registered_user_id %>：
+    <% if @engineorder.registered_user_id.nil? %>
+      <% @engineorder.registered_user_id = current_user.id  %>
+    <% end %>
+      <%=  User.find(@engineorder.registered_user_id).name  %>
+    <%= f.hidden_field :registered_user_id %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :inquiry_date %><br>
+    <%= f.date_select :inquiry_date %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :branch_id %><br>
+   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :salesman_id %><br>
+   <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :install_place_id %><br>
+    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :orderer %><br>
+    <%= f.text_field :orderer %>
+  </div>
+
+  <div class="field">
+    <%= f.label "販売型式" %><br>
+  </div>
+
+
+  <div class="field">
+※型式とS/Nに分かれる。※
+    <%= f.label :old_engine_id %><br>
+    <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label "返却エンジン型式" %><br>
+  </div>
+
+  <div class="field">
+    <%= f.label "返却エンジンS/#" %><br>
+  </div>
+
+
+  <div class="field">
+    <%= f.label "機体No" %><br>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_of_running %><br>
+    <%= f.number_field :time_of_running %>
+  </div>
+
+  <div class="field">
+    <%= f.label :day_of_test %><br>
+    <%= f.date_select :day_of_test %>
+  </div>
+
+  <div class="field">
+使用年数<br>
+＜使用年数が、ここにはいる。＞<br>
+</div>
+  <div class="field">
+    <%= f.label :change_comment %><br>
+    <%= f.text_area :change_comment %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :desirable_delivery_date %><br>
+    <%= f.date_select :desirable_delivery_date %>
+  </div>
+
+
+  <%= f.hidden_field :businessstatus_id %>
+
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_inquiry') %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', engineorders_path %>
