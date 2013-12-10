@@ -19,13 +19,26 @@ class EngineordersController < ApplicationController
 
   # GET /engineorders/1/edit
   def edit
+    #流通ステータスでレンダリング先を変える。
+
+    if @engineorder.afterShipped?
+      render :template => "engineorders/shipped"
+    elsif @engineorder.afterAllocated?
+      render :template => "engineorders/allocated"
+    elsif @engineorder.afterOrdered?
+      render :template => "engineorders/ordered"
+    elsif @engineorder.afterInquiry?
+      render :template => "engineorders/inquiry"
+    end
   end
 
   # POST /engineorders
   # POST /engineorders.json
   def create
     @engineorder = Engineorder.new(engineorder_params)
+    #流通ステータスを「引合」にセットする(受注モデルは、引合時に新規作成される)
     @engineorder.setInquiry
+    #発行Noを自動採番する
     @engineorder.issue_no = Engineorder.createIssueNo
 
     respond_to do |format|
@@ -42,6 +55,9 @@ class EngineordersController < ApplicationController
   # PATCH/PUT /engineorders/1
   # PATCH/PUT /engineorders/1.json
   def update
+    #流通ステータスをセットする。(privateメソッド)
+    setBusinessstatus
+
     respond_to do |format|
       if @engineorder.update(engineorder_params)
         # 受注オブジェクトの状況などから、単純な画面項目のセット以外の、各種編集を行う
@@ -65,33 +81,28 @@ class EngineordersController < ApplicationController
     end
   end
 
-  # GET /repairs/engineInquiry/1
+  # 引合の処理
   def inquiry
     @engineorder = Engineorder.new
     # パラメータにengine_idがあれば、旧エンジンに紐づける
     if !(params[:engine_id].nil?)
         @engineorder.old_engine = Engine.find(params[:engine_id])
     end
-    render :template => "engineorders/new"
-   end
+  end
 
+  #受注の処理
   def ordered
     set_engineorder
-    @engineorder.setOrdered
-    render :template => "engineorders/edit"
   end
 
+  #引当の処理
   def allocated
     set_engineorder
-    @engineorder.setAllocated
-    render :template => "engineorders/edit"
   end
 
-
+  #出荷の処理
   def shipped
     set_engineorder
-    @engineorder.setShipped
-    render :template => "engineorders/edit"
   end
 
   def  editByStatus
@@ -101,7 +112,8 @@ class EngineordersController < ApplicationController
     # ★整備オブジェクトの会社コードは、何になるべき？
     # 
     # 出荷画面からの更新の場合
-    if !(params[:engineorder][:invoice_no].nil?)
+#    if !(params[:engineorder][:invoice_no].nil?)
+   if params[:commit] == t('views.buttun_shipped')
       # 出荷済みの場合は、出荷済みにセットする。
       @engineorder.new_engine.enginestatus_id = 5
       # 新エンジンの会社を設置先に変更する。
@@ -116,7 +128,8 @@ class EngineordersController < ApplicationController
         repair.save
       end
     # 引当画面からの更新の場合
-    elsif !(params[:engineorder][:new_engine_id].nil?)
+#    elsif !(params[:engineorder][:new_engine_id].nil?)
+      elsif params[:commit] == t('views.buttun_allocated')
       # 引当登録は、新エンジンのステータスを変更する。
       @engineorder.new_engine = Engine.find(params[:engineorder][:new_engine_id])
       @engineorder.new_engine.enginestatus_id = 4
@@ -138,6 +151,31 @@ class EngineordersController < ApplicationController
   end
   
   private
+    #流通ステータスをセットする。判定はボタンに表示されているラベルで、どの画面で押されたものかを見て
+    #決定している。(ボタンのラベルはprams[:commit]でラベルを取得可能)
+    # t('xxxxxx')は、congfg/locales/xxx.ja.ymlから名称を取得するメソッド。
+    def setBusinessstatus
+      #引合登録の場合
+      if params[:commit] == t('views.buttun_inquiry')
+        #流通ステータスを、「受注」にセットする。
+        @engineorder.setInquiry
+      #受注登録の場合
+      elsif params[:commit] == t('views.buttun_ordered')
+        #流通ステータスを、「受注」にセットする。
+        @engineorder.setOrdered
+      #引合登録の場合
+      elsif params[:commit] == t('views.buttun_allocated')
+        #流通ステータスを、「出荷準備中」にセットする。
+        @engineorder.setShippingreparation
+      #出荷登録の場合
+      elsif params[:commit] == t('views.buttun_shipped')
+        #流通ステータスを、「出荷済」にセットする。
+        @engineorder.setShipped
+      end  
+      #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
+      params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_engineorder
       @engineorder = Engineorder.find(params[:id])

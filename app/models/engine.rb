@@ -30,7 +30,7 @@ class Engine < ActiveRecord::Base
   end
 
   #完成品のエンジン一覧を取得する。
-  def self.completedEngine
+  def self.completedEngines
      return Engine.where(:enginestatus_id => 3)
   end
 

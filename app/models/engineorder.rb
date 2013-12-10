@@ -30,7 +30,7 @@ class Engineorder < ActiveRecord::Base
   end 
 
   #引当登録以降かどうか？
-  def afterAccepted?
+  def afterAllocated?
     return true if self.businessstatus_id.to_i >= 3 
   end 
 
@@ -65,7 +65,7 @@ class Engineorder < ActiveRecord::Base
   end
 
   #流通ステータスに「出荷準備中」をセットする
-  def setAllocated
+  def setShippingreparation
     self.businessstatus_id = 3
   end
 
