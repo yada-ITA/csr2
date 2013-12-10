@@ -10,6 +10,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    respond_to do |format|
+      format.text { render :text => @company.address }
+    end
   end
 
   # GET /companies/new

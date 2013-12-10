@@ -1,3 +1,14 @@
+<script>
+function update_branch_id() {
+  var selected = document.getElementById("branch_id").value
+  $.ajax({
+    url: "/companies/" + selected,
+    type: "GET", 
+    success: function(data) { document.getElementById("branch_location").value = data }
+  })
+  }
+</script>
+
 <% if @engineorder.registInquiry? %>
   <h1>引合登録</h1>
 <% elsif %>
@@ -68,7 +79,10 @@
 
   <div class="field">
     <%= f.label :branch_id %><br>
-   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
+    <%= f.collection_select( :branch_id, Company.all, :id, :name, options = {:include_blank => false}, html_options = {:onchange => "update_branch_id()", :id => "branch_id" }  ) %>
+  </div>
+  <input type="text" size=40 id="branch_location" disabled="true">
+  <div id="branch_location2">
   </div>
 
   <div class="field">
@@ -153,6 +167,7 @@
     <%= f.label :shipped_date %><br>
     <%= f.date_select :shipped_date %>
   </div>
+  <div id="shipment location"></div>
 <% end %>
 
 
