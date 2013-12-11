@@ -1,7 +1,8 @@
 class Repair < ActiveRecord::Base
 
   # virtual attribute
-  attr_accessor :returning_comment, :returning_date 
+  #attr_accessible :returning_comment, :returning_date
+  #attr_accessor   :returning_comment, :returning_date 
   
   # validation
   
@@ -10,26 +11,27 @@ class Repair < ActiveRecord::Base
 
   # getter and setter for virtual attribute
   def returning_date
-    unless self.engine.current_order.nil?  
-      return self.engine.current_order.returning_date
+    unless self.engine.current_order_as_old.nil?  
+      puts '************* wow ***************' + engine.current_order_as_old.returning_date.to_s
+      return self.engine.current_order_as_old.returning_date
     end
     return nil
   end
   def returning_date=(returning_date_value)
-    unless self.engine.current_order.nil? 
-      self.engine.current_order.returning_date = returning_date_value
+    unless self.engine.current_order_as_old.nil? 
+      self.engine.current_order_as_old.returning_date = returning_date_value
     end
   end
 
   def returning_comment
-    unless self.engine.current_order.nil?
-      return self.engine.current_order.returning_comment
+    unless self.engine.current_order_as_old.nil?
+      return self.engine.current_order_as_old.returning_comment
     end
     return nil
   end
   def returning_comment=(returning_comment_value)
-    unless self.engine.current_order.nil? 
-      self.engine.current_order.returning_comment = returning_comment_value
+    unless self.engine.current_order_as_old.nil? 
+      self.engine.current_order_as_old.returning_comment = returning_comment_value
     end
   end
 

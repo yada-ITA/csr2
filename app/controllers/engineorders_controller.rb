@@ -150,6 +150,9 @@ class EngineordersController < ApplicationController
 
       # 旧エンジンのステータスを受領前にセットする。
       @engineorder.old_engine.setBeforeArrive
+      
+      # DBに格納する。
+      @repair.save
       @engineorder.old_engine.save      
 
       
