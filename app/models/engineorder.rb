@@ -15,7 +15,7 @@ class Engineorder < ActiveRecord::Base
 
   # 仕掛中かどうかを確認する
   def opened?
-    return self.shipped_date.nil?
+    return self.returning_date.nil?
   end
 
   # ステータスの確認メソッド集 --------------- #
@@ -121,8 +121,6 @@ class Engineorder < ActiveRecord::Base
     repair.issue_date        = self.order_date
     repair.time_of_running   = self.time_of_running
     repair.day_of_test       = self.day_of_test
-    repair.returning_comment = self.returning_comment
-    repair.returning_date    = self.returning_date
     
     # 整備オブジェクトに旧エンジンを紐づける
     repair.engine            = self.old_engine

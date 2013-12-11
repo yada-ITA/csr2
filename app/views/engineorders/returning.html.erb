@@ -133,11 +133,11 @@
 
   <div class="field">
     <%= f.label :returning_comment %><br>
-    <%= text_area_tag 'returning_comment' %>
+    <%= f.text_area :returning_comment %>
   </div>
 
   <div class="actions">
-    <%= f.submit  :value => t('views.buttun_shipped') %>
+    <%= f.submit  :value => t('views.buttun_returning') %>
   </div>
 <% end %>
 

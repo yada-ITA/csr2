@@ -33,9 +33,9 @@ class Engine < ActiveRecord::Base
   def current_order_as_old
     if !(engineorders_as_old.blank?)
       engineorders_as_old.each do | a_order |
-        if a_order.opened?
+    #    if a_order.opened?
          return a_order
-        end
+    #    end
       end
     end
     return nil
@@ -46,9 +46,9 @@ class Engine < ActiveRecord::Base
   def current_order_as_new
     if !(engineorders_as_new.blank?)
       engineorders_as_new.each do | a_order |
-        if a_order.opened?
+    #    if a_order.opened?
          return a_order
-        end
+    #    end
       end
     end
     return nil
