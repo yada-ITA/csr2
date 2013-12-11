@@ -44,6 +44,12 @@
   </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+
   <% #出荷登録の場合のみ送り状Noを表示する %>
   <% if @engineorder.afterShipped? %>
   <div class="field">
