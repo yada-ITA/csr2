@@ -48,12 +48,10 @@ function update_branch_id() {
   </div>
 
   <% #引合登録以外は、発注Noを表示する(引合登録時発注Noは、まだ未発番のため) %>
-  <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :issue_no %><br>
     <%=  @engineorder.issue_no %>
   </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :title %><br>
