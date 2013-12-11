@@ -84,6 +84,12 @@
     <%= f.date_select :day_of_test %>
   </div>
   <div class="field">
+    <%= label_tag t('views.label_runningyear') %><br>
+    <%= @engineorder.calcRunningYear %>
+  </div>
+ 
+
+  <div class="field">
     <%= f.label :change_comment %><br>
     <%= f.text_area :change_comment %>
   </div>

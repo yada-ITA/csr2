@@ -1,4 +1,4 @@
-  <h1>出荷登録_</h1>
+  <h1>出荷登録</h1>
 
 
 <%= form_for(@engineorder) do |f| %>
@@ -39,13 +39,10 @@
     <%= f.date_select :inquiry_date %>
   </div>
 
-  <% #引合登録以外の場合は、order_dateを表示 %>
-  <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :branch_id %><br>
@@ -91,6 +88,12 @@
     <%= f.label :day_of_test %><br>
     <%= f.date_select :day_of_test %>
   </div>
+ 
+  <div class="field">
+    <%= label_tag t('views.label_runningyear') %><br>
+    <%= @engineorder.calcRunningYear %>
+  </div>
+ 
   <div class="field">
     <%= f.label :change_comment %><br>
     <%= f.text_area :change_comment %>
