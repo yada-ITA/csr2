@@ -62,12 +62,10 @@ function update_branch_id() {
 
 
   <% #出荷登録の場合のみ送り状Noを表示する %>
-  <% if @engineorder.afterShipped? %>
   <div class="field">
     <%= f.label :invoice_no_new %><br>
     <%= f.text_field :invoice_no_new %>
   </div>
-  <% end %>
 
 
   <div class="field">
@@ -76,12 +74,10 @@ function update_branch_id() {
   </div>
 
   <% #引合登録以外の場合は、order_dateを表示 %>
-  <% unless @engineorder.registInquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :branch_id %><br>
@@ -112,12 +108,10 @@ function update_branch_id() {
   </div>
 
 <% #引当登録以降の場合は、新エンジンを表示 %> 
-<% if @engineorder.afterAllocated? %>
   <div class="field">
     <%= f.label :new_engine_id %><br>
     <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
-<% end %>
 
 <!--
   <div class="field">
@@ -139,12 +133,10 @@ function update_branch_id() {
   </div>
 
 <% #引当登録以降の場合は、受注日を表示 %> 
-<% if @engineorder.afterInquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-<% end %>
   
   <div class="field">
     <%= f.label :sending_place_id %><br>
@@ -162,13 +154,10 @@ function update_branch_id() {
   </div>
   
 <% #引当登録以降の場合は、返却コメントと出荷日を表示 %> 
-<% if @engineorder.afterAllocated? %>
   <div class="field">
     <%= f.label :returning_comment %><br>
     <%= text_area_tag 'returning_comment' %>
   </div>
-<% end %>
-<% if @engineorder.afterShipped? %>
   <div class="field">
     <%= f.label :shipped_date %><br>
     <%= f.date_select :shipped_date %>

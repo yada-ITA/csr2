@@ -22,3 +22,15 @@ businessstatus4:
   created_at: 
   updated_at: 
 
+businessstatus5:
+  id: 5
+  name: 返却済
+  created_at: 
+  updated_at: 
+
+businessstatus9:
+  id: 9
+  name: キャンセル
+  created_at: 
+  updated_at: 
+
