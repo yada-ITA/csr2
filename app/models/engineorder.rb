@@ -13,34 +13,44 @@ class Engineorder < ActiveRecord::Base
   belongs_to :updated_user, :class_name => 'User' 
   belongs_to :salesman, :class_name => 'User' 
 
+  # 仕掛中かどうかを確認する
+  def opened?
+    return self.shipped_date.nil?
+  end
 
-  #新規引合かどうか？
+  # ステータスの確認メソッド集 --------------- #
+  # 新規引合かどうか？
   def registInquiry?
     return true if self.businessstatus_id.nil?
   end 
 
-  #引合以降かどうか？
+  # 引合状態かどうか？
   def afterInquiry?
-    return true if self.businessstatus_id.to_i >= 1 
+    return true if self.businessstatus_id.to_i == 1 
   end 
 
-  #受注以降かどうか？
+  # 受注済かどうか？
   def afterOrdered?
-    return true if self.businessstatus_id.to_i >= 2 
+    return true if self.businessstatus_id.to_i == 2 
   end 
 
-  #引当登録以降かどうか？
+  # 出荷準備中かどうか？
   def afterAllocated?
-    return true if self.businessstatus_id.to_i >= 3 
+    return true if self.businessstatus_id.to_i == 3 
   end 
 
-  #出荷登録以降かどうか？
+  # 出荷済かどうか？
   def afterShipped?
-    return true if self.businessstatus_id.to_i >= 4 
+    return true if self.businessstatus_id.to_i == 4 
+  end 
+
+  # 返却済かどうか？
+  def afterShipped?
+    return true if self.businessstatus_id.to_i == 5 
   end 
 
 
-  #現時点での発行Noの生成 (年月-枝番3桁)
+  # 発行Noを発行する
   def self.createIssueNo
     issuedate = Date.today.strftime("%Y%m") 
     maxseq = self.where("issue_no like ?", issuedate + "%").max()
@@ -54,22 +64,33 @@ class Engineorder < ActiveRecord::Base
 
   end
 
-  #流通ステータスに「引合」をセットする
+  # 旧エンジンに対する整備オブジェクトを取り出す
+  def repair_for_old_engine
+    return old_engine.current_repair
+  end
+
+  # 新エンジンに対する整備オブジェクトを取り出す
+  def repair_for_new_engine
+    return new_engine.current_repair
+  end
+
+  # ステータスの変更メソッド集 --------------- #
+  # 流通ステータスに「引合」をセットする
   def setInquiry
     self.businessstatus_id = 1
   end
 
-  #流通ステータスに「受注」をセットする
+  # 流通ステータスに「受注」をセットする
   def setOrdered
     self.businessstatus_id = 2
   end
 
-  #流通ステータスに「出荷準備中」をセットする
+  # 流通ステータスに「出荷準備中」をセットする
   def setShippingreparation
     self.businessstatus_id = 3
   end
 
-  #流通ステータスに「出荷済み」をセットする
+  # 流通ステータスに「出荷済み」をセットする
   def setShipped
     self.businessstatus_id = 4
   end

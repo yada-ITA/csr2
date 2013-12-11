@@ -105,7 +105,7 @@ class EngineordersController < ApplicationController
     set_engineorder
   end
 
-  def  editByStatus
+  def editByStatus
     # 今の状態では、引当を複数実施する（引当のやり直し）は出来ないかもしれない
     # 下記は要確認
     # ★整備オブジェクトの発行日とは?
@@ -113,42 +113,37 @@ class EngineordersController < ApplicationController
     # 
     # 出荷画面からの更新の場合
 #    if !(params[:engineorder][:invoice_no].nil?)
+
    if params[:commit] == t('views.buttun_shipped')
+      
       # 出荷済みの場合は、出荷済みにセットする。
-      @engineorder.new_engine.enginestatus_id = 5
-      # 新エンジンの会社を設置先に変更する。
+      @engineorder.new_engine.setAfterShipping
+      
+      # 新エンジンの会社を設置先に変更し、DBに反映する
       @engineorder.new_engine.company = @engineorder.install_place
-      # 新エンジンの情報を更新する。
       @engineorder.new_engine.save
-      # 出荷したエンジンに関わる整備オブジェクトがもしあれば、出荷日を設定する
-      # エンジンひとつに対して整備オブジェクトは複数ある場合、もっとも大きな値の発行Noのものを対象とする
-      repair = Repair.where('engine_id = ?', @engineorder.new_engine_id).order('issue_no desc').first
+      
+      # 出荷しようとしている新エンジンに関わる整備オブジェクトを取得する
+      repair = @engineorder.repair_for_new_engine
       if !(repair.nil?)
         repair.shipped_date = @engineorder.shipped_date
         repair.save
       end
+    end
+
     # 引当画面からの更新の場合
-#    elsif !(params[:engineorder][:new_engine_id].nil?)
-      elsif params[:commit] == t('views.buttun_allocated')
-      # 引当登録は、新エンジンのステータスを変更する。
+    if params[:commit] == t('views.buttun_allocated')
+      # 引当登録は、新エンジンのステータスを出荷準備中に変更する。
       @engineorder.new_engine = Engine.find(params[:engineorder][:new_engine_id])
-      @engineorder.new_engine.enginestatus_id = 4
-      # 整備オブジェクトを作り、旧エンジンを紐づける。
-      @repair = @engineorder.createRepair
-      # 整備オブジェクトのエンジン（旧エンジン）のステータスを変更する
-      @repair.engine.enginestatus_id = 1
-      # 旧エンジンの会社を、（受注の）拠点に変更する。
-      @repair.engine.company = @engineorder.branch
-      # 画面の返却コメントが入力されていれば、整備オブジェクトの返却コメントにセットする。
-      if !(params[:returning_comment].nil?)
-        @repair.returning_comment = params[:returning_comment]
-      end
-      # 新・旧エンジンと整備オブジェクトの情報を更新する。
-      @engineorder.old_engine.save
-      @engineorder.new_engine.save      
-      @repair.save
-    end      
+      @engineorder.new_engine.setBeforeShipping
+      @engineorder.new_engine.save
+     end      
+  
+    # ここに返却画面からの更新の場合を書く！
+  
+  
   end
+  
   
   private
     #流通ステータスをセットする。判定はボタンに表示されているラベルで、どの画面で押されたものかを見て
