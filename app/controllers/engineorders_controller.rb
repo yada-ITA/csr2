@@ -89,18 +89,23 @@ class EngineordersController < ApplicationController
     end
   end
 
-  #受注の処理
+  # 受注の処理
   def ordered
     set_engineorder
   end
 
-  #引当の処理
+  # 引当の処理
   def allocated
     set_engineorder
   end
 
-  #出荷の処理
+  # 出荷の処理
   def shipped
+    set_engineorder
+  end
+
+  # 返却の処理
+  def returning
     set_engineorder
   end
 
@@ -110,12 +115,19 @@ class EngineordersController < ApplicationController
     # ★整備オブジェクトの発行日とは?
     # ★整備オブジェクトの会社コードは、何になるべき？
     # 
-    # 出荷画面からの更新の場合
-#    if !(params[:engineorder][:invoice_no].nil?)
 
-   if params[:commit] == t('views.buttun_shipped')
+    # 引当画面からの更新の場合
+    if params[:commit] == t('views.buttun_allocated')
+      # 新エンジンのステータスを出荷準備中に変更する。
+      @engineorder.new_engine = Engine.find(params[:engineorder][:new_engine_id])
+      @engineorder.new_engine.setBeforeShipping
+      @engineorder.new_engine.save
+    end      
+  
+    # 出荷画面からの更新の場合
+    if params[:commit] == t('views.buttun_shipped')
       
-      # 出荷済みの場合は、出荷済みにセットする。
+      # 新エンジンのステータスを出荷済みにセットする。
       @engineorder.new_engine.setAfterShipping
       
       # 新エンジンの会社を設置先に変更し、DBに反映する
@@ -130,17 +142,19 @@ class EngineordersController < ApplicationController
       end
     end
 
-    # 引当画面からの更新の場合
-    if params[:commit] == t('views.buttun_allocated')
-      # 引当登録は、新エンジンのステータスを出荷準備中に変更する。
-      @engineorder.new_engine = Engine.find(params[:engineorder][:new_engine_id])
-      @engineorder.new_engine.setBeforeShipping
-      @engineorder.new_engine.save
-     end      
-  
-    # ここに返却画面からの更新の場合を書く！
-  
-  
+    # 返却画面からの更新の場合
+    if params[:commit] == t('views.buttun_returning')
+
+      # 整備オブジェクトを作り、旧エンジンを紐づける。
+      @repair = @engineorder.createRepair
+
+      # 旧エンジンのステータスを受領前にセットする。
+      @engineorder.old_engine.setBeforeArrive
+      @engineorder.old_engine.save      
+
+      
+      
+    end
   end
   
   
@@ -149,22 +163,30 @@ class EngineordersController < ApplicationController
     #決定している。(ボタンのラベルはprams[:commit]でラベルを取得可能)
     # t('xxxxxx')は、congfg/locales/xxx.ja.ymlから名称を取得するメソッド。
     def setBusinessstatus
-      #引合登録の場合
+      # 引合登録の場合
       if params[:commit] == t('views.buttun_inquiry')
         #流通ステータスを、「受注」にセットする。
         @engineorder.setInquiry
-      #受注登録の場合
-      elsif params[:commit] == t('views.buttun_ordered')
+      end
+      # 受注登録の場合
+      if params[:commit] == t('views.buttun_ordered')
         #流通ステータスを、「受注」にセットする。
         @engineorder.setOrdered
-      #引合登録の場合
-      elsif params[:commit] == t('views.buttun_allocated')
+      end
+      # 引合登録の場合
+      if params[:commit] == t('views.buttun_allocated')
         #流通ステータスを、「出荷準備中」にセットする。
         @engineorder.setShippingreparation
-      #出荷登録の場合
-      elsif params[:commit] == t('views.buttun_shipped')
+      end
+      # 出荷登録の場合
+      if params[:commit] == t('views.buttun_shipped')
         #流通ステータスを、「出荷済」にセットする。
         @engineorder.setShipped
+      end  
+      # 返却登録の場合
+      if params[:commit] == t('views.buttun_returning')
+        #流通ステータスを、「返却済」にセットする。
+        @engineorder.setReturned
       end  
       #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
       params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id

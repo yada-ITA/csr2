@@ -4,6 +4,7 @@ ja:
     buttun_ordered: 受注登録
     buttun_allocated: 引当登録
     buttun_shipped: 出荷登録
+    buttun_returning: 返却登録
     buttun_arrived: 受領登録
     buttun_repairOrdered: 整備依頼
     buttun_repairStarted: 整備開始
