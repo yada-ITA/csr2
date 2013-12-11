@@ -20,15 +20,14 @@ class EngineordersController < ApplicationController
   # GET /engineorders/1/edit
   def edit
     #流通ステータスでレンダリング先を変える。
-
-    if @engineorder.afterShipped?
-      render :template => "engineorders/shipped"
-    elsif @engineorder.afterAllocated?
-      render :template => "engineorders/allocated"
-    elsif @engineorder.afterOrdered?
-      render :template => "engineorders/ordered"
-    elsif @engineorder.afterInquiry?
+    if @engineorder.isInquiry?
       render :template => "engineorders/inquiry"
+    elsif @engineorder.isShipped?
+      render :template => "engineorders/shipped"
+    elsif @engineorder.isShippingreparation?
+      render :template => "engineorders/allocated"
+    elsif @engineorder.isOrdered?
+      render :template => "engineorders/ordered"
     end
   end
 

@@ -19,24 +19,34 @@ class Engineorder < ActiveRecord::Base
     return true if self.businessstatus_id.nil?
   end 
 
-  #引合以降かどうか？
-  def afterInquiry?
-    return true if self.businessstatus_id.to_i >= 1 
+  #引合かどうか？
+  def isInquiry?
+    return true if self.businessstatus_id.to_i == 1 
   end 
 
-  #受注以降かどうか？
-  def afterOrdered?
-    return true if self.businessstatus_id.to_i >= 2 
+  #受注かどうか？
+  def isOrdered?
+    return true if self.businessstatus_id.to_i == 2 
   end 
 
-  #引当登録以降かどうか？
-  def afterAllocated?
-    return true if self.businessstatus_id.to_i >= 3 
+  #出荷準備中かどうか？
+  def isShippingreparation?
+    return true if self.businessstatus_id.to_i == 3 
   end 
 
-  #出荷登録以降かどうか？
-  def afterShipped?
-    return true if self.businessstatus_id.to_i >= 4 
+  #出荷済かどうか？
+  def isShipped?
+    return true if self.businessstatus_id.to_i == 4 
+  end 
+
+  #返却済みかどうか？
+  def isReturned?
+    return true if self.businessstatus_id.to_i == 5 
+  end 
+
+  #キャンセルかどうか？
+  def isCanceled?
+    return true if self.businessstatus_id.to_i == 9 
   end 
 
 
@@ -73,6 +83,17 @@ class Engineorder < ActiveRecord::Base
   def setShipped
     self.businessstatus_id = 4
   end
+
+  #流通ステータスに「返却済み」をセットする
+  def setReturned
+    self.businessstatus_id = 5
+  end
+
+  #流通ステータスに「キャンセル」をセットする
+  def setCanceled
+    self.businessstatus_id = 9
+  end
+
 
   def createRepair
     # 整備オブジェクトを受領前の状態で新規作成して返す
