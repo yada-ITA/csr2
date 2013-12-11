@@ -184,6 +184,6 @@ class EngineordersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def engineorder_params
       params.require(:engineorder).permit(:issue_no, :inquiry_date, :registered_user_id, :updated_user_id, :branch_id, :salesman_id, :install_place_id, :orderer, :machine_no, :time_of_running, :change_comment, :order_date, :sending_place_id, :sending_comment, :desirable_delivery_date, :businessstatus_id,
-       :new_engine_id, :old_engine_id, :old_engine, :new_engine, :enginestatus_id,:invoice_no, :day_of_test, :shipped_date, :title)
+       :new_engine_id, :old_engine_id, :old_engine, :new_engine, :enginestatus_id,:invoice_no_new, :invoice_no_old, :day_of_test, :shipped_date, :returning_date, :returning_comment, :title)
     end
 end
