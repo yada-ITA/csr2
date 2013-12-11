@@ -7,7 +7,7 @@ class Repair < ActiveRecord::Base
   
   # 作業中かどうかを判定する
   def opened?
-    return self.finish_date.nil?
+    return self.shipped_date.nil?
   end
 
   # 現時点での発行Noの生成(年月-枝番3桁)

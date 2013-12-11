@@ -35,12 +35,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :invoice_no %><br>
-    <%= f.text_field :invoice_no %>
-  </div>
-
-
-  <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date %>
   </div>
@@ -102,34 +96,47 @@
     <%= f.text_area :change_comment %>
   </div>
 
+  <div class="field">
+    <%= f.label :desirable_delivery_date %><br>
+    <%= f.date_select :desirable_delivery_date %>
+  </div>
+  
   
   <div class="field">
     <%= f.label :sending_place_id %><br>
     <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
   </div>
 
+  <div class="field">
+    <%= f.label :invoice_no_new %><br>
+    <%= f.text_field :invoice_no_new %>
+  </div>
 
   <div class="field">
     <%= f.label :sending_comment %><br>
     <%= f.text_area :sending_comment %>
   </div>
-  <div class="field">
-    <%= f.label :desirable_delivery_date %><br>
-    <%= f.date_select :desirable_delivery_date %>
-  </div>
   
-  <div class="field">
-    <%= f.label :returning_comment %><br>
-    <%= text_area_tag 'returning_comment' %>
-  </div>
-
   <div class="field">
     <%= f.label :shipped_date %><br>
     <%= f.date_select :shipped_date %>
   </div>
 
+  <div class="field">
+    <%= f.label :invoice_no_old %><br>
+    <%= f.text_field :invoice_no_old %>
+  </div>
 
-  <%= f.hidden_field :businessstatus_id %>
+  <div class="field">
+    <%= f.label :returning_date %><br>
+    <%= f.date_select :returning_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :returning_comment %><br>
+    <%= text_area_tag 'returning_comment' %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit  :value => t('views.buttun_shipped') %>
