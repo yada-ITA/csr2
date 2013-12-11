@@ -13,8 +13,13 @@ class Engineorder < ActiveRecord::Base
   belongs_to :updated_user, :class_name => 'User' 
   belongs_to :salesman, :class_name => 'User' 
 
+  # 仕掛中かどうかを確認する
+  def opened?
+    return self.shipped_date.nil?
+  end
 
-  #新規引合かどうか？
+  # ステータスの確認メソッド集 --------------- #
+  # 新規引合かどうか？
   def registInquiry?
     return true if self.businessstatus_id.nil?
   end 
@@ -38,7 +43,6 @@ class Engineorder < ActiveRecord::Base
   def isShipped?
     return true if self.businessstatus_id.to_i == 4 
   end 
-
   #返却済みかどうか？
   def isReturned?
     return true if self.businessstatus_id.to_i == 5 
@@ -49,22 +53,36 @@ class Engineorder < ActiveRecord::Base
     return true if self.businessstatus_id.to_i == 9 
   end 
 
-  #流通ステータスに「引合」をセットする
+   unless maxseq.nil?
+   end
+    return issuedate + "-" + issueseq
+  # 旧エンジンに対する整備オブジェクトを取り出す
+  def repair_for_old_engine
+    return old_engine.current_repair
+  end
+
+  # 新エンジンに対する整備オブジェクトを取り出す
+  def repair_for_new_engine
+    return new_engine.current_repair
+  end
+
+  # ステータスの変更メソッド集 --------------- #
+  # 流通ステータスに「引合」をセットする
   def setInquiry
     self.businessstatus_id = 1
   end
 
-  #流通ステータスに「受注」をセットする
+  # 流通ステータスに「受注」をセットする
   def setOrdered
     self.businessstatus_id = 2
   end
 
-  #流通ステータスに「出荷準備中」をセットする
+  # 流通ステータスに「出荷準備中」をセットする
   def setShippingreparation
     self.businessstatus_id = 3
   end
 
-  #流通ステータスに「出荷済み」をセットする
+  # 流通ステータスに「出荷済み」をセットする
   def setShipped
     self.businessstatus_id = 4
   end

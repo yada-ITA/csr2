@@ -5,7 +5,8 @@ class Engine < ActiveRecord::Base
   belongs_to :company
   
   has_many :repairs
-  has_many :engineorders
+  has_many :engineorders_as_new, :class_name => :engine, :foreign_key => 'new_engine_id'
+  has_many :engineorders_as_old, :class_name => :engine, :foreign_key => 'old_engine_id'
   
   # Validation
   validates :engine_model_name, :presence => true  
@@ -25,11 +26,11 @@ class Engine < ActiveRecord::Base
     return nil
   end
 
-  # Get unclosed order (get unclosed one)
-  # 現在仕掛中の受注オブジェクトを返す
-  def current_order
-    if !(engineorders.blank?)
-      engineorders.each do | order |
+  # Get unclosed order (this engine is old engine for it and it is not unclosed)
+  # 旧エンジンとして関わっている受注オブジェクトのうち、現在仕掛中のものを返す
+  def current_order_as_old
+    if !(engineorders_as_old.blank?)
+      engineorders_as_old.each do | order |
         if order.opened?
          return order
         end
@@ -38,6 +39,19 @@ class Engine < ActiveRecord::Base
     return nil
   end
   
+  # Get unclosed order (this engine is new engine for it and it is not unclosed)
+  # 新エンジンとして関わっている受注オブジェクトのうち、現在仕掛中のものを返す
+  def current_order_as_new
+    if !(engineorders_as_new.blank?)
+      engineorders_as_new.each do | order |
+        if order.opened?
+         return order
+        end
+      end
+    end
+    return nil
+  end
+
   #エンジン型式とシリアルNoを併せてエンジン名として表示する。
   def engine_name
     "#{engine_model_name} ( #{serialno} )"

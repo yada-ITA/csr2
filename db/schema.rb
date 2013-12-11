@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211045956) do
+ActiveRecord::Schema.define(version: 20131211053128) do
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20131211045956) do
     t.string   "construction_no"
     t.date     "desirable_finish_date"
     t.date     "estimated_finish_date"
-    t.text     "returning_comment"
     t.integer  "engine_id"
     t.datetime "created_at"
     t.datetime "updated_at"
