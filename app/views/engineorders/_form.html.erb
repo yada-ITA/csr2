@@ -64,8 +64,8 @@ function update_branch_id() {
   <% #出荷登録の場合のみ送り状Noを表示する %>
   <% if @engineorder.afterShipped? %>
   <div class="field">
-    <%= f.label :invoice_no %><br>
-    <%= f.text_field :invoice_no %>
+    <%= f.label :invoice_no_new %><br>
+    <%= f.text_field :invoice_no_new %>
   </div>
   <% end %>
 
