@@ -35,7 +35,7 @@
       <th>S/#</th>
       <th>販売型式</th>
       <th>管轄</th>      
-      <th>返却予定日</th>
+      <th>返却日</th>
       <th></th>
       <th></th>
       <th></th>
@@ -52,7 +52,7 @@
         <td><%= engine.serialno %></td>
         <td><%= engine.sales_model_name %></td>
         <td><%= engine.company.name %></td>
-        <td></td>
+        <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
         <td><%= link_to '引合登録', inquiry_path(engine) %></td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td>.....</td>

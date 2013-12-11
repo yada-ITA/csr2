@@ -1,3 +1,5 @@
+require 'engineorder'
+
 class Engine < ActiveRecord::Base
 
   # Association
@@ -5,8 +7,8 @@ class Engine < ActiveRecord::Base
   belongs_to :company
   
   has_many :repairs
-  has_many :engineorders_as_new, :class_name => :engine, :foreign_key => 'new_engine_id'
-  has_many :engineorders_as_old, :class_name => :engine, :foreign_key => 'old_engine_id'
+  has_many :engineorders_as_new, :class_name => 'Engineorder', :foreign_key => 'new_engine_id'
+  has_many :engineorders_as_old, :class_name => 'Engineorder', :foreign_key => 'old_engine_id'
   
   # Validation
   validates :engine_model_name, :presence => true  
@@ -30,9 +32,9 @@ class Engine < ActiveRecord::Base
   # 旧エンジンとして関わっている受注オブジェクトのうち、現在仕掛中のものを返す
   def current_order_as_old
     if !(engineorders_as_old.blank?)
-      engineorders_as_old.each do | order |
-        if order.opened?
-         return order
+      engineorders_as_old.each do | a_order |
+        if a_order.opened?
+         return a_order
         end
       end
     end
@@ -43,9 +45,9 @@ class Engine < ActiveRecord::Base
   # 新エンジンとして関わっている受注オブジェクトのうち、現在仕掛中のものを返す
   def current_order_as_new
     if !(engineorders_as_new.blank?)
-      engineorders_as_new.each do | order |
-        if order.opened?
-         return order
+      engineorders_as_new.each do | a_order |
+        if a_order.opened?
+         return a_order
         end
       end
     end

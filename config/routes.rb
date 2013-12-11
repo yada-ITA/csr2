@@ -22,6 +22,8 @@ R2::Application.routes.draw do
 
   get 'engineorders/engineShipped/:id' => 'engineorders#shipped',:as => :shipped
 
+  get 'engineorders/engineReturning/:id' => 'engineorders#returning',:as => :returning
+
   #post 'companies' =>  'companies#show'
 
   resources :arrivals

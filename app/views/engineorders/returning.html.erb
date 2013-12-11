@@ -121,6 +121,21 @@
     <%= f.date_select :shipped_date %>
   </div>
 
+  <div class="field">
+    <%= f.label :invoice_no_old %><br>
+    <%= f.text_field :invoice_no_old %>
+  </div>
+
+  <div class="field">
+    <%= f.label :returning_date %><br>
+    <%= f.date_select :returning_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :returning_comment %><br>
+    <%= text_area_tag 'returning_comment' %>
+  </div>
+
   <div class="actions">
     <%= f.submit  :value => t('views.buttun_shipped') %>
   </div>
