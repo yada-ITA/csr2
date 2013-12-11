@@ -1,4 +1,4 @@
-  <h1>出荷登録_v2</h1>
+  <h1>出荷登録_</h1>
 
 
 <%= form_for(@engineorder) do |f| %>
@@ -23,10 +23,15 @@
     <%= f.hidden_field :registered_user_id %>
   </div>
 
-
   <div class="field">
     <%= f.label :issue_no %><br>
     <%=  @engineorder.issue_no %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
   </div>
 
   <div class="field">
