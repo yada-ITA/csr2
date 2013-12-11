@@ -1,4 +1,4 @@
-  <h1>引合登録_v2</h1>
+  <h1>引合登録</h1>
 
 <%= form_for(@engineorder) do |f| %>
   <% if @engineorder.errors.any? %>
@@ -22,6 +22,10 @@
     <%= f.hidden_field :registered_user_id %>
   </div>
 
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
 
   <div class="field">
     <%= f.label :inquiry_date %><br>
