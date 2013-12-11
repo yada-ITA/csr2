@@ -12,12 +12,26 @@ class Engine < ActiveRecord::Base
   validates :serialno, :presence => true,
                        :uniqueness =>{:scope => :engine_model_name }
   
-  # Get unclosed repair
+  # Get current repair (get unclosed one)
+  # 現在作業中の整備オブジェクトを返す
   def current_repair
     if !(repairs.blank?)
       repairs.each do | repair |
         if repair.opened?
          return repair
+        end
+      end
+    end
+    return nil
+  end
+
+  # Get unclosed order (get unclosed one)
+  # 現在仕掛中の受注オブジェクトを返す
+  def current_order
+    if !(engineorders.blank?)
+      engineorders.each do | order |
+        if order.opened?
+         return order
         end
       end
     end
