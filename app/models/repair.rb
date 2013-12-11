@@ -50,8 +50,13 @@ class Repair < ActiveRecord::Base
    end
 
     return issuedate + "-" + issueseq
-
   end
 
   
+  
+  #試運転日から運転年数を求める。(運転年数は、切り上げ)
+  def calcRunningYear
+    return  ((Date.today - self.day_of_test)/365).ceil unless self.day_of_test.nil? 
+  end
+
 end

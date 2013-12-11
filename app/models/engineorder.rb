@@ -24,46 +24,38 @@ class Engineorder < ActiveRecord::Base
     return true if self.businessstatus_id.nil?
   end 
 
-  # 引合状態かどうか？
-  def afterInquiry?
+  #引合かどうか？
+  def isInquiry?
     return true if self.businessstatus_id.to_i == 1 
   end 
 
-  # 受注済かどうか？
-  def afterOrdered?
+  #受注かどうか？
+  def isOrdered?
     return true if self.businessstatus_id.to_i == 2 
   end 
 
-  # 出荷準備中かどうか？
-  def afterAllocated?
+  #出荷準備中かどうか？
+  def isShippingreparation?
     return true if self.businessstatus_id.to_i == 3 
   end 
 
-  # 出荷済かどうか？
-  def afterShipped?
+  #出荷済かどうか？
+  def isShipped?
     return true if self.businessstatus_id.to_i == 4 
   end 
-
-  # 返却済かどうか？
-  def afterShipped?
+  #返却済みかどうか？
+  def isReturned?
     return true if self.businessstatus_id.to_i == 5 
   end 
 
-
-  # 発行Noを発行する
-  def self.createIssueNo
-    issuedate = Date.today.strftime("%Y%m") 
-    maxseq = self.where("issue_no like ?", issuedate + "%").max()
-    issueseq = '001'
+  #キャンセルかどうか？
+  def isCanceled?
+    return true if self.businessstatus_id.to_i == 9 
+  end 
 
    unless maxseq.nil?
-    issueseq = sprintf("%03d", maxseq.issue_no.split('-')[1].to_i + 1)
    end
-
     return issuedate + "-" + issueseq
-
-  end
-
   # 旧エンジンに対する整備オブジェクトを取り出す
   def repair_for_old_engine
     return old_engine.current_repair
@@ -93,6 +85,36 @@ class Engineorder < ActiveRecord::Base
   # 流通ステータスに「出荷済み」をセットする
   def setShipped
     self.businessstatus_id = 4
+  end
+
+  #流通ステータスに「返却済み」をセットする
+  def setReturned
+    self.businessstatus_id = 5
+  end
+
+  #流通ステータスに「キャンセル」をセットする
+  def setCanceled
+    self.businessstatus_id = 9
+  end
+
+  #現時点での発行Noの生成 (年月-枝番3桁)
+  def self.createIssueNo
+    issuedate = Date.today.strftime("%Y%m") 
+    maxseq = self.where("issue_no like ?", issuedate + "%").max()
+    issueseq = '001'
+
+   unless maxseq.nil?
+    issueseq = sprintf("%03d", maxseq.issue_no.split('-')[1].to_i + 1)
+   end
+
+    return issuedate + "-" + issueseq
+
+  end
+
+
+  #試運転日から運転年数を求める。(運転年数は、切り上げ)
+  def calcRunningYear
+    return  ((Date.today - self.day_of_test)/365).ceil unless self.day_of_test.nil? 
   end
 
   def createRepair

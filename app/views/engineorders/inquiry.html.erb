@@ -89,9 +89,10 @@
   </div>
 
   <div class="field">
-使用年数<br>
-＜使用年数が、ここにはいる。＞<br>
-</div>
+    <%= label_tag t('views.label_runningyear') %><br>
+    <%= @engineorder.calcRunningYear %>
+  </div>
+  
   <div class="field">
     <%= f.label :change_comment %><br>
     <%= f.text_area :change_comment %>
