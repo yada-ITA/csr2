@@ -49,21 +49,6 @@ class Engineorder < ActiveRecord::Base
     return true if self.businessstatus_id.to_i == 9 
   end 
 
-
-  #現時点での発行Noの生成 (年月-枝番3桁)
-  def self.createIssueNo
-    issuedate = Date.today.strftime("%Y%m") 
-    maxseq = self.where("issue_no like ?", issuedate + "%").max()
-    issueseq = '001'
-
-   unless maxseq.nil?
-    issueseq = sprintf("%03d", maxseq.issue_no.split('-')[1].to_i + 1)
-   end
-
-    return issuedate + "-" + issueseq
-
-  end
-
   #流通ステータスに「引合」をセットする
   def setInquiry
     self.businessstatus_id = 1
@@ -94,6 +79,25 @@ class Engineorder < ActiveRecord::Base
     self.businessstatus_id = 9
   end
 
+  #現時点での発行Noの生成 (年月-枝番3桁)
+  def self.createIssueNo
+    issuedate = Date.today.strftime("%Y%m") 
+    maxseq = self.where("issue_no like ?", issuedate + "%").max()
+    issueseq = '001'
+
+   unless maxseq.nil?
+    issueseq = sprintf("%03d", maxseq.issue_no.split('-')[1].to_i + 1)
+   end
+
+    return issuedate + "-" + issueseq
+
+  end
+
+
+  #試運転日から運転年数を求める。(運転年数は、切り上げ)
+  def calcRunningYear
+    return  ((Date.today - self.day_of_test)/365).ceil unless self.day_of_test.nil? 
+  end
 
   def createRepair
     # 整備オブジェクトを受領前の状態で新規作成して返す
