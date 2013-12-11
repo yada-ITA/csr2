@@ -1,7 +1,5 @@
 R2::Application.routes.draw do
 
-  resources :engineorders
-
   get 'repairs/new/:engine_id' => 'repairs#new'
 
   get 'repairs/engineArrived/:engine_id' => 'repairs#engineArrived'
@@ -14,6 +12,8 @@ R2::Application.routes.draw do
 
   get 'engines/index' => 'engines#index'
 
+  get 'engineorders/engineInquiry' => 'engineorders#inquiry'
+
   get 'engineorders/engineInquiry/:engine_id' => 'engineorders#inquiry',:as => :inquiry
 
   get 'engineorders/engineOrdered/:id' => 'engineorders#ordered',:as => :ordered
@@ -25,6 +25,8 @@ R2::Application.routes.draw do
   get 'engineorders/engineReturning/:id' => 'engineorders#returning',:as => :returning
 
   #post 'companies' =>  'companies#show'
+
+  resources :engineorders
 
   resources :arrivals
 
