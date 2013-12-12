@@ -11,8 +11,7 @@ class Repair < ActiveRecord::Base
 
   # getter and setter for virtual attribute
   def returning_date
-    unless self.engine.current_order_as_old.nil?  
-      puts '************* wow ***************' + engine.current_order_as_old.returning_date.to_s
+    unless self.engine.current_order_as_old.nil?
       return self.engine.current_order_as_old.returning_date
     end
     return nil

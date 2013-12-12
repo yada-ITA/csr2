@@ -58,14 +58,18 @@ class RepairsController < ApplicationController
     # パラメータにエンジンIDがある場合、まずエンジンに、作業中の整備オブジェクトの取得を試みる
     engine = Engine.find(params[:repair][:engine_id])
     @reapir = engine.current_repair
+
     # 作業中の整備オブジェクトが存在しない場合、整備オブジェクトを作って、当該のエンジンに紐づける
     if @reapir.nil?
       @repair = Repair.new(repair_params)  
       @repair.issue_no = Repair.createIssueNo
-	    if !(params[:repair][:engine_id].nil?)
-        @repair.engine = engine
-	    end   
+      @repair.engine = engine
     end
+
+    # エンジンのステータスをセットする。
+    setEngineStatus
+    @repair.engine.save
+    
     respond_to do |format|
       if @repair.save
         format.html { redirect_to @repair, notice: 'Repair was successfully created.' }
@@ -148,7 +152,7 @@ class RepairsController < ApplicationController
     # 受領登録時→整備前
     if params[:commit] == t('views.buttun_arrived')
       @repair.engine.setBeforeRepair
-      @repair.engine.company = current_user.company
+      @repair.engine.company = current_user.company	
     end
     # 整備開始→整備中
     if params[:commit] == t('views.buttun_repairStarted')
