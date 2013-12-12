@@ -22,11 +22,17 @@ class EngineordersController < ApplicationController
     #流通ステータスでレンダリング先を変える。
     if @engineorder.isInquiry?
       render :template => "engineorders/inquiry"
-    elsif @engineorder.isShipped?
+    end
+
+    if @engineorder.isShipped?
       render :template => "engineorders/shipped"
-    elsif @engineorder.isShippingreparation?
+    end
+
+    if @engineorder.isShippingreparation?
       render :template => "engineorders/allocated"
-    elsif @engineorder.isOrdered?
+    end
+
+    if @engineorder.isOrdered?
       render :template => "engineorders/ordered"
     end
   end
