@@ -127,6 +127,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :returning_place_id %><br>
+    <%= f.collection_select( :returning_place_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
+
+  <div class="field">
     <%= f.label :returning_date %><br>
     <%= f.date_select :returning_date %>
   </div>

@@ -60,8 +60,10 @@ class EngineordersController < ApplicationController
   # PATCH/PUT /engineorders/1
   # PATCH/PUT /engineorders/1.json
   def update
-    #流通ステータスをセットする。(privateメソッド)
+    # 流通ステータスをセットする。(privateメソッド)
     setBusinessstatus
+    # エンジンに変更があれば、セットする。
+    setEngines
 
     respond_to do |format|
       if @engineorder.update(engineorder_params)
@@ -86,12 +88,20 @@ class EngineordersController < ApplicationController
     end
   end
 
+  # GET /engineorders/engineInquiry/:engine_id'
   # 引合の処理
   def inquiry
-    @engineorder = Engineorder.new
-    # パラメータにengine_idがあれば、旧エンジンに紐づける
-    if !(params[:engine_id].nil?)
-        @engineorder.old_engine = Engine.find(params[:engine_id])
+    # パラメータのengine_idをもとに、エンジンオブジェクトを取り出す。
+    unless params[:engine_id].nil?
+      engine = Engine.find(params[:engine_id])
+      @engineorder = engine.current_order_as_old
+      if @engineorder.nil?
+        @engineorder = Engineorder.new
+      end
+      @engineorder.setOldEngine(engine)
+    else
+      @engineorder = Engineorder.new
+      @engineorder.setOldEngine(engine)
     end
   end
 
@@ -125,7 +135,6 @@ class EngineordersController < ApplicationController
     # 引当画面からの更新の場合
     if params[:commit] == t('views.buttun_allocated')
       # 新エンジンのステータスを出荷準備中に変更する。
-      @engineorder.new_engine = Engine.find(params[:engineorder][:new_engine_id])
       @engineorder.new_engine.setBeforeShipping
       @engineorder.new_engine.save
     end      
@@ -151,17 +160,20 @@ class EngineordersController < ApplicationController
     # 返却画面からの更新の場合
     if params[:commit] == t('views.buttun_returning')
 
-      # 整備オブジェクトを作り、旧エンジンを紐づける。
-      @repair = @engineorder.createRepair
-
+      repair = @engineorder.repair_for_old_engine
+      if repair.nil?
+        # 整備オブジェクトを作り、旧エンジンを紐づける。
+        repair = @engineorder.createRepair
+      else
+        # 整備オブジェクトの内容を再編集し、旧エンジンを紐づける。
+        @engineorder.modifyRepair	(repair)
+      end
       # 旧エンジンのステータスを受領前にセットする。
       @engineorder.old_engine.setBeforeArrive
       
       # DBに格納する。
-      @repair.save
-      @engineorder.old_engine.save      
-
-      
+      repair.save
+      @engineorder.old_engine.save
       
     end
   end
@@ -201,6 +213,17 @@ class EngineordersController < ApplicationController
       params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
     end
 
+    # setEngines
+    # パラメータにエンジンIDがあればセットメソッドで先に設定する
+    def setEngines
+      unless params[:engineorder][:new_engine_id].blank?
+        @engineorder.setNewEngine(Engine.find(params[:engineorder][:new_engine_id]))
+      end  
+      unless params[:engineorder][:old_engine_id].blank?
+        @engineorder.setOldEngine(Engine.find(params[:engineorder][:old_engine_id]))
+      end  
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_engineorder
       @engineorder = Engineorder.find(params[:id])
@@ -209,6 +232,6 @@ class EngineordersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def engineorder_params
       params.require(:engineorder).permit(:issue_no, :inquiry_date, :registered_user_id, :updated_user_id, :branch_id, :salesman_id, :install_place_id, :orderer, :machine_no, :time_of_running, :change_comment, :order_date, :sending_place_id, :sending_comment, :desirable_delivery_date, :businessstatus_id,
-       :new_engine_id, :old_engine_id, :old_engine, :new_engine, :enginestatus_id,:invoice_no_new, :invoice_no_old, :day_of_test, :shipped_date, :returning_date, :returning_comment, :title)
+       :new_engine_id, :old_engine_id, :old_engine, :new_engine, :enginestatus_id,:invoice_no_new, :invoice_no_old, :day_of_test, :shipped_date, :returning_date, :returning_comment, :title, :returning_place_id)
     end
 end

@@ -1,3 +1,5 @@
+require 'engine'
+
 class Engineorder < ActiveRecord::Base
   #Association
   belongs_to :businessstatus
@@ -6,8 +8,9 @@ class Engineorder < ActiveRecord::Base
   belongs_to :new_engine, :class_name => 'Engine' 
 
   belongs_to :branch, :class_name => 'Company' 
-  belongs_to :install_place, :class_name => 'Company' 
-  belongs_to :sending_place, :class_name => 'Company' 
+  belongs_to :install_place,   :class_name => 'Company' 
+  belongs_to :sending_place,   :class_name => 'Company' 
+  belongs_to :returning_place, :class_name => 'Company' 
 
   belongs_to :registered_user, :class_name => 'User' 
   belongs_to :updated_user, :class_name => 'User' 
@@ -16,6 +19,34 @@ class Engineorder < ActiveRecord::Base
   # 仕掛中かどうかを確認する
   def opened?
     return self.returning_date.nil?
+  end
+
+  # 新エンジンをセットする
+  def setNewEngine(engine)
+    if self.new_engine.nil?
+      self.new_engine = engine
+    else
+      unless self.new_engine == engine
+        prev_new_engine = self.new_engine
+        prev_new_engine.suspend
+        prev_new_engine.save
+        self.new_engine = engine
+      end
+    end
+  end
+
+  # 旧エンジンをセットする
+  def setOldEngine(engine)
+    if self.old_engine.nil?
+      self.old_engine = engine
+    else
+      unless self.old_engine == engine
+        prev_old_engine = self.old_engine
+        prev_old_engine.suspend
+        prev_old_engine.save
+        self.old_engine = engine
+      end
+    end
   end
 
   # ステータスの確認メソッド集 --------------- #
@@ -114,18 +145,31 @@ class Engineorder < ActiveRecord::Base
     return  ((Date.today - self.day_of_test)/365).ceil unless self.day_of_test.nil? 
   end
 
+  # 整備オブジェクトを受領前の状態で新規作成する
   def createRepair
-    # 整備オブジェクトを受領前の状態で新規作成して返す
     repair = Repair.new
     repair.issue_no          = Repair.createIssueNo
-    repair.issue_date        = self.order_date
-    repair.time_of_running   = self.time_of_running
-    repair.day_of_test       = self.day_of_test
-    
+    copyToRapair(repair)
     # 整備オブジェクトに旧エンジンを紐づける
-    repair.engine            = self.old_engine
+    repair.setEngine(self.old_engine)
     
     return repair
   end
 
+  # 整備オブジェクトを再度設定する。
+  def modifyRepair(repair)
+    copyToRapair(repair)
+    # 整備オブジェクトに旧エンジンを紐づける
+    repair.setEngine(self.old_engine)
+    
+    return repair
+  end
+  
+  # 整備に必要な属性を、自身からコピーする。
+  def copyToRapair(repair)
+    repair.issue_date        = self.order_date
+    repair.time_of_running   = self.time_of_running
+    repair.day_of_test       = self.day_of_test
+  end
+  
 end

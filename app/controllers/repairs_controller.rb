@@ -32,15 +32,15 @@ class RepairsController < ApplicationController
     end
     
     if @repair.engine.beforeRepair?
-      render :template => "engineorders/engineArrived"
+      render :template => "repairs/engineArrived"
     end
     
     if @repair.engine.underRepair?
-      render :template => "engineorders/repairStarted"
+      render :template => "repairs/repairStarted"
     end
     
-    if @repair.engine.finishedRepair?
-      render :template => "engineorders/repairFinished"
+    if @repair.engine.completed?
+      render :template => "repairs/repairFinished"
     end
   
     #if @repair.engine.beforeShipping?
