@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'engineorder'
 
 class Engine < ActiveRecord::Base
@@ -61,7 +62,39 @@ class Engine < ActiveRecord::Base
 
   #完成品のエンジン一覧を取得する。
   def self.completedEngines
-     return Engine.where(:enginestatus_id => 3)
+     return self.where(:enginestatus_id => 3)
+  end
+
+  # サスペンド状態かどうか確認する。
+  def suspend?
+    return self.suspended
+  end
+
+  # サスペンド状態にする
+  def suspend
+    self.suspended = true
+  end
+  
+  # サスペンド状態を解除する
+  def release
+    self.suspended = false
+  end
+  
+  # サスペンド状態を文字表示する。
+  def displaySuspend_orNot
+    if self.suspended?
+      return "<b>***サスペンド中***</b>".html_safe
+    end
+  end
+  
+  #サスペンド状態のエンジンがあるかどうかを返す。
+  def self.existsSuspended?
+     !(self.where(:suspended => true).blank?)
+  end
+
+  # 最も古いエンジンの試運転年を返す（date_selectの最小値とするため）
+  def self.start_year
+    return 1990
   end
 
   # ステータスを受領前にする

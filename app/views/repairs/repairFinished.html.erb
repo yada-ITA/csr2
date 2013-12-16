@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :arrive_date %><br>
-    <%=  f.date_select :arrive_date %>
+    <%=  f.date_select :arrive_date, :use_month_numbers => true %>
   </div>
   <div class="field">
     <%= f.label :order_no %><br>
@@ -41,15 +41,15 @@
   </div>
   <div class="field">
     <%= f.label :desirable_finish_date %><br>
-    <%= f.date_select :desirable_finish_date, :disabled=>'true' %>
+    <%= f.date_select :desirable_finish_date, :use_month_numbers => true, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date, :use_month_numbers => true %>
   </div>
   <div class="field">
     <%= f.label :estimated_finish_date %><br>
-    <%= f.date_select :estimated_finish_date %>
+    <%= f.date_select :estimated_finish_date, :use_month_numbers => true %>
   </div>
   <div class="field">
     <%= f.label :before_comment %><br>
@@ -57,7 +57,7 @@
   </div>
   <div class="field">
     <%= f.label :finish_date %><br>
-    <%= f.date_select :finish_date %>
+    <%= f.date_select :finish_date, :use_month_numbers => true %>
   </div>
   <div class="field">
     <%= f.label :after_comment %><br>

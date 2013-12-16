@@ -1,15 +1,26 @@
 class Repair < ActiveRecord::Base
 
-  # virtual attribute
-  #attr_accessible :returning_comment, :returning_date
-  #attr_accessor   :returning_comment, :returning_date 
-  
   # validation
   
   # Association
   belongs_to :engine
+  
+  # エンジンをセットする
+  def setEngine(engine)
+    if self.engine.nil?
+      self.engine = engine
+    else
+      unless self.engine == engine
+        prev_engine = self.engine
+        prev_engine.suspend
+        prev_engine.save
+        self.engine = engine
+      end
+    end
+  end
 
   # getter and setter for virtual attribute
+  # 返却日
   def returning_date
     unless self.engine.current_order_as_old.nil?
       return self.engine.current_order_as_old.returning_date
@@ -22,6 +33,8 @@ class Repair < ActiveRecord::Base
     end
   end
 
+  # getter and setter for virtual attribute
+  # 返却コメント
   def returning_comment
     unless self.engine.current_order_as_old.nil?
       return self.engine.current_order_as_old.returning_comment
@@ -35,7 +48,7 @@ class Repair < ActiveRecord::Base
   end
 
   
-  # 作業中かどうかを判定する
+  # 作業中かどうかを判定する（出荷日が入っていたら”終了した整備”と解釈）
   def opened?
     return self.shipped_date.nil?
   end

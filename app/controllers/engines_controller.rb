@@ -118,6 +118,6 @@ class EnginesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engine_params
-      params.require(:engine).permit(:engine_model_name, :serialno, :sales_model_name, :company_id, :enginestatus_id, :page)
+      params.require(:engine).permit(:engine_model_name, :serialno, :sales_model_name, :company_id, :enginestatus_id, :suspended, :page)
     end
 end

@@ -13,6 +13,7 @@ ja:
         sales_model_name: '販売型式'
         serialno: 'S/#'
         company: '管轄'
+        suspended: サスペンド
         status: 'ステータス'
       repair:
         issue_no: 発行番号
@@ -66,6 +67,7 @@ ja:
         new_engine_id: 新規エンジン
         old_engine_id: 返却エンジン
         invoice_no: 送り状No
+        returning_place_id: 返却先
         returning_comment: 返却コメント
         shipped_date: 出荷日
         title: 物件名
