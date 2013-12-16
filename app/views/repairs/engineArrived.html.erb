@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :issue_date %><br>
-    <%= f.date_select :issue_date, :use_month_numbers => true %>
+    <%= f.date_select :issue_date, :use_month_numbers => true, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :time_of_running %><br>
@@ -38,8 +38,13 @@
   </div>
 
   <div class="field">
+    <%= f.label :returning_date %><br>
+    <%= f.date_select :returning_date, :disabled=>'true', :use_month_numbers => true  %>
+  </div>
+
+  <div class="field">
     <%= f.label :returning_comment %><br>
-    <%# f.text_area :returning_comment %>
+    <%= f.text_area :returning_comment, :disabled=>'true' %>
   </div>
   <div class="field">
     <%= f.label :arrive_date %><br>

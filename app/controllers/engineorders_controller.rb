@@ -62,8 +62,6 @@ class EngineordersController < ApplicationController
   def update
     # 流通ステータスをセットする。(privateメソッド)
     setBusinessstatus
-    # エンジンに変更があれば、セットする。
-    setEngines
 
     respond_to do |format|
       if @engineorder.update(engineorder_params)
@@ -186,44 +184,56 @@ class EngineordersController < ApplicationController
     def setBusinessstatus
       # 引合登録の場合
       if params[:commit] == t('views.buttun_inquiry')
-        #流通ステータスを、「受注」にセットする。
+        # 流通ステータスを、「受注」にセットする。
         @engineorder.setInquiry
       end
       # 受注登録の場合
       if params[:commit] == t('views.buttun_ordered')
-        #流通ステータスを、「受注」にセットする。
+        # 流通ステータスを、「受注」にセットする。
         @engineorder.setOrdered
       end
-      # 引合登録の場合
+      # 引当登録の場合
       if params[:commit] == t('views.buttun_allocated')
-        #流通ステータスを、「出荷準備中」にセットする。
+        # 流通ステータスを、「出荷準備中」にセットする。
         @engineorder.setShippingreparation
+        # エンジンに変更があれば、セットする。
+        setNewEngines
       end
       # 出荷登録の場合
       if params[:commit] == t('views.buttun_shipped')
-        #流通ステータスを、「出荷済」にセットする。
+        # 流通ステータスを、「出荷済」にセットする。
         @engineorder.setShipped
+        # エンジンに変更があれば、セットする。
+        setNewEngines
       end  
       # 返却登録の場合
       if params[:commit] == t('views.buttun_returning')
-        #流通ステータスを、「返却済」にセットする。
+        # 流通ステータスを、「返却済」にセットする。
         @engineorder.setReturned
+        # エンジンに変更があれば、セットする。
+        setNewEngines
+        setOldEngines
       end  
       #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
       params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
     end
 
-    # setEngines
+    # setNewEngines
     # パラメータにエンジンIDがあればセットメソッドで先に設定する
-    def setEngines
+    def setNewEngines
       unless params[:engineorder][:new_engine_id].blank?
         @engineorder.setNewEngine(Engine.find(params[:engineorder][:new_engine_id]))
       end  
+    end
+    
+    # setOldEngines
+    # パラメータにエンジンIDがあればセットメソッドで先に設定する
+    def setOldEngines
       unless params[:engineorder][:old_engine_id].blank?
         @engineorder.setOldEngine(Engine.find(params[:engineorder][:old_engine_id]))
       end  
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_engineorder
       @engineorder = Engineorder.find(params[:id])
