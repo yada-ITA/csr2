@@ -58,8 +58,8 @@
         <td><%= link_to '引合登録', inquiry_path(engine) %></td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td>
-        <% unless engine.current_order_as_new.nil? %>
-        <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
+        <% if  engine.beforeShipping?  %>
+          <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
         <% end %>
         </td>
         <td>.....</td>
