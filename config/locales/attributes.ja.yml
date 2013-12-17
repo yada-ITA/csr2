@@ -9,9 +9,9 @@ ja:
         phone_no: 電話番号
         destination_name: 宛先
       engine:
-        engine_model_name: '型式'
+        engine_model_name: 'エンジン型式'
         sales_model_name: '販売型式'
-        serialno: 'S/#'
+        serialno: 'エンジンS/#'
         company: '管轄'
         suspended: サスペンド
         status: 'ステータス'
@@ -35,6 +35,7 @@ ja:
         estimated_finish_date: 予定完成日
         finish_date: 完了日
         shipped_date: 出荷日
+        returning_date: 返却日
       user:
         userid: 社員コード
         code: 社員コード
@@ -70,8 +71,9 @@ ja:
         returning_place_id: 返却先
         returning_comment: 返却コメント
         shipped_date: 出荷日
+        shipped_comment: 出荷コメント
         title: 物件名
-        returning_date: 返却日
+        returning_date: 返却日 
         returning_comment: 返却コメント
         invoice_no_new: 送り状No（新エンジン）
         invoice_no_old: 送り状No（旧エンジン） 

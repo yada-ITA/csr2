@@ -61,4 +61,7 @@ gem 'will_paginate'
 gem 'rails-erd', group: [:development, :test]
 
 #Use need_label for highlighting
-gem "need_label"
+gem 'need_label'
+
+#Use authority
+gem 'cancan'

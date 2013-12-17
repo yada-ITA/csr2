@@ -78,7 +78,7 @@ company7:
 company8:
   id: 8
   name: YES名古屋営業
-  category: ＹＥＳ拠点
+  category: YES拠点
   postcode: 432-1111
   address: 名古屋市中区東新町
   phone_no: 053-555-6666
@@ -89,7 +89,7 @@ company8:
 company9:
   id: 9
   name: YES大阪営業
-  category: ＹＥＳ拠点
+  category: YES拠点
   postcode: 123-4568
   address: 大阪市大北区万歳町
   phone_no: 06-6123-4567
