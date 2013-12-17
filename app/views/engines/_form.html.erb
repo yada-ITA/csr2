@@ -19,19 +19,30 @@
     <%= f.label :serialno %><br>
     <%= f.text_field :serialno %>
   </div>
+
+<!--
   <div class="field">
     <%= f.label :sales_model_name %><br>
     <%= f.text_field :sales_model_name %>
   </div>
-  <% if yesOffice? %>
+-->
+
+  <% if current_user.yesOffice? %>
     <div>
       <%= f.label :company %><br>
-      <%= f.collection_select( :company_id, Company.all, :id, :name, :include_blank => false ) %><br>	
+      <%= f.collection_select( :company_id, Company.all, :id, :name, :include_blank => false ) %><br>	<br>
       <%= f.label :suspended %><br>
-      <%= f.check_box :suspended %>
+      <%= f.check_box :suspended %><br>
     </div>
   <% else %>
-    <%= f.hidden_field(:company_id, :value => current_user.company_id) %>
+    <%= f.label :company %><br>
+    <% if @engine.company_id.nil? %>
+      <% engine_company_id = current_user.company_id %>
+    <% else %> 
+      <% engine_company_id = @engine.company_id %>
+    <% end %>
+      <%= Company.find(engine_company_id).name %><br>
+      <%= f.hidden_field(:company_id, :value => engine_company_id) %><br>
   <% end %>
 
   <div><%= f.label :status %><br>

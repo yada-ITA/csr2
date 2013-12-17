@@ -2,7 +2,7 @@
 <h3><b>検索条件</b></h3>
 <%= form_tag engines_index_path, :method => :get do %>
 <table id = "square">
-  <% if yesOffice? %>
+  <% if current_user.yesOffice? %>
     <tr>
       <td width="80" >所轄会社     </td>
       <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched.fetch('company_id', ""))%></td>
@@ -31,8 +31,8 @@
   <thead>
     <tr>
       <th>ステータス</th>      
-      <th>型式</th>
-      <th>S/#</th>
+      <th>エンジン型式</th>
+      <th>エンジンS/#</th>
       <th>販売型式</th>
       <th>管轄</th>      
       <th>返却日</th>	      
@@ -55,11 +55,15 @@
         <td><%= engine.company.name %></td>
         <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
         <td><%= engine.displaySuspend_orNot %></td>
-        <td><%= link_to '引合登録', inquiry_path(engine) %></td>
+        <td>
+          <% unless current_user.tender? %>
+            <%= link_to '引合登録', inquiry_path(engine) %>
+          <% end %>
+        </td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <td>
-        <% unless engine.current_order_as_new.nil? %>
-        <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
+        <% if  engine.beforeShipping?  %>
+          <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
         <% end %>
         </td>
         <td>.....</td>

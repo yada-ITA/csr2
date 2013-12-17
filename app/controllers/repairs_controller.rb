@@ -24,22 +24,22 @@ class RepairsController < ApplicationController
   end
 
   # GET /repairs/1/edit
-  # 流通ステータスでレンダリング先を変える。
+  # ステータスでレンダリング先を変える。
   def edit
-    
+    #エンジンが受領前状態の場合、
     if @repair.engine.beforeArrive?
-      render :template => "repairs/returning	"
+      render :templathe => "repairs/returning"
     end
-    
+    #エンジンが整備前状態の場合、整備前
     if @repair.engine.beforeRepair?
       render :template => "repairs/engineArrived"
     end
-    
+    #エンジンが整備中の場合
     if @repair.engine.underRepair?
       render :template => "repairs/repairStarted"
     end
-    
-    if @repair.engine.completed?
+    #エンジンが整備完了(完成品状態)の場合、
+    if @repair.engine.finishedRepair?
       render :template => "repairs/repairFinished"
     end
   
