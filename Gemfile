@@ -59,3 +59,6 @@ gem 'will_paginate'
 
 # Use rails-erd  for development
 gem 'rails-erd', group: [:development, :test]
+
+#Use need_label for highlighting
+gem "need_label"

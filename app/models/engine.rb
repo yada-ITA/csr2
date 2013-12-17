@@ -145,8 +145,9 @@ class Engine < ActiveRecord::Base
     return self.enginestatus_id.to_i == 3 
   end 
 
-  # 完成品状態かどうか？
-  def completed?
+  # 整備完了(完成品)状態かどうか？
+#  def completed?
+  def finishedRepair?
     return self.enginestatus_id.to_i == 4 
   end 
 
