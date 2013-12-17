@@ -12,5 +12,5 @@
  *= require_tree .
  */
 label.need-label:after {
-content: "***";
+content: " *";
 }

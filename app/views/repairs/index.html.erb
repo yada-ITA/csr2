@@ -48,8 +48,8 @@
         <td><%= link_to '開始登録', start_repair_path(repair) %></td>
         <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
         <td>
-        <% unless repair.engine.current_order_as_new.nil? %>
-        <%= link_to '出荷登録', shipped_path(repair.engine.current_order_as_new) %>
+        <% if repair.engine.beforeShipping? %>
+          <%= link_to '出荷登録', shipped_path(repair.engine.current_order_as_new) %>
         <% end %>
         </td>
         <td>.....</td>
