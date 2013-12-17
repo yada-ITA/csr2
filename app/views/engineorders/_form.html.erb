@@ -1,27 +1,19 @@
-<script>
-function update_branch_id() {
-  var selected = document.getElementById("branch_id").value
-  $.ajax({
-    url: "/companies/" + selected,
-    type: "GET", 
-    success: function(data) { document.getElementById("branch_location").value = data }
-  })
-  }
-</script>
+
+<%= javascript_include_tag "location" %>
 
 <% if @engineorder.registInquiry? %>
   <h1>引合登録</h1>
 <% elsif %>
-<% @engineorder.afterShipped? %>
+<% @engineorder.isShipped? %>
   <h1>出荷登録</h1>
 <% elsif %>
-<% @engineorder.afterAllocated? %>
+<% @engineorder.isShippingreparation? %>
   <h1>引当登録</h1>
 <% elsif %>
-<% @engineorder.afterOrdered? %>
+<% @engineorder.isOrdered? %>
   <h1>受注登録</h1>
 <% elsif %>
-<% @engineorder.afterInquiry? %>
+<% @engineorder.isInquiry? %>
   <h1>引合登録</h1>
 <% end %>
 
@@ -76,25 +68,16 @@ function update_branch_id() {
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-
-  <div class="field">
-    <%= f.label :branch_id %><br>
-    <%= f.collection_select( :branch_id, Company.all, :id, :name, options = {:include_blank => false}, html_options = {:onchange => "update_branch_id()", :id => "branch_id" }  ) %>
-  </div>
-  <input type="text" size=40 id="branch_location" disabled="true">
-  <div id="branch_location2">
-  </div>
-
+  
+  <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
+  
   <div class="field">
     <%= f.label :salesman_id %><br>
    <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
   </div>
 
-  <div class="field">
-    <%= f.label :install_place_id %><br>
-    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
-
+  <%= render "location", {f: f, attr_name: "install_place", location: @engineorder.install_place } %>
+  
   <div class="field">
     <%= f.label :orderer %><br>
     <%= f.text_field :orderer %>
@@ -175,3 +158,4 @@ function update_branch_id() {
     <%= f.submit %>
   </div>
 <% end %>
+</body>
