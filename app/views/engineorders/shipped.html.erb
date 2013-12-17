@@ -40,11 +40,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :order_date %><br>
-    <%= f.date_select :order_date, :use_month_numbers => true %>
-  </div>
-
-  <div class="field">
     <%= f.label :branch_id %><br>
    <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
   </div>
@@ -61,17 +56,25 @@
 
   <div class="field">
     <%= f.label :orderer %><br>
-    <%= f.text_field :orderer %>
+    <%= f.text_field :orderer %><br>
   </div>
 
-  <div class="field">
-    <%= f.label :old_engine_id %><br>
-    <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
-  </div>
+  <% unless current_user.tender? %>
+    <div class="field">
+      返却エンジンS/# <br>
+      <%= text_field_tag 'serialno', @engineorder.old_engine.serialno, :disabled=>'true' %><br>
+      返却エンジン型式 <br>
+      <%= text_field_tag 'engine_model_name', @engineorder.old_engine.engine_model_name, :disabled=>'true' %><br>
+    <br>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= f.label :new_engine_id %><br>
-    <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
+    エンジンS/# <br>
+    <%= text_field_tag 'serialno', @engineorder.new_engine.serialno, :disabled=>'true' %><br>
+    型式 <br>
+    <%= text_field_tag 'engine_model_name', @engineorder.new_engine.engine_model_name, :disabled=>'true' %><br>
+  <br>
   </div>
 
 <!--
@@ -124,6 +127,12 @@
     <%= f.label :shipped_date %><br>
     <%= f.date_select :shipped_date, :use_month_numbers => true %>
   </div>
+
+  <div class="field">
+    <%= f.label :shipped_comment %><br>
+    <%= f.text_area :shipped_comment %>
+  </div>
+  
 
   <div class="actions">
     <%= f.submit  :value => t('views.buttun_shipped') %>
