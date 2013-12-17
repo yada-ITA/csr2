@@ -160,7 +160,7 @@ class Engineorder < ActiveRecord::Base
   def modifyRepair(repair)
     copyToRapair(repair)
     # 整備オブジェクトに旧エンジンを紐づける
-    repair.setEngine(self.old_engine)
+    repair.setEngine	(self.old_engine)
     
     return repair
   end
