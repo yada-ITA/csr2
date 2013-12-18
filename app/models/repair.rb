@@ -28,8 +28,12 @@ class Repair < ActiveRecord::Base
     return nil
   end
   def returning_date=(returning_date_value)
-    unless self.engine.current_order_as_old.nil? 
-      self.engine.current_order_as_old.returning_date = returning_date_value
+    #新規作成時はself.engineがnilなので、いったん確認する。
+    #(nilに対してcurrent_order_oldは確認できない…)
+    unless self.engine.nil?
+      unless self.engine.current_order_as_old.nil? 
+        self.engine.current_order_as_old.returning_date = returning_date_value
+      end
     end
   end
 
@@ -42,8 +46,12 @@ class Repair < ActiveRecord::Base
     return nil
   end
   def returning_comment=(returning_comment_value)
-    unless self.engine.current_order_as_old.nil? 
-      self.engine.current_order_as_old.returning_comment = returning_comment_value
+    #新規作成時はself.engineがnilなので、いったん確認する。
+    #(nilに対してcurrent_order_oldは確認できない…)
+    unless self.engine.nil?
+      unless self.engine.current_order_as_old.nil? 
+        self.engine.current_order_as_old.returning_comment = returning_comment_value
+      end
     end
   end
 
