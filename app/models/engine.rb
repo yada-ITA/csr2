@@ -62,7 +62,7 @@ class Engine < ActiveRecord::Base
 
   #完成品のエンジン一覧を取得する。
   def self.completedEngines
-     return self.where(:enginestatus_id => 3)
+     return self.where(:enginestatus_id => 4)
   end
 
   # サスペンド状態かどうか確認する。

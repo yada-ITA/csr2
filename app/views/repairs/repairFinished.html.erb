@@ -14,7 +14,8 @@
   <% end %>
 
   <%= render 'engineInfo' %>
-  
+  <% disabled_data = getDisabled_RepairFinished %>
+
  <div class="field">
     <%= f.label :issue_no %><br>
     <%= f.text_field :issue_no, :disabled=> true %>
@@ -26,31 +27,31 @@
 
   <div class="field">
     <%= f.label :order_no %><br>
-    <%= f.text_field :order_no, :disabled=> true %>
+    <%= f.text_field :order_no, :disabled=> disabled_data[:order_no] %>
   </div>
   <div class="field">
     <%= f.label :order_date %><br>
-    <%= f.text_field :order_date, :disabled=> true %>
+    <%= f.text_field :order_date, :disabled=> disabled_data[:order_date] %>
   </div>
   <div class="field">
     <%= f.label :construction_no %><br>
-    <%= f.text_field :construction_no, :disabled=> true %>
+    <%= f.text_field :construction_no, :disabled=> disabled_data[:construction_no] %>
   </div>
   <div class="field">
     <%= f.label :desirable_finish_date %><br>
-    <%= f.date_select :desirable_finish_date, :use_month_numbers => true, :disabled=>true %>
+    <%= f.date_select :desirable_finish_date, :use_month_numbers => true, :disabled=>disabled_data[:desirable_finish_date] %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date, :use_month_numbers => true %>
+    <%= f.date_select :start_date, :use_month_numbers => true, :disabled=>disabled_data[:start_date] %>
   </div>
   <div class="field">
     <%= f.label :estimated_finish_date %><br>
-    <%= f.date_select :estimated_finish_date, :use_month_numbers => true %>
+    <%= f.date_select :estimated_finish_date, :use_month_numbers => true, :disabled=>disabled_data[:estimated_finish_date] %>
   </div>
   <div class="field">
     <%= f.label :before_comment %><br>
-    <%= f.text_area :before_comment %>
+    <%= f.text_area :before_comment, :disabled=>disabled_data[:before_comment] %>
   </div>
   <div class="field">
     <%= f.label :finish_date %><br>
