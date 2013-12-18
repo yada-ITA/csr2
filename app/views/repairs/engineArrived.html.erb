@@ -14,22 +14,23 @@
   <% end %>
 
   <%= render 'engineInfo' %>
-  
+  <% disabled_data = getDisabled_EngineArrived %>
+
   <div class="field">
     <%= f.label :issue_no %><br>
-    <%= f.text_field :issue_no, :disabled=>'true' %>
+    <%= f.text_field :issue_no, :disabled=>true %>
   </div>
   <div class="field">
     <%= f.label :issue_date %><br>
-    <%= f.date_select :issue_date, :use_month_numbers => true, :disabled=>'true' %>
+    <%= f.date_select :issue_date, :use_month_numbers => true, :disabled=>true %>
   </div>
   <div class="field">
     <%= f.label :time_of_running %><br>
-    <%= f.number_field :time_of_running %>
+    <%= f.number_field :time_of_running, :disabled=>disabled_data[:time_of_running] %>
   </div>
   <div class="field">
     <%= f.label :day_of_test %><br>
-    <%= f.date_select :day_of_test, :use_month_numbers => true, :start_year => Engine.start_year %>
+    <%= f.date_select :day_of_test, :use_month_numbers => true, :start_year => Engine.start_year, :disabled=>disabled_data[:day_of_test] %>
   </div>
   
   <div class="field">
@@ -39,12 +40,13 @@
 
   <div class="field">
     <%= f.label :returning_date %><br>
-    <%= f.date_select :returning_date, :disabled=>'true', :use_month_numbers => true  %>
+    <%= f.date_select :returning_date, :disabled=>disabled_data[:returning_date],
+     :use_month_numbers => true %>
   </div>
 
   <div class="field">
     <%= f.label :returning_comment %><br>
-    <%= f.text_area :returning_comment, :disabled=>'true' %>
+    <%= f.text_area :returning_comment, :disabled=>disabled_data[:returning_comment] %>
   </div>
   <div class="field">
     <%= f.label :arrive_date %><br>

@@ -1,4 +1,6 @@
-  <h1>引当登録</h1>
+<%= javascript_include_tag "location" %>
+
+<h1>引当登録</h1>
 
 
 <%= form_for(@engineorder) do |f| %>
@@ -49,6 +51,7 @@
    <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
   </div>
 
+
   <div class="field">
     <%= f.label :salesman_id %><br>
    <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
@@ -69,10 +72,9 @@
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
 
-
   <div class="field">
     <%= f.label :new_engine_id %><br>
-    <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
+    <%= f.collection_select( :new_engine_id, Engine.where(:enginestatus_id => 4), :id, :engine_name, :include_blank => true ) %>
   </div>
 
 <!--
@@ -105,7 +107,6 @@
     <%= f.label :sending_place_id %><br>
     <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
   </div>
-
 
   <div class="field">
     <%= f.label :sending_comment %><br>
