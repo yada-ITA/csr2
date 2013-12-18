@@ -1,4 +1,6 @@
-	  <h1>引合登録</h1>
+<%= javascript_include_tag "location" %>
+
+<h1>引合登録</h1>
 
 <%= form_for(@engineorder) do |f| %>
   <% if @engineorder.errors.any? %>
@@ -32,11 +34,11 @@
     <%= f.date_select :inquiry_date, :use_month_numbers => true %>
   </div>
 
-
   <div class="field">
     <%= f.label :branch_id %><br>
    <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
   </div>
+
 
   <div class="field">
     <%= f.label :salesman_id %><br>
@@ -59,24 +61,10 @@
 
 
   <div class="field">
-※型式とS/Nに分かれる。※
     <%= f.label :old_engine_id %><br>
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
 
-
-  <div class="field">
-    <%= f.label "返却エンジン型式" %><br>
-  </div>
-
-  <div class="field">
-    <%= f.label "返却エンジンS/#" %><br>
-  </div>
-
-
-  <div class="field">
-    <%= f.label "機体No" %><br>
-  </div>
 
   <div class="field">
     <%= f.label :time_of_running %><br>

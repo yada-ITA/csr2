@@ -1,4 +1,6 @@
-  <h1>受注登録</h1>
+<%= javascript_include_tag "location" %>
+
+<h1>受注登録</h1>
 
 <%= form_for(@engineorder) do |f| %>
   <% if @engineorder.errors.any? %>
