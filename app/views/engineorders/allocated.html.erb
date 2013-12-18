@@ -46,7 +46,10 @@
     <%= f.date_select :order_date, :use_month_numbers => true %>
   </div>
 
-  <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
+  <div class="field">
+    <%= f.label :branch_id %><br>
+   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
 
 
   <div class="field">
@@ -54,8 +57,10 @@
    <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
   </div>
 
-  <%= render "location", {f: f, attr_name: "install_place", location: @engineorder.install_place } %>
-
+  <div class="field">
+    <%= f.label :install_place_id %><br>
+    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
+  </div>
 
   <div class="field">
     <%= f.label :orderer %><br>
@@ -98,7 +103,10 @@
     <%= f.text_area :change_comment %>
   </div>
   
-  <%= render "location", {f: f, attr_name: "sending_place", location: @engineorder.sending_place } %>
+  <div class="field">
+    <%= f.label :sending_place_id %><br>
+    <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
+  </div>
 
   <div class="field">
     <%= f.label :sending_comment %><br>
