@@ -1,6 +1,8 @@
 class EnginesController < ApplicationController
   before_action :set_engine, only: [:show, :edit, :update, :destroy]
 
+  autocomplete :engine, :engine_model_name, :full => true #, :extra_data => [:default_client_id, :default_client_name]
+  
   # GET /engines
   # GET /engines.json
   def index

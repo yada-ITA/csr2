@@ -1,7 +1,7 @@
   <table>
     <tr><td rowspan="5" valign="top">
       <%= f.label (attr_name + "_id").to_sym %>
-      <%= f.collection_select((attr_name + "_id").to_sym, Company.all, :id, :name, options = {:include_blank => false}, html_options = {:onchange => "selectionChanged(\"" + attr_name + "\")", :id => "select_" + attr_name }  ) %>
+      <%= f.collection_select((attr_name + "_id").to_sym, Company.all, :id, :name, options = {:include_blank => true}, html_options = {:onchange => "selectionChanged(\"" + attr_name + "\")", :id => "select_" + attr_name }  ) %>
     </td></tr>
     <% if location.nil? %>
     <tr>

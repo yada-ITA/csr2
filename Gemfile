@@ -65,3 +65,7 @@ gem 'need_label'
 
 #Use authority
 gem 'cancan'
+
+# for Autocomplete
+gem 'rails3-jquery-autocomplete'
+

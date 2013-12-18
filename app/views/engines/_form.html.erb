@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :engine_model_name %><br>
-    <%= f.text_field :engine_model_name %>
+    <%= autocomplete_field :engine, :engine_model_name, autocomplete_engine_engine_model_name_engines_path %>
   </div>
   <div class="field">
     <%= f.label :serialno %><br>
