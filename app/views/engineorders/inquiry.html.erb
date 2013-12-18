@@ -34,21 +34,14 @@
     <%= f.date_select :inquiry_date, :use_month_numbers => true %>
   </div>
 
-  <div class="field">
-    <%= f.label :branch_id %><br>
-   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
-
+  <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
 
   <div class="field">
     <%= f.label :salesman_id %><br>
    <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
   </div>
 
-  <div class="field">
-    <%= f.label :install_place_id %><br>
-    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
+  <%= render "location", {f: f, attr_name: "install_place", location: @engineorder.install_place } %>
 
   <div class="field">
     <%= f.label :orderer %><br>
