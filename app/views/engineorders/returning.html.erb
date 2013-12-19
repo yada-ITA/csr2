@@ -48,20 +48,14 @@
   </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :branch_id %><br>
-   <%= f.collection_select( :branch_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
+  <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
 
   <div class="field">
     <%= f.label :salesman_id %><br>
    <%= f.collection_select( :salesman_id, User.all, :id, :name, :include_blank => false ) %>
   </div>
 
-  <div class="field">
-    <%= f.label :install_place_id %><br>
-    <%= f.collection_select( :install_place_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
+  <%= render "location", {f: f, attr_name: "install_place", location: @engineorder.install_place } %>
 
   <div class="field">
     <%= f.label :orderer %><br>
@@ -103,10 +97,7 @@
   </div>
   
   
-  <div class="field">
-    <%= f.label :sending_place_id %><br>
-    <%= f.collection_select( :sending_place_id, Company.all, :id, :name, :include_blank => true ) %>
-  </div>
+  <%= render "location", {f: f, attr_name: "sending_place", location: @engineorder.sending_place } %>
 
   <div class="field">
     <%= f.label :invoice_no_new %><br>
@@ -128,10 +119,7 @@
     <%= f.text_field :invoice_no_old %>
   </div>
 
-  <div class="field">
-    <%= f.label :returning_place_id %><br>
-    <%= f.collection_select( :returning_place_id, Company.all, :id, :name, :include_blank => false ) %>
-  </div>
+  <%= render "location", {f: f, attr_name: "returning_place", location: @engineorder.returning_place } %>
 
   <div class="field">
     <%= f.label :returning_date %><br>

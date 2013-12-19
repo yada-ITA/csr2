@@ -38,7 +38,9 @@ R2::Application.routes.draw do
   
   resources :enginemodels
 
-  resources :engines
+  resources :engines do
+    get :autocomplete_engine_engine_model_name, :on => :collection
+  end
 
   resources :businessstatuses
 
