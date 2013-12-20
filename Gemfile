@@ -70,3 +70,10 @@ gem 'cancan'
 # for Autocomplete
 gem 'rails3-jquery-autocomplete'
 
+# Use Capybara and Selenium for acceptance test
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'simplecov'
+end
