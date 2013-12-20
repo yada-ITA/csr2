@@ -27,19 +27,19 @@ class RepairsController < ApplicationController
   # ステータスでレンダリング先を変える。
   def edit
     #エンジンが受領前状態の場合、
-    if @repair.engine.beforeArrive?
+    if @repair.engine.before_arrive?
       render :templathe => "repairs/returning"
     end
     #エンジンが整備前状態の場合、整備前
-    if @repair.engine.beforeRepair?
+    if @repair.engine.before_repair?
       render :template => "repairs/engineArrived"
     end
     #エンジンが整備中の場合
-    if @repair.engine.underRepair?
+    if @repair.engine.under_repair?
       render :template => "repairs/repairStarted"
     end
     #エンジンが整備完了(完成品状態)の場合、
-    if @repair.engine.finishedRepair?
+    if @repair.engine.finished_repair?
       render :template => "repairs/repairFinished"
     end
   
@@ -151,17 +151,17 @@ class RepairsController < ApplicationController
   
     # 受領登録時→整備前
     if params[:commit] == t('views.buttun_arrived')
-      @repair.engine.setBeforeRepair
+      @repair.engine.status = Enginestatus.of_before_repair
       @repair.engine.company = current_user.company	
     end
     # 整備開始→整備中
     if params[:commit] == t('views.buttun_repairStarted')
-      @repair.engine.setUnderRepair
+      @repair.engine.status = Enginestatus.of_under_repair
       @repair.engine.company = current_user.company
     end
     # 整備完了→完成品
     if params[:commit] == t('views.buttun_repairFinished')
-      @repair.engine.setCompleted
+      @repair.engine.status = Enginestatus.of_finished_repair
       @repair.engine.company = current_user.company
     end
 

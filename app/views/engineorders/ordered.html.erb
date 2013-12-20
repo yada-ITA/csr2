@@ -77,7 +77,7 @@
   </div>
   <div class="field">
     <%= f.label :day_of_test %><br>
-    <%= f.date_select :day_of_test, :use_month_numbers => true, :start_year => Engine.start_year %>
+    <%= f.date_select :day_of_test, :use_month_numbers => true, :start_year => Engine::EARLIEST_START_YEAR %>
   </div>
   <div class="field">
     <%= label_tag t('views.label_runningyear') %><br>

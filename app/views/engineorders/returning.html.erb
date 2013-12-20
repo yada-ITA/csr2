@@ -41,7 +41,7 @@
   </div>
 
   <% #引合登録以外の場合は、order_dateを表示 %>
-  <% unless @engineorder.registInquiry? %>
+  <% unless @engineorder.new_inquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>

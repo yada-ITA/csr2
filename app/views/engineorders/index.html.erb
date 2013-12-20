@@ -38,7 +38,7 @@
   <tbody>
     <% @engineorders.each do |engineorder| %>
       <tr>
-        <td><%= engineorder.businessstatus.name %></td>
+        <td><%= engineorder.status.name %></td>
         <td><%= engineorder.title %></td>
         <td><%= engineorder.issue_no %></td>
         <td><%= engineorder.inquiry_date %></td>

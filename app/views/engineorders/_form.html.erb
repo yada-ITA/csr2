@@ -1,19 +1,19 @@
 
 <%= javascript_include_tag "location" %>
 
-<% if @engineorder.registInquiry? %>
+<% if @engineorder.new_inquiry? %>
   <h1>引合登録</h1>
 <% elsif %>
-<% @engineorder.isShipped? %>
+<% @engineorder.shipped? %>
   <h1>出荷登録</h1>
 <% elsif %>
-<% @engineorder.isShippingreparation? %>
+<% @engineorder.shipping_preparation? %>
   <h1>引当登録</h1>
 <% elsif %>
-<% @engineorder.isOrdered? %>
+<% @engineorder.ordered? %>
   <h1>受注登録</h1>
 <% elsif %>
-<% @engineorder.isInquiry? %>
+<% @engineorder.inquiry? %>
   <h1>引合登録</h1>
 <% end %>
 

@@ -20,5 +20,4 @@ deploy:
   app:
     develop: r2-staging
   run:
-    - rake db:schema:load
-    - rake db:fixtures:load
+    - rake db:setup

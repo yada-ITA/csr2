@@ -20,19 +20,14 @@ class EngineordersController < ApplicationController
   # GET /engineorders/1/edit
   def edit
     #流通ステータスでレンダリング先を変える。
-    if @engineorder.isInquiry?
+    case
+    when @engineorder.inquiry?
       render :template => "engineorders/inquiry"
-    end
-
-    if @engineorder.isShipped?
+    when @engineorder.shipped?
       render :template => "engineorders/shipped"
-    end
-
-    if @engineorder.isShippingreparation?
+    when @engineorder.shipping_preparation?
       render :template => "engineorders/allocated"
-    end
-
-    if @engineorder.isOrdered?
+    when @engineorder.ordered?
       render :template => "engineorders/ordered"
     end
   end
@@ -42,7 +37,7 @@ class EngineordersController < ApplicationController
   def create
     @engineorder = Engineorder.new(engineorder_params)
     #流通ステータスを「引合」にセットする(受注モデルは、引合時に新規作成される)
-    @engineorder.setInquiry
+    @engineorder.status = Businessstatus.of_inquiry
     #発行Noを自動採番する
     @engineorder.issue_no = Engineorder.createIssueNo
 
@@ -99,7 +94,7 @@ class EngineordersController < ApplicationController
 	      @engineorder = engine.current_order_as_old
 	      if @engineorder.nil?
 	        @engineorder = Engineorder.new
-  	      @engineorder.setOldEngine(engine)
+  	      @engineorder.old_engine = engine
 	      end
 	    else
 	      @engineorder = Engineorder.new
@@ -132,120 +127,116 @@ class EngineordersController < ApplicationController
     # 下記は要確認
     # ★整備オブジェクトの発行日とは?
     # ★整備オブジェクトの会社コードは、何になるべき？
-    # 
+    #
 
-    # 引当画面からの更新の場合
-    if params[:commit] == t('views.buttun_allocated')
+    case
+    when params[:commit] == t('views.buttun_allocated')
+      # 引当画面からの更新の場合
       # 新エンジンのステータスを出荷準備中に変更する。
-      @engineorder.new_engine.setBeforeShipping
+      @engineorder.new_engine.status = Enginestatus.of_before_shipping
       @engineorder.new_engine.save
-    end      
-  
-    # 出荷画面からの更新の場合
-    if params[:commit] == t('views.buttun_shipped')
-      
+
+    when params[:commit] == t('views.buttun_shipped')
+      # 出荷画面からの更新の場合
       # 新エンジンのステータスを出荷済みにセットする。
-      @engineorder.new_engine.setAfterShipping
-      
+      @engineorder.new_engine.status = Enginestatus.of_after_shipping
       # 新エンジンの会社を設置先に変更し、DBに反映する
       @engineorder.new_engine.company = @engineorder.install_place
       @engineorder.new_engine.save
-      
       # 出荷しようとしている新エンジンに関わる整備オブジェクトを取得する
-      repair = @engineorder.repair_for_new_engine
-      if !(repair.nil?)
+      if repair = @engineorder.repair_for_new_engine
         repair.shipped_date = @engineorder.shipped_date
         repair.save
       end
-    end
 
-    # 返却画面からの更新の場合
-    if params[:commit] == t('views.buttun_returning')
-
-      repair = @engineorder.repair_for_old_engine
-      if repair.nil?
+    when params[:commit] == t('views.buttun_returning')
+      # 返却画面からの更新の場合
+      if repair = @engineorder.repair_for_old_engine
+        # 整備オブジェクトの内容を再編集し、旧エンジンを紐づける。
+        @engineorder.modifyRepair(repair)
+      else
         # 整備オブジェクトを作り、旧エンジンを紐づける。
         repair = @engineorder.createRepair
-      else
-        # 整備オブジェクトの内容を再編集し、旧エンジンを紐づける。
-        @engineorder.modifyRepair	(repair)
       end
       # 旧エンジンのステータスを受領前にセットする。
-      @engineorder.old_engine.setBeforeArrive
-      
+      @engineorder.old_engine.status = Enginestatus.of_before_arrive
       # DBに格納する。
       repair.save
       @engineorder.old_engine.save
-      
     end
   end
-  
-  
+
   private
-    #流通ステータスをセットする。判定はボタンに表示されているラベルで、どの画面で押されたものかを見て
-    #決定している。(ボタンのラベルはprams[:commit]でラベルを取得可能)
-    # t('xxxxxx')は、congfg/locales/xxx.ja.ymlから名称を取得するメソッド。
-    def setBusinessstatus
+  #流通ステータスをセットする。判定はボタンに表示されているラベルで、どの画面で押されたものかを見て
+  #決定している。(ボタンのラベルはprams[:commit]でラベルを取得可能)
+  # t('xxxxxx')は、congfg/locales/xxx.ja.ymlから名称を取得するメソッド。
+  def setBusinessstatus
+    case
+    when params[:commit] == t('views.buttun_inquiry')
       # 引合登録の場合
-      if params[:commit] == t('views.buttun_inquiry')
-        # 流通ステータスを、「受注」にセットする。
-        @engineorder.setInquiry
-      end
+      # 流通ステータスを、「受注」にセットする。
+      @engineorder.status = Businessstatus.of_inquiry
+    when params[:commit] == t('views.buttun_ordered')
       # 受注登録の場合
-      if params[:commit] == t('views.buttun_ordered')
-        # 流通ステータスを、「受注」にセットする。
-        @engineorder.setOrdered
-      end
+      # 流通ステータスを、「受注」にセットする。
+      @engineorder.status = Businessstatus.of_ordered
+    when params[:commit] == t('views.buttun_allocated')
       # 引当登録の場合
-      if params[:commit] == t('views.buttun_allocated')
-        # 流通ステータスを、「出荷準備中」にセットする。
-        @engineorder.setShippingreparation
-        # エンジンに変更があれば、セットする。
-        setNewEngines
-      end
+      # 流通ステータスを、「出荷準備中」にセットする。
+      @engineorder.status = Businessstatus.of_shipping_preparation
+      # エンジンに変更があれば、セットする。
+      setNewEngines
+    when params[:commit] == t('views.buttun_shipped')
       # 出荷登録の場合
-      if params[:commit] == t('views.buttun_shipped')
-        # 流通ステータスを、「出荷済」にセットする。
-        @engineorder.setShipped
-        # エンジンに変更があれば、セットする。
-        setNewEngines
-      end  
+      # 流通ステータスを、「出荷済」にセットする。
+      @engineorder.status = Businessstatus.of_shipped
+      # エンジンに変更があれば、セットする。
+      setNewEngines
+    when params[:commit] == t('views.buttun_returning')
       # 返却登録の場合
-      if params[:commit] == t('views.buttun_returning')
-        # 流通ステータスを、「返却済」にセットする。
-        @engineorder.setReturned
-        # エンジンに変更があれば、セットする。
-        setNewEngines
-        setOldEngines
-      end  
-      #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
-      params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
+      # 流通ステータスを、「返却済」にセットする。
+      @engineorder.status = Businessstatus.of_returned
+      # エンジンに変更があれば、セットする。
+      setNewEngines
+      setOldEngines
     end
+    #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
+    params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
+  end
 
-    # setNewEngines
-    # パラメータにエンジンIDがあればセットメソッドで先に設定する
-    def setNewEngines
-      unless params[:engineorder][:new_engine_id].blank?
-        @engineorder.setNewEngine(Engine.find(params[:engineorder][:new_engine_id]))
-      end  
+  # setNewEngines
+  # パラメータにエンジンIDがあればセットメソッドで先に設定する
+  def setNewEngines
+    engine_id = params[:engineorder][:new_engine_id]
+    unless engine_id.blank?
+      @engineorder.new_engine = Engine.find(engine_id)
     end
-    
-    # setOldEngines
-    # パラメータにエンジンIDがあればセットメソッドで先に設定する
-    def setOldEngines
-      unless params[:engineorder][:old_engine_id].blank?
-        @engineorder.setOldEngine(Engine.find(params[:engineorder][:old_engine_id]))
-      end  
-    end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_engineorder
-      @engineorder = Engineorder.find(params[:id])
+  # setOldEngines
+  # パラメータにエンジンIDがあればセットメソッドで先に設定する
+  def setOldEngines
+    engine_id = params[:engineorder][:old_engine_id]
+    unless engine_id.blank?
+      @engineorder.old_engine_id = Engine.find(engine_id)
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def engineorder_params
-      params.require(:engineorder).permit(:issue_no, :inquiry_date, :registered_user_id, :updated_user_id, :branch_id, :salesman_id, :install_place_id, :orderer, :machine_no, :time_of_running, :change_comment, :order_date, :sending_place_id, :sending_comment, :desirable_delivery_date, :businessstatus_id,
-       :new_engine_id, :old_engine_id, :old_engine, :new_engine, :enginestatus_id,:invoice_no_new, :invoice_no_old, :day_of_test, :shipped_date, :returning_date, :returning_comment, :title, :returning_place_id, :allocated_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_engineorder
+    @engineorder = Engineorder.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def engineorder_params
+    params.require(:engineorder).permit(
+      :issue_no, :inquiry_date, :registered_user_id, :updated_user_id,
+      :branch_id, :salesman_id, :install_place_id, :orderer, :machine_no,
+      :time_of_running, :change_comment, :order_date, :sending_place_id,
+      :sending_comment, :desirable_delivery_date, :businessstatus_id,
+      :new_engine_id, :old_engine_id, :old_engine, :new_engine,
+      :enginestatus_id,:invoice_no_new, :invoice_no_old, :day_of_test,
+      :shipped_date, :returning_date, :returning_comment, :title,
+      :returning_place_id, :allocated_date)
+  end
 end
