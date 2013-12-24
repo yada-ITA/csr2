@@ -11,7 +11,7 @@
     <%= hidden_field(:search, :company_id, :value => current_user.company_id) %>
   <% end %>
   <tr>
-    <td width="80" >型式   </td>
+    <td width="80" >エンジン型式   </td>
     <td width="120"><%= text_field :search, :engine_model_name, :value => @searched.fetch('engine_model_name', "") %><br /></td>
     <td width="80" >販売型式   </td>
     <td width="120"><%= text_field :search, :sales_model_name, :value => @searched.fetch('sales_model_name', "") %><br /></td>
