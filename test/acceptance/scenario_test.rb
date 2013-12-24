@@ -43,8 +43,8 @@ class ScenarioTest < AcceptanceTest
     click_link "Back"
     within "tbody > tr" do
       #assert_equal comment, nth_tag(:td, 8).text    # 返却コメント
-      assert_equal "ENG0002", nth_tag(:td, 12).text # 型式
-      assert_equal "SN0001", nth_tag(:td, 13).text  # S/#
+      assert_equal "ENG0002", nth_tag(:td, 12).text # エンジン型式
+      assert_equal "SN0001", nth_tag(:td, 13).text  # エンジンS/#
       assert_equal "整備前", nth_tag(:td, 14).text  # ステータス
     end
     save_screenshot "scenario1-1_7.png"
@@ -238,7 +238,9 @@ class ScenarioTest < AcceptanceTest
 
     # SG からの出荷手続きが変更となった？
     # 流通情報一覧が開けない。。。
-=begin
+    # 流通情報一覧はアクセス不可に変更。整備一覧から出荷情報
+
+
     ###########################################################################
     # 8. エンジン２を出荷した [@SG]
     ###########################################################################
@@ -246,15 +248,15 @@ class ScenarioTest < AcceptanceTest
     # 8.1. サインインする
     sign_in "SG000001", "password"
     save_screenshot "scenario1-8_1.png"
-    # 8.2. 引合一覧画面を開く
-    click_link "流通情報一覧"
+    # 8.2. 整備一覧画面を開く
+    click_link "整備一覧"
     save_screenshot "scenario1-8_2.png"
     # 8.3. 出荷登録画面を開く
     click_link "出荷登録"
     save_screenshot "scenario1-8_3_1.png"
     fill_in "送り状No", with: "201312-001-001"
     save_screenshot "scenario1-8_3_2.png"
-    click_button "更新する"
+    click_button "出荷登録"
     # 8.4. 引合一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
@@ -265,6 +267,5 @@ class ScenarioTest < AcceptanceTest
     save_screenshot "scenario1-8_4.png"
     # 8.2. サインアウトする
     sign_out
-=end
   end
 end
