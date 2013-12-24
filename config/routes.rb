@@ -14,15 +14,17 @@ R2::Application.routes.draw do
 
   get 'engineorders/engineInquiry' => 'engineorders#inquiry'
 
-  get 'engineorders/engineInquiry/:engine_id' => 'engineorders#inquiry',:as => :inquiry
+  get 'engineorders/engineInquiry/:id' => 'engineorders#inquiry', :as => :edit_inquery
 
-  get 'engineorders/engineOrdered/:id' => 'engineorders#ordered',:as => :ordered
+  get 'engineorders/newInquiry/:engine_id' => 'engineorders#inquiry', :as => :new_inquiry
 
-  get 'engineorders/engineAllocated/:id' => 'engineorders#allocated',:as => :allocated
+  get 'engineorders/engineOrdered/:id' => 'engineorders#ordered', :as => :ordered
 
-  get 'engineorders/engineShipped/:id' => 'engineorders#shipped',:as => :shipped
+  get 'engineorders/engineAllocated/:id' => 'engineorders#allocated', :as => :allocated
 
-  get 'engineorders/engineReturning/:id' => 'engineorders#returning',:as => :returning
+  get 'engineorders/engineShipped/:id' => 'engineorders#shipped', :as => :shipped
+
+  get 'engineorders/engineReturning/:id' => 'engineorders#returning', :as => :returning
 
   #post 'companies' =>  'companies#show'
 

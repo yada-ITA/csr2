@@ -19,31 +19,24 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true
 
-#現在ログインしているユーザーがYES本社の人かどうか
-def yesOffice?
-  if Company.find(self.company_id).category == "YES本社"
-    return true      
-  else
-    return false
+  # このユーザーがYES本社の人かどうか
+  def yesOffice?
+    return self.company.category == "YES本社"
   end
-end
 
-#現在ログインしているユーザーがYES拠点の人かどうか
-def yesBranch?
-  if Company.find(self.company_id).category == "YES拠点"
-    return true      
-  else
-    return false
+  # このユーザーがYES拠点の人かどうか
+  def yesBranch?
+    return self.company.category == "YES拠点"
   end
-end
 
-#現在ログインしているユーザーが整備会社の人かどうか
-def tender?
-  if Company.find(self.company_id).category == "整備会社"
-    return true      
-  else
-    return false
+  # このユーザーがYES拠点の人かどうか
+  def yes?
+    return (self.yesOffice?) || (self.yesBranch?)
   end
-end
+
+  # このユーザーが整備会社の人かどうか
+  def tender?
+    return self.company.category == "整備会社"
+  end
 
 end

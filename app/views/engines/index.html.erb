@@ -55,7 +55,7 @@
         <td><%= engine.displaySuspend_orNot %></td>
         <td>
           <% unless current_user.tender? %>
-            <%= link_to '引合登録', inquiry_path(engine) %>
+            <%= link_to '引合登録', new_inquiry_path(engine) %>
           <% end %>
         </td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
