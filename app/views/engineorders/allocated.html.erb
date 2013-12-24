@@ -68,9 +68,9 @@
   <div class="field">
     <%= f.label :new_engine_id %><br>
     <% if @engineorder.new_engine.nil? %>
-      <%= f.collection_select( :new_engine_id, Engine.where(:enginestatus_id => 4), :id, :engine_name, :include_blank => true ) %>
+      <%= f.collection_select( :new_engine_id, Engine.completedEngines, :id, :engine_name, :include_blank => true ) %>
     <% else %>
-      <%= f.collection_select( :new_engine_id, Engine.where(:enginestatus_id => 4).unshift(@engineorder.new_engine), :id, :engine_name, :include_blank => true ) %>
+      <%= f.collection_select( :new_engine_id, Engine.completedEngines.unshift(@engineorder.new_engine), :id, :engine_name, :include_blank => true ) %>
     <% end %>
   </div>
 
