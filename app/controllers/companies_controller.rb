@@ -13,6 +13,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.text { render :text => @company.address }
       format.json { render json: @company }
+      format.html
     end
   end
 

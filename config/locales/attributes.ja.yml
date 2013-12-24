@@ -16,7 +16,7 @@ ja:
         suspended: サスペンド
         status: 'ステータス'
       repair:
-        issue_no: 発行番号
+        issue_no: 発行No
         issue_date: 発行日
         time_of_running: エンジン運転時間
         day_of_test: 試運転日
@@ -48,7 +48,7 @@ ja:
         current_password: 現在のパスワード
         company: 会社
       engineorder:
-        issue_no: 発行番号
+        issue_no: 発行No
         inquiry_date: 引合発生日
         order_date: 受注日
         registered_user_id: ログイン担当者

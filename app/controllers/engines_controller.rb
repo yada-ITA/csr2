@@ -43,7 +43,7 @@ class EnginesController < ApplicationController
     if !(@searched.fetch('company_id', nil).blank?)
       @engines = @engines.where('engines.company_id = ?', @searched.fetch('company_id'))
     end
-    # 型式
+    # エンジン型式
     if !(@searched.fetch('engine_model_name', nil).blank?)
       @engines = @engines.where('engines.engine_model_name like ?', "%" + @searched.fetch('engine_model_name') + "%")
     end

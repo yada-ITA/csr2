@@ -10,10 +10,11 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
   <% if user_signed_in? %>
+  　<b>　ログインユーザー：<%= current_user.name %>　</b>
     <%= link_to "メインメニューへ戻る", "/" %>
     <%= link_to "サインアウト", destroy_user_session_path, :method => :delete %>
   <% end %>
-      
+<hr>
 <%= yield %>
 
 </body>

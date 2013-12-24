@@ -14,3 +14,9 @@
 label.need-label:after {
 content: " *";
 }
+
+hr {
+height: 1px;
+border: none;
+border-top: 1px #CCCCCC dashed;
+}
