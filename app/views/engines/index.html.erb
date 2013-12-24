@@ -11,10 +11,10 @@
     <%= hidden_field(:search, :company_id, :value => current_user.company_id) %>
   <% end %>
   <tr>
-    <td width="80" >エンジン型式   </td>
+    <td width="80" >エンジン型式</td>
     <td width="120"><%= text_field :search, :engine_model_name, :value => @searched.fetch('engine_model_name', "") %><br /></td>
-    <td width="80" >販売型式   </td>
-    <td width="120"><%= text_field :search, :sales_model_name, :value => @searched.fetch('sales_model_name', "") %><br /></td>
+    <td width="80" >エンジンS/#</td>
+    <td width="120"><%= text_field :search, :serialno, :value => @searched.fetch('serialno', "") %><br /></td>
   </tr>
   <tr>
       <td width="80" >ステータス     </td>
@@ -33,7 +33,6 @@
       <th>ステータス</th>      
       <th>エンジン型式</th>
       <th>エンジンS/#</th>
-      <th>販売型式</th>
       <th>管轄</th>      
       <th>返却日</th>	      
       <th></th>
@@ -51,13 +50,12 @@
         <td><%= engine.enginestatus.name %></td>
         <td><%= engine.engine_model_name	 %></td>
         <td><%= engine.serialno %></td>
-        <td><%= engine.sales_model_name %></td>
         <td><%= engine.company.name %></td>
         <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
         <td><%= engine.displaySuspend_orNot %></td>
         <td>
           <% unless current_user.tender? %>
-            <%= link_to '引合登録', inquiry_path(engine) %>
+            <%= link_to '引合登録', new_inquiry_path(engine) %>
           <% end %>
         </td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>

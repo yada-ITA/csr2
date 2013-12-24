@@ -5,15 +5,12 @@
     <tr>
       <th>発行No</th>
       <th>発行日</th>
+      <th>返却日</th>
       <th>到着日</th>
       <th>完成希望日</th>
       <th>整備開始日</th>
       <th>整備完了日</th>
       <th>出荷日</th>
-      <th>返却日</th>
-      <th>返却コメント</th>
-      <th>整備前コメント</th>
-      <th>完成品コメント</th>
       <th>エンジン型式</th>
       <th>エンジンS/#</th>
       <th>ステータス</th>
@@ -32,19 +29,20 @@
       <tr>
         <td><%= repair.issue_no %></td>
         <td><%= repair.issue_date %></td>
+        <td><%= repair.returning_date %></td>
         <td><%= repair.arrive_date %></td>
         <td><%= repair.desirable_finish_date %></td>
         <td><%= repair.start_date %></td>
         <td><%= repair.finish_date %></td>
         <td><%= repair.shipped_date %></td>
-        <td><%= repair.returning_date %></td>
-        <td><%= repair.returning_comment %></td>
-        <td><%= repair.before_comment %></td>
-        <td><%= repair.after_comment %></td>
         <td><%= repair.engine.engine_model_name %></td>
         <td><%= repair.engine.serialno %></td>
         <td><%= repair.engine.enginestatus.name %></td>
-        <td><%= link_to '整備依頼', order_repair_path(repair) %></td>
+        <td>
+          <% if current_user.yes? %>
+            <%= link_to '整備依頼', order_repair_path(repair) %>
+          <% end %>
+        </td>
         <td><%= link_to '開始登録', start_repair_path(repair) %></td>
         <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
         <td>

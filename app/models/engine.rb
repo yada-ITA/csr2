@@ -11,10 +11,20 @@ class Engine < ActiveRecord::Base
   has_many :engineorders_as_new, :class_name => 'Engineorder', :foreign_key => 'new_engine_id'
   has_many :engineorders_as_old, :class_name => 'Engineorder', :foreign_key => 'old_engine_id'
   
+  # Initialize Object
+  after_initialize :initialize_engine
+
+  
   # Validation
   validates :engine_model_name, :presence => true  
   validates :serialno, :presence => true,
                        :uniqueness =>{:scope => :engine_model_name }
+  
+  # 初期化
+  def initialize_engine
+    # ステータスが設定されていない場合は「整備前」にする。	
+    self.setBeforeRepair if self.enginestatus_id.nil?
+  end
   
   # Get current repair (get unclosed one)
   # 現在作業中の整備オブジェクトを返す

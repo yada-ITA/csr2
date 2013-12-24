@@ -90,17 +90,21 @@ class EngineordersController < ApplicationController
   # 引合の処理
   def inquiry
     # パラメータのengine_idをもとに、エンジンオブジェクトを取り出す。
-    unless params[:engine_id].nil?
-      engine = Engine.find(params[:engine_id])
-      @engineorder = engine.current_order_as_old
-      if @engineorder.nil?
-        @engineorder = Engineorder.new
-      end
-      @engineorder.setOldEngine(engine)
-    else
-      @engineorder = Engineorder.new
-      @engineorder.setOldEngine(engine)
+    unless params[:id].nil?
+      set_engineorder
     end
+    if @engineorder.nil?
+	    unless params[:engine_id].nil?
+	      engine = Engine.find(params[:engine_id])
+	      @engineorder = engine.current_order_as_old
+	      if @engineorder.nil?
+	        @engineorder = Engineorder.new
+  	      @engineorder.setOldEngine(engine)
+	      end
+	    else
+	      @engineorder = Engineorder.new
+	    end
+	  end
   end
 
   # 受注の処理
