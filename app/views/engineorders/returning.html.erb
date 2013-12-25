@@ -131,6 +131,11 @@
     <%= f.text_area :returning_comment %>
   </div>
 
+  <div class="field">
+    <%= f.label :allocated_date %><br>
+    <%= f.date_select :allocated_date, :use_month_numbers => true %>
+  </div>
+  
   <div class="actions">
     <%= f.submit  :value => t('views.buttun_returning') %>
   </div>

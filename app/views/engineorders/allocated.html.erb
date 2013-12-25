@@ -37,6 +37,12 @@
   </div>
 
   <div class="field">
+    <%= f.label :allocated_date %><br>
+    <%= f.date_select :allocated_date, :use_month_numbers => true %>
+  </div>
+  
+
+  <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date, :use_month_numbers => true %>
   </div>
