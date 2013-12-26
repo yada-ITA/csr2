@@ -20,4 +20,4 @@ deploy:
   app:
     develop: r2-staging
   run:
-    - rake db:setup
+    - rake db:migrate
