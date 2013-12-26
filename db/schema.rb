@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131225022334) do
+ActiveRecord::Schema.define(version: 20131226075101) do
 
   create_table "businessstatuses", force: true do |t|
     t.string   "name"
@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 20131225022334) do
     t.integer  "businessstatus_id"
     t.integer  "new_engine_id"
     t.integer  "old_engine_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.date     "shipped_date"
     t.date     "day_of_test"
     t.string   "title"
@@ -68,6 +66,8 @@ ActiveRecord::Schema.define(version: 20131225022334) do
     t.integer  "returning_place_id"
     t.text     "shipped_comment"
     t.date     "allocated_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "engines", force: true do |t|
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20131225022334) do
     t.string   "serialno"
     t.integer  "enginestatus_id"
     t.integer  "company_id"
+    t.boolean  "suspended"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "suspended"
   end
 
   create_table "enginestatuses", force: true do |t|
@@ -104,9 +104,9 @@ ActiveRecord::Schema.define(version: 20131225022334) do
     t.date     "desirable_finish_date"
     t.date     "estimated_finish_date"
     t.integer  "engine_id"
+    t.date     "shipped_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "shipped_date"
   end
 
   create_table "users", force: true do |t|
