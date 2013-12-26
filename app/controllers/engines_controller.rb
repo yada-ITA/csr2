@@ -113,6 +113,12 @@ class EnginesController < ApplicationController
     end
   end
 
+　　#インポートする
+  def import
+    Engine.import(params[:file])
+    redirect_to action: "index", notice: "Imported."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_engine

@@ -50,7 +50,9 @@ R2::Application.routes.draw do
 
   resources :locations
 
-  resources :companies
+  resources :companies do
+    collection { post :import }
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
