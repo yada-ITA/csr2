@@ -20,42 +20,43 @@ class EnginesController < ApplicationController
     #    ①検索条件のセッションからの取り出し
     if params[:page].nil?
       # ページ繰り以外
-      @searched = Hash.new()
+      @searched = Hash.new
       session[:searched] = @searched
       if params[:commit].nil?
         # 初期表示時：ログインユーザの部門コードという条件のみセッションへの保存
-        @searched.store('company_id', current_user.company_id)
+        @searched[:company_id] = current_user.company_id
       else
         # 検索ボタン押下時：画面入力された条件のセッションへの保存
-        params[:search].each do | key, value |
-          @searched.store(key, value)
+        params[:search].each do |key, val|
+          @searched[key.intern] = val unless val.blank?
         end
       end
     else
       # ページ繰り時：検索条件のセッションからの取り出し
       @searched = session[:searched]
     end
-    # まずはページングを指示
-    @engines = Engine.paginate(:page => params[:page], :order => 'id', :per_page => 10)
-    
-    # 検索条件が指定されていれば、抽出条件としてwhere句を追加
+
+    arel = Engine.arel_table
+    cond = []
+
     # 会社コード（管轄）
-    if !(@searched.fetch('company_id', nil).blank?)
-      @engines = @engines.where('engines.company_id = ?', @searched.fetch('company_id'))
+    if company_id = @searched[:company_id]
+      cond.push(arel[:company_id].eq company_id)
     end
     # エンジン型式
-    if !(@searched.fetch('engine_model_name', nil).blank?)
-      @engines = @engines.where('engines.engine_model_name like ?', "%" + @searched.fetch('engine_model_name') + "%")
+    if engine_model_name = @searched[:engine_model_name]
+      cond.push(arel[:engine_model_name].matches "%#{engine_model_name}%")
     end
     # お客様名
-    if !(@searched.fetch('serialno', nil).blank?)
-      @engines = @engines.where('engines.serialno like ?', "%" + @searched.fetch('serialno') + "%")
+    if serialno = @searched[:serialno]
+      cond.push(arel[:serialno].matches "%#{serialno}%")
     end
     # ステータス
-    if !(@searched.fetch('enginestatus_id', nil).blank?)
-      @engines = @engines.where('engines.enginestatus_id = ?', @searched.fetch('enginestatus_id'))
+    if enginestatus_id = @searched[:enginestatus_id]
+      cond.push(arel[:enginestatus_id].eq enginestatus_id)
     end
 
+    @engines = Engine.where(cond.reduce(&:and)).order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /engines/1

@@ -37,7 +37,7 @@
         <td><%= repair.shipped_date %></td>
         <td><%= repair.engine.engine_model_name %></td>
         <td><%= repair.engine.serialno %></td>
-        <td><%= repair.engine.enginestatus.name %></td>
+        <td><%= repair.engine.status.name %></td>
         <td>
           <% if current_user.yes? %>
             <%= link_to '整備依頼', order_repair_path(repair) %>
@@ -46,7 +46,7 @@
         <td><%= link_to '開始登録', start_repair_path(repair) %></td>
         <td><%= link_to '完了登録', finish_repair_path(repair) %></td>
         <td>
-          <% if repair.engine.beforeShipping? %>
+          <% if repair.engine.before_shipping? %>
             <%= link_to '出荷登録', shipped_path(repair.engine.current_order_as_new) %>
           <% end %>
         </td>

@@ -5,6 +5,9 @@ class Repair < ActiveRecord::Base
   # Association
   belongs_to :engine
   
+  # 作業中の整備のみを抽出するスコープ (出荷日が設定済みなら作業完了)
+  scope :opened, -> { where shipped_date: nil }
+
   # エンジンをセットする
   def setEngine(engine)
     if self.engine.nil?
@@ -12,7 +15,7 @@ class Repair < ActiveRecord::Base
     else
       unless self.engine == engine
         prev_engine = self.engine
-        prev_engine.suspend
+        prev_engine.suspend!
         prev_engine.save
         self.engine = engine
       end
@@ -53,12 +56,6 @@ class Repair < ActiveRecord::Base
         self.engine.current_order_as_old.returning_comment = returning_comment_value
       end
     end
-  end
-
-  
-  # 作業中かどうかを判定する（出荷日が入っていたら”終了した整備”と解釈）
-  def opened?
-    return self.shipped_date.nil?
   end
 
   # 現時点での発行Noの生成(年月-枝番3桁)
