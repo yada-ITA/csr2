@@ -43,9 +43,9 @@ class ScenarioTest < AcceptanceTest
     click_link "Back"
     within "tbody > tr" do
       #assert_equal comment, nth_tag(:td, 8).text    # 返却コメント
-      assert_equal "ENG0002", nth_tag(:td, 12).text # エンジン型式
-      assert_equal "SN0001", nth_tag(:td, 13).text  # エンジンS/#
-      assert_equal "整備前", nth_tag(:td, 14).text  # ステータス
+      assert_equal "ENG0002", nth_tag(:td, 9).text # エンジン型式
+      assert_equal "SN0001", nth_tag(:td, 10).text  # エンジンS/#
+      assert_equal "整備前", nth_tag(:td, 11).text  # ステータス
     end
     save_screenshot "scenario1-1_7.png"
     # 1.8. サインアウトする
@@ -75,8 +75,8 @@ class ScenarioTest < AcceptanceTest
     # 2.4. 整備作業一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
-      assert_equal "2014-01-15", nth_tag(:td, 4).text # 完成希望日
-      assert_equal "整備前", nth_tag(:td, 14).text    # ステータス
+      assert_equal "2014-01-15", nth_tag(:td, 5).text # 完成希望日
+      assert_equal "整備前", nth_tag(:td, 11).text    # ステータス
     end
     save_screenshot "scenario1-2_4.png"
     # 2.5. サインアウトする
@@ -105,8 +105,8 @@ class ScenarioTest < AcceptanceTest
     # 3.4. 整備作業一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
-      assert_equal comment, nth_tag(:td, 10).text  # 整備前コメント
-      assert_equal "整備中", nth_tag(:td, 14).text # ステータス
+      #assert_equal comment, nth_tag(:td, 10).text  # 整備前コメント
+      assert_equal "整備中", nth_tag(:td, 11).text # ステータス
     end
     save_screenshot "scenario1-3_4.png"
     # 3.9. サインアウトする
@@ -134,9 +134,9 @@ class ScenarioTest < AcceptanceTest
     # 4.4. 整備作業一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
-      assert_equal "2014-01-09", nth_tag(:td, 6).text # 整備完了日
-      assert_equal comment, nth_tag(:td, 11).text     # 完成品コメント
-      assert_equal "完成品", nth_tag(:td, 14).text    # ステータス
+      assert_equal "2014-01-09", nth_tag(:td, 7).text # 整備完了日
+      #assert_equal comment, nth_tag(:td, 11).text     # 完成品コメント
+      assert_equal "完成品", nth_tag(:td, 11).text    # ステータス
     end
     save_screenshot "scenario1-4_4.png"
     # 4.2. サインアウトする
@@ -153,7 +153,7 @@ class ScenarioTest < AcceptanceTest
     click_link "流通情報一覧"
     save_screenshot "scenario1-5_2.png"
     # 5.3. 引合登録画面を開く
-    click_link "新規登録"
+    click_link "新規引合"
     save_screenshot "scenario1-5_3_1.png"
     fill_in "物件名", with: "ぶっけんめい"
     select "西宮戎リペア", from: "engineorder[branch_id]"           # 拠点
@@ -169,9 +169,9 @@ class ScenarioTest < AcceptanceTest
     click_link "Back"
     within "tbody > tr" do
       assert_equal "引合", nth_tag(:td, 1).text         # ステータス
-      assert_equal "西宮戎リペア", nth_tag(:td, 4).text # 拠点
-      assert_equal "法華倶楽部", nth_tag(:td, 6).text   # 設置先
-      assert_equal "2014-02-10", nth_tag(:td, 12).text  # 希望納期
+      assert_equal "西宮戎リペア", nth_tag(:td, 5).text # 拠点
+      assert_equal "法華倶楽部", nth_tag(:td, 7).text   # 設置先
+      assert_equal "2014-02-10", nth_tag(:td, 13).text  # 希望納期
     end
     save_screenshot "scenario1-5_4.png"
     # 5.9. サインアウトする
@@ -198,7 +198,7 @@ class ScenarioTest < AcceptanceTest
     click_link "Back"
     within "tbody > tr" do
       assert_equal "受注", nth_tag(:td, 1).text        # ステータス
-      assert_equal "法華倶楽部", nth_tag(:td, 11).text # 送付先
+      assert_equal "法華倶楽部", nth_tag(:td, 12).text # 送付先
     end
     save_screenshot "scenario1-6_4.png"
     # 6.9. サインアウトする
@@ -228,9 +228,9 @@ class ScenarioTest < AcceptanceTest
     # 7.4. 引合一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
-      assert_equal "出荷準備中", nth_tag(:td, 1).text         # ステータス
-      assert_equal "1GPH00-KS ( 5 )", nth_tag(:td, 8).text    # 返却エンジン
-      assert_equal "ENG0002 ( SN0001 )", nth_tag(:td, 9).text # 新規エンジン
+      assert_equal "出荷準備中", nth_tag(:td, 1).text # ステータス
+      assert_equal "1GPH00-KS ( 5 )", nth_tag(:td, 9).text # 返却エンジン
+      assert_equal "ENG0002 ( SN0001 )", nth_tag(:td, 10).text # 新規エンジン
     end
     save_screenshot "scenario1-7_4.png"
     # 7.9. サインアウトする
@@ -254,15 +254,15 @@ class ScenarioTest < AcceptanceTest
     # 8.3. 出荷登録画面を開く
     click_link "出荷登録"
     save_screenshot "scenario1-8_3_1.png"
-    fill_in "送り状No", with: "201312-001-001"
+    fill_in "送り状No（新エンジン）", with: "201312-001-001"
     save_screenshot "scenario1-8_3_2.png"
     click_button "出荷登録"
     # 8.4. 引合一覧画面に移動する
     click_link "Back"
     within "tbody > tr" do
       assert_equal "出荷済", nth_tag(:td, 1).text # ステータス
-      assert_equal "1GPH00-KS ( 5 )", nth_tag(:td, 8).text    # 返却エンジン
-      assert_equal "ENG0002 ( SN0001 )", nth_tag(:td, 9).text # 新規エンジン
+      assert_equal "1GPH00-KS ( 5 )", nth_tag(:td, 9).text # 返却エンジン
+      assert_equal "ENG0002 ( SN0001 )", nth_tag(:td, 10).text # 新規エンジン
     end
     save_screenshot "scenario1-8_4.png"
     # 8.2. サインアウトする
