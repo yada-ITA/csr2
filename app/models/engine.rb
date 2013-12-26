@@ -49,7 +49,7 @@ class Engine < ActiveRecord::Base
   # 初期化
   def initialize_engine
     # ステータスが設定されていない場合は「整備前」にする。	
-    self.setBeforeRepair if self.enginestatus_id.nil?
+    status = Enginestatus.of_before_repair if enginestatus_id.nil?
   end
   
   # Get current repair (get unclosed one)
