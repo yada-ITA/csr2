@@ -42,6 +42,7 @@ R2::Application.routes.draw do
 
   resources :engines do
     get :autocomplete_engine_engine_model_name, :on => :collection
+    collection { post :import }
   end
 
   resources :businessstatuses
@@ -50,7 +51,9 @@ R2::Application.routes.draw do
 
   resources :locations
 
-  resources :companies
+  resources :companies do
+    collection { post :import }
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

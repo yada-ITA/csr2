@@ -1,3 +1,4 @@
+# coding: utf-8
 module EnginesHelper
   def display_suspended_or_not(engine)
     if engine.suspended?

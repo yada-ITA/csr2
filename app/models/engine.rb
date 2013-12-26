@@ -171,4 +171,14 @@ class Engine < ActiveRecord::Base
   def abolished?
     status == Enginestatus.of_abolished
   end
+
+#エンジンのCSVをインポートする
+def self.import(file)
+  CSV.foreach(file.path, headers: true) do |row|
+    Engine.create! row.to_hash
+  end
+end
+
+
+
 end

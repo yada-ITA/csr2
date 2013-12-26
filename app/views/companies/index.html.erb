@@ -32,6 +32,13 @@
   </tbody>
 </table>
 
-<br>
+<hr>
+<%= form_tag import_companies_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
+
+
+<br><br>
 
 <%= link_to '新規登録', new_company_path %>
