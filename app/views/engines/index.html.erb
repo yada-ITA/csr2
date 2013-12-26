@@ -78,4 +78,14 @@
 <%= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br>
 
+<% if current_user.yesOffice? %>
+  <hr>
+    <%= form_tag import_engines_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "インポート" %>
+    <% end %>
+  <br>
+<% end %>
+
+
 <%= link_to '新規登録', new_engine_path %>

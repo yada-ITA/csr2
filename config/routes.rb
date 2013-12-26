@@ -42,6 +42,7 @@ R2::Application.routes.draw do
 
   resources :engines do
     get :autocomplete_engine_engine_model_name, :on => :collection
+    collection { post :import }
   end
 
   resources :businessstatuses
