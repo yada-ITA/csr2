@@ -2,6 +2,8 @@ require 'engine'
 
 class Engineorder < ActiveRecord::Base
   #Association
+  # engine.status と同様に、DB スキーマを変更せずに order.status で
+  # Businessstatus を取得できるように変更しました。
   belongs_to :status, class_name: 'Businessstatus', foreign_key: 'businessstatus_id'
 
   belongs_to :old_engine, :class_name => 'Engine' 
@@ -17,9 +19,16 @@ class Engineorder < ActiveRecord::Base
   belongs_to :salesman, :class_name => 'User' 
 
   # 仕掛中の受注のみを抽出するスコープ (返却日が設定済みなら完了と見なす)
+  # ActiveRecord のスコープ機能を使って、よく使う「仕掛かり中？」条件に名前を付
+  # けています。
   scope :opened, -> { where returning_date: nil }
 
   # 新エンジンをセットする
+  # 独自の setNewEngine メソッドではなく、そのまま order.new_engine = engine と
+  # 書けるように、ActiveRecord が定義する new_engine= メソッドを拡張しました。
+  # もともとの new_engine= メソッドを内部で呼び出すので、メソッド定義を上書きす
+  # る前に元のメソッドに alias で別名を付けています。
+  # あと、冗長な self. 指定も削りました。
   alias :_orig_new_engine= :new_engine=
   def new_engine=(engine)
     if new_engine && new_engine != engine
@@ -42,6 +51,7 @@ class Engineorder < ActiveRecord::Base
   end
 
   # ステータスの確認メソッド集 --------------- #
+  # メソッド名を lower-camel-case -> snake-case に変更しています。
   # 新規引合かどうか？
   def new_inquiry?
     status.nil?

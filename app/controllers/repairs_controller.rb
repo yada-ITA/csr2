@@ -27,6 +27,9 @@ class RepairsController < ApplicationController
   # ステータスでレンダリング先を変える。
   def edit
     #エンジンが受領前状態の場合、
+    # メソッド名の lower-camel-case -> snake-case 変更です。
+    # ここの if 文の並びも排他的な条件なので、case 文に変更すると読みやすくなる
+    # と思います。
     if @repair.engine.before_arrive?
       render :templathe => "repairs/returning"
     end
@@ -151,6 +154,7 @@ class RepairsController < ApplicationController
   
     # 受領登録時→整備前
     if params[:commit] == t('views.buttun_arrived')
+      # エンジンオブジェクトの状態更新を、そのまま代入文に置き換えました。
       @repair.engine.status = Enginestatus.of_before_repair
       @repair.engine.company = current_user.company	
     end

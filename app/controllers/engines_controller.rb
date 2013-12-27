@@ -24,9 +24,13 @@ class EnginesController < ApplicationController
       session[:searched] = @searched
       if params[:commit].nil?
         # 初期表示時：ログインユーザの部門コードという条件のみセッションへの保存
+        # ハッシュのキーのような定型的な「識別子」っぽいものは、シンボルとした
+        # 方が性能も可読性もあがると思いました。
         @searched[:company_id] = current_user.company_id
       else
         # 検索ボタン押下時：画面入力された条件のセッションへの保存
+        # 検索条件を取り込むときに、あらかじめ blank? なものは設定されていない
+        # と見なすように変更しました。
         params[:search].each do |key, val|
           @searched[key.intern] = val unless val.blank?
         end
@@ -36,6 +40,11 @@ class EnginesController < ApplicationController
       @searched = session[:searched]
     end
 
+    # Rails 標準の Arel 機能を使って、WHERE 条件をオブジェクトとして扱うように
+    # 変更しました。
+    # cond 配列に WHERE 条件を溜め込んでいきます。
+    # Arel は SQL を組み立てるための DSL のようなもので、文字列として SQL 文の
+    # 断片を埋め込む必要も無くなり、DBMS を取り替えやすくなります。
     arel = Engine.arel_table
     cond = []
 
@@ -56,6 +65,12 @@ class EnginesController < ApplicationController
       cond.push(arel[:enginestatus_id].eq enginestatus_id)
     end
 
+    # cond 配列に溜め込んだ WHERE 条件を AND でつないで検索を実行しています。
+    # cond.reduce(&:and) は、Ruby 1.9 で追加された、シンボルから Proc オブジェ
+    # クトを作り出す構文を使っています。
+    # cond.reduce { |result, c| result.and c } と同じ意味となります。
+    # order 指定を paginate の引数で指定すると、実行時に will_paginate 内で
+    # deprecated 警告が出たので、外に出しました。
     @engines = Engine.where(cond.reduce(&:and)).order(:id).paginate(page: params[:page], per_page: 10)
   end
 

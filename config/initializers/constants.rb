@@ -1,4 +1,6 @@
-
+# Enginestatus, Businessstatus マスタデータの id に定数として名前を付けました。
+# db/seeds.rb も、この定数を使って仕込みデータを作るので、id がずれることもなく
+# 安心です。
 module Constants
   module Enginestatus
     ID_BEFORE_ARRIVE   = 1 # 受領前

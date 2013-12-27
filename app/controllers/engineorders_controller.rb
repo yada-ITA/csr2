@@ -20,6 +20,9 @@ class EngineordersController < ApplicationController
   # GET /engineorders/1/edit
   def edit
     #流通ステータスでレンダリング先を変える。
+    # switch 文のような if 文の並びは case 文で書くとすっきりします。
+    # 受注オブジェクトの状態問い合わせメソッドを lower-camel-case から
+    # snake-case に変更しました。
     case
     when @engineorder.inquiry?
       render :template => "engineorders/inquiry"
@@ -37,6 +40,7 @@ class EngineordersController < ApplicationController
   def create
     @engineorder = Engineorder.new(engineorder_params)
     #流通ステータスを「引合」にセットする(受注モデルは、引合時に新規作成される)
+    # 受注オブジェクトの状態更新メソッドを、そのまま代入に置き換えました。
     @engineorder.status = Businessstatus.of_inquiry
     #発行Noを自動採番する
     @engineorder.issue_no = Engineorder.createIssueNo
@@ -129,6 +133,7 @@ class EngineordersController < ApplicationController
     # ★整備オブジェクトの会社コードは、何になるべき？
     #
 
+    # ここの if 文の並びも排他的な条件なので、case 文に変更しました。
     case
     when params[:commit] == t('views.buttun_allocated')
       # 引当画面からの更新の場合
@@ -171,6 +176,7 @@ class EngineordersController < ApplicationController
   #決定している。(ボタンのラベルはprams[:commit]でラベルを取得可能)
   # t('xxxxxx')は、congfg/locales/xxx.ja.ymlから名称を取得するメソッド。
   def setBusinessstatus
+    # ここの if 文の並びも排他的な条件なので、case 文に変更しました。
     case
     when params[:commit] == t('views.buttun_inquiry')
       # 引合登録の場合
