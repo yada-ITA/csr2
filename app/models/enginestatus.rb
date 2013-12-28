@@ -1,6 +1,9 @@
 class Enginestatus < ActiveRecord::Base
+  # config/initializers/constants.rb で定義した ID_* 定数を取り込んでいます。
   include Constants::Enginestatus
 
+  # 他のコードで、マスタデータの id を直接使わないように、マスタデータそのもの
+  # を簡単に取得できるようにしました。
   def self.of_before_arrive;   find(ID_BEFORE_ARRIVE) end
   def self.of_before_repair;   find(ID_BEFORE_REPAIR) end
   def self.of_under_repair;    find(ID_UNDER_REPAIR) end

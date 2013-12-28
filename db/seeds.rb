@@ -7,7 +7,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# マスタデータの id 値定数を参照するため。
 require_relative "../config/initializers/constants"
+
+# db/seeds.rb は、稼働用の仕込みデータを作成できます。
+# データの作成は、ふつうに ActiveRecord の機能で行えます。
+# アプリの初回セットアップ時に rake db:seed でデータを仕込みますが、念のため何
+# 度も実行できるよう、データ作成前に既存データを削除しています。
+# データの削除を delete_all で書いているので、取扱いにはご注意ください。。
 
 # データは test/fixtures/businessstatuses.yml からリバース
 Businessstatus.delete_all

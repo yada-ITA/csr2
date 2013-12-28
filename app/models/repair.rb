@@ -6,6 +6,8 @@ class Repair < ActiveRecord::Base
   belongs_to :engine
   
   # 作業中の整備のみを抽出するスコープ (出荷日が設定済みなら作業完了)
+  # ActiveRecord のスコープ機能を使って、よく使う「作業中？」条件に名前を付けて
+  # います。
   scope :opened, -> { where shipped_date: nil }
 
   # エンジンをセットする
@@ -57,6 +59,11 @@ class Repair < ActiveRecord::Base
       end
     end
   end
+
+  # opened? 問い合わせメソッドを削除しました。
+  # DB からフェッチしたデータをアプリ内でふるいにかけることになるので、opened
+  # スコープを使って DB 検索時に予め作業中のレコードのみに絞るように変更しまし
+  # た。
 
   # 現時点での発行Noの生成(年月-枝番3桁)
   def self.createIssueNo
