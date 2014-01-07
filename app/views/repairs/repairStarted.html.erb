@@ -16,6 +16,26 @@
   <%= render 'engineInfo' %>
   <% disabled_data = getDisabled_RepairStarted %>
 
+<br>
+
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date, :use_month_numbers => true %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_finish_date %><br>
+    <%= f.date_select :estimated_finish_date, :use_month_numbers => true %>
+  </div>
+  <div class="field">
+    <%= f.label :before_comment %><br>
+    <%= f.text_area :before_comment %>
+  </div>
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_repairStarted') %>
+  </div>
+<hr>
+
+
   <div class="field">
     <%= f.label :issue_no %><br>
     <%= f.text_field :issue_no, :disabled=> true %>
@@ -41,20 +61,6 @@
     <%= f.label :desirable_finish_date %><br>
     <%= f.date_select :desirable_finish_date, :use_month_numbers => true, :disabled=>disabled_data[:desirable_finish_date] %>
   </div>
-  <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date, :use_month_numbers => true %>
-  </div>
-  <div class="field">
-    <%= f.label :estimated_finish_date %><br>
-    <%= f.date_select :estimated_finish_date, :use_month_numbers => true %>
-  </div>
-  <div class="field">
-    <%= f.label :before_comment %><br>
-    <%= f.text_area :before_comment %>
-  </div>
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_repairStarted') %>
-  </div>
+
 <% end %>
 <%= link_to 'Back', repairs_path %>

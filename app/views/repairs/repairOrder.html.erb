@@ -13,17 +13,10 @@
   <% end %>
   
   <%= render 'engineInfo' %>
-
   <% disabled_data = getDisabled_RepairOrder %>
 
-  <div class="field">
-    <%= f.label :issue_no %><br>
-    <%= f.text_field :issue_no, :disabled=> true %>
-  </div>
-  <div class="field">
-    <%= f.label :issue_date %><br>
-    <%= f.text_field :issue_date, :disabled=> true %>
-  </div>
+<br>
+
   <div class="field">
     <%= f.label :time_of_running %><br>
     <%= f.number_field :time_of_running, :disabled => disabled_data[:time_of_running]  %>
@@ -61,10 +54,21 @@
   </div>
 
   <% if current_user.yesOffice? %>
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_repairOrdered') %>
-  </div>
+    <div class="actions">
+      <%= f.submit  :value => t('views.buttun_repairOrdered') %>
+    </div>
   <% end %>
+
+<hr>
+  <div class="field">
+    <%= f.label :issue_no %><br>
+    <%= f.text_field :issue_no, :disabled=> true %>
+  </div>
+  <div class="field">
+    <%= f.label :issue_date %><br>
+    <%= f.text_field :issue_date, :disabled=> true %>
+  </div>
+
 
 <% end %>
 
