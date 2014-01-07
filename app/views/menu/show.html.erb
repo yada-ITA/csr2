@@ -13,16 +13,14 @@
 <br>
 
 <% unless current_user.tender? %>
- <b>マスタ管理</b>
- <br>
+ <h3>マスタ管理</h3>
  <p><%= link_to '法人', companies_path %></p>
  <p><%= link_to 'エンジン型式', enginemodels_path %></p>
  <p><%= link_to 'ビジネスステータス', businessstatuses_path %></p>
  <p><%= link_to 'エンジンステータス', enginestatuses_path %></p>
  <br>
 <% end %>
-<b>その他</b>
-<br>
+<h3>その他</h3>
 <p><%= link_to 'プロファイル', edit_user_registration_path %></p>
 <br>
 <br>

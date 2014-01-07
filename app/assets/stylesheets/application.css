@@ -15,8 +15,21 @@ label.need-label:after {
 content: " *";
 }
 
-hr {
-height: 1px;
-border: none;
-border-top: 1px #CCCCCC dashed;
+
+hr{
+  height: 1px;
+  border: none;
+  border-top: 1px #CCCCCC dashed;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+hr.header{
+  border-top: 1px #CCCCCC solid;
+}
+
+
+p{
+	margin-top: 6px;
+	margin-bottom: 6px
 }
