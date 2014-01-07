@@ -33,18 +33,22 @@ class EngineordersController < ApplicationController
     when @engineorder.ordered?
       render :template => "engineorders/ordered"
     end
-  end
+  end	
 
   # POST /engineorders
   # POST /engineorders.json
   def create
     @engineorder = Engineorder.new(engineorder_params)
-    #流通ステータスを「引合」にセットする(受注モデルは、引合時に新規作成される)
-    # 受注オブジェクトの状態更新メソッドを、そのまま代入に置き換えました。
+    # 流通ステータスを「引合」にセットする(受注モデルは、引合時に新規作成される)
+    #  受注オブジェクトの状態更新メソッドを、そのまま代入に置き換えました。
     @engineorder.status = Businessstatus.of_inquiry
-    #発行Noを自動採番する
+    # 発行Noを自動採番する
     @engineorder.issue_no = Engineorder.createIssueNo
-
+    # エンジンのステータスを返却予定にする
+    setOldEngine
+    @engineorder.old_engine.status = Enginestatus.of_about_to_return
+    @engineorder.old_engine.save
+    
     respond_to do |format|
       if @engineorder.save
         format.html { redirect_to @engineorder, notice: 'Engineorder was successfully created.' }
@@ -93,17 +97,17 @@ class EngineordersController < ApplicationController
       set_engineorder
     end
     if @engineorder.nil?
-	    unless params[:engine_id].nil?
-	      engine = Engine.find(params[:engine_id])
-	      @engineorder = engine.current_order_as_old
-	      if @engineorder.nil?
-	        @engineorder = Engineorder.new
-  	      @engineorder.old_engine = engine
-	      end
-	    else
-	      @engineorder = Engineorder.new
-	    end
-	  end
+      unless params[:engine_id].nil?
+        engine = Engine.find(params[:engine_id])
+        @engineorder = engine.current_order_as_old
+        if @engineorder.nil?
+          @engineorder = Engineorder.new
+          @engineorder.old_engine = engine
+        end
+      else
+        @engineorder = Engineorder.new
+      end
+    end
   end
 
   # 受注の処理
@@ -168,7 +172,14 @@ class EngineordersController < ApplicationController
       # DBに格納する。
       repair.save
       @engineorder.old_engine.save
+
+    when params[:commit] == t('views.buttun_inquiry')
+      # 引合画面からの更新の場合
+      @engineorder.old_engine.status = Enginestatus.of_about_to_return
+      @engineorder.old_engine.save
+    
     end
+    
   end
 
   private
@@ -180,8 +191,9 @@ class EngineordersController < ApplicationController
     case
     when params[:commit] == t('views.buttun_inquiry')
       # 引合登録の場合
-      # 流通ステータスを、「受注」にセットする。
+      # 流通ステータスを、「引合」にセットする。
       @engineorder.status = Businessstatus.of_inquiry
+      setOldEngine
     when params[:commit] == t('views.buttun_ordered')
       # 受注登録の場合
       # 流通ステータスを、「受注」にセットする。
@@ -191,40 +203,42 @@ class EngineordersController < ApplicationController
       # 流通ステータスを、「出荷準備中」にセットする。
       @engineorder.status = Businessstatus.of_shipping_preparation
       # エンジンに変更があれば、セットする。
-      setNewEngines
+      setNewEngine
     when params[:commit] == t('views.buttun_shipped')
       # 出荷登録の場合
       # 流通ステータスを、「出荷済」にセットする。
       @engineorder.status = Businessstatus.of_shipped
       # エンジンに変更があれば、セットする。
-      setNewEngines
+      setNewEngine
     when params[:commit] == t('views.buttun_returning')
       # 返却登録の場合
       # 流通ステータスを、「返却済」にセットする。
       @engineorder.status = Businessstatus.of_returned
       # エンジンに変更があれば、セットする。
-      setNewEngines
-      setOldEngines
+      setNewEngine
+      setOldEngine
     end
     #paramsに値をセットする(UPDATEで、engineorder_paramsとして更新してもらうため)
     params[:engineorder][:businessstatus_id] = @engineorder.businessstatus_id
   end
 
-  # setNewEngines
+  # setNewEngine
   # パラメータにエンジンIDがあればセットメソッドで先に設定する
-  def setNewEngines
+  def setNewEngine
     engine_id = params[:engineorder][:new_engine_id]
     unless engine_id.blank?
+      puts '-----*------new engine changed'
       @engineorder.new_engine = Engine.find(engine_id)
     end
   end
 
-  # setOldEngines
+  # setOldEngine
   # パラメータにエンジンIDがあればセットメソッドで先に設定する
-  def setOldEngines
+  def setOldEngine
     engine_id = params[:engineorder][:old_engine_id]
     unless engine_id.blank?
-      @engineorder.old_engine_id = Engine.find(engine_id)
+      puts '-----*------old engine changed'
+      @engineorder.old_engine = Engine.find(engine_id)
     end
   end
 

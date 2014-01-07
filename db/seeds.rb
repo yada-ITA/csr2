@@ -36,6 +36,7 @@ Enginestatus.create([
   {name: "完成品",     id: Enginestatus::ID_FINISHED_REPAIR},
   {name: "出荷準備中", id: Enginestatus::ID_BEFORE_SHIPPING},
   {name: "出荷済",     id: Enginestatus::ID_AFTER_SHIPPING},
+  {name: "返却予定",   id: Enginestatus::ID_ABOUT_TO_RETURN},
   {name: "廃却済",     id: Enginestatus::ID_ABOLISHED}
 ])
 
