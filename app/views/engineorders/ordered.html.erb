@@ -25,24 +25,41 @@
   </div>
 
   <div class="field">
-    <%= f.label :issue_no %><br>
+    <%= f.label :issue_no %>：
     <%=  @engineorder.issue_no %>
   </div>
-
-
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+<br>
+  <div class="field">
+    <%= f.label :order_date %><br>
+    <%= f.date_select :order_date, :use_month_numbers => true %>
+  </div>
+
+  <%= render "location", {f: f, attr_name: "sending_place", location: @engineorder.sending_place } %>
+
+  <div class="field">
+    <%= f.label :sending_comment %><br>
+    <%= f.text_area :sending_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :desirable_delivery_date %><br>
+    <%= f.date_select :desirable_delivery_date, :use_month_numbers => true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_ordered') %>
+  </div>  
+
+<%= link_to 'Back', engineorders_path %>
+
+<hr>
 
   <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date, :use_month_numbers => true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :order_date %><br>
-    <%= f.date_select :order_date, :use_month_numbers => true %>
   </div>
 
   <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
@@ -84,29 +101,11 @@
     <%= @engineorder.calcRunningYear %>
   </div>
  
-
   <div class="field">
     <%= f.label :change_comment %><br>
     <%= f.text_area :change_comment %>
   </div>
 
-  <%= render "location", {f: f, attr_name: "sending_place", location: @engineorder.sending_place } %>
-
-  <div class="field">
-    <%= f.label :sending_comment %><br>
-    <%= f.text_area :sending_comment %>
-  </div>
-  <div class="field">
-    <%= f.label :desirable_delivery_date %><br>
-    <%= f.date_select :desirable_delivery_date, :use_month_numbers => true %>
-  </div>
-  
-
-
   <%= f.hidden_field :businessstatus_id %>
 
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_ordered') %>
-  </div>
 <% end %>
-<%= link_to 'Back', engineorders_path %>

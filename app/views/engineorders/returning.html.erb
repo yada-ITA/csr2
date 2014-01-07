@@ -34,19 +34,41 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+<br>
 
+  <div class="field">
+    <%= f.label :invoice_no_old %><br>
+    <%= f.text_field :invoice_no_old %>
+  </div>
+
+  <%= render "location", {f: f, attr_name: "returning_place", location: @engineorder.returning_place } %>
+
+  <div class="field">
+    <%= f.label :returning_date %><br>
+    <%= f.date_select :returning_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :returning_comment %><br>
+    <%= f.text_area :returning_comment %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_returning') %>
+  </div>
+
+  <%= link_to 'Back', engineorders_path %>
+
+<hr>
   <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date %>
   </div>
 
-  <% #引合登録以外の場合は、order_dateを表示 %>
-  <% unless @engineorder.new_inquiry? %>
   <div class="field">
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date %>
   </div>
-  <% end %>
 
   <%= render "location", {f: f, attr_name: "branch", location: @engineorder.branch } %>
 
@@ -67,10 +89,6 @@
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
   </div>
 
-  <div class="field">
-    <%= f.label :new_engine_id %><br>
-    <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
-  </div>
 
 <!--
   <div class="field">
@@ -108,6 +126,16 @@
     <%= f.label :sending_comment %><br>
     <%= f.text_area :sending_comment %>
   </div>
+
+  <div class="field">
+    <%= f.label :allocated_date %><br>
+    <%= f.date_select :allocated_date, :use_month_numbers => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :new_engine_id %><br>
+    <%= f.collection_select( :new_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
+  </div>
   
   <div class="field">
     <%= f.label :shipped_date %><br>
@@ -115,30 +143,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :invoice_no_old %><br>
-    <%= f.text_field :invoice_no_old %>
+    <%= f.label :shipped_comment %><br>
+    <%= f.text_area :shipped_comment %>
   </div>
 
-  <%= render "location", {f: f, attr_name: "returning_place", location: @engineorder.returning_place } %>
-
-  <div class="field">
-    <%= f.label :returning_date %><br>
-    <%= f.date_select :returning_date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :returning_comment %><br>
-    <%= f.text_area :returning_comment %>
-  </div>
-
-  <div class="field">
-    <%= f.label :allocated_date %><br>
-    <%= f.date_select :allocated_date, :use_month_numbers => true %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_returning') %>
-  </div>
 <% end %>
-
-<%= link_to 'Back', engineorders_path %>

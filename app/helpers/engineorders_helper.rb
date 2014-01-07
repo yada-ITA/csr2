@@ -1,6 +1,6 @@
 module EngineordersHelper
 
-	#画面上の編集可否を返す（受領画面）
+	#画面上の編集可否を返す（出荷画面）
 def getDisabled_Shipped
   #整備会社の場合
   if current_user.tender?
