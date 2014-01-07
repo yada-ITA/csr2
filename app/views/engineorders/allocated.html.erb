@@ -26,21 +26,36 @@
   </div>
 
   <div class="field">
-    <%= f.label :issue_no %><br>
+    <%= f.label :issue_no %>：
     <%=  @engineorder.issue_no %>
   </div>
-
 
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
 
+<br>
+
   <div class="field">
     <%= f.label :allocated_date %><br>
     <%= f.date_select :allocated_date, :use_month_numbers => true %>
   </div>
   
+  <div class="field">
+    <%= f.label :new_engine_id %><br>
+    <% if @engineorder.new_engine.nil? %>
+      <%= f.collection_select( :new_engine_id, Engine.completed.load, :id, :engine_name, :include_blank => true ) %>
+    <% else %>
+      <%= f.collection_select( :new_engine_id, Engine.completed.load.unshift(@engineorder.new_engine), :id, :engine_name, :include_blank => true ) %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_allocated') %>
+  </div>
+  <%= link_to 'Back', engineorders_path %>
+
+<hr>
 
   <div class="field">
     <%= f.label :inquiry_date %><br>
@@ -69,15 +84,6 @@
   <div class="field">
     <%= f.label :old_engine_id %><br>
     <%= f.collection_select( :old_engine_id, Engine.all, :id, :engine_name, :include_blank => true ) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :new_engine_id %><br>
-    <% if @engineorder.new_engine.nil? %>
-      <%= f.collection_select( :new_engine_id, Engine.completed.load, :id, :engine_name, :include_blank => true ) %>
-    <% else %>
-      <%= f.collection_select( :new_engine_id, Engine.completed.load.unshift(@engineorder.new_engine), :id, :engine_name, :include_blank => true ) %>
-    <% end %>
   </div>
 
 <!--
@@ -120,8 +126,4 @@
 
   <%= f.hidden_field :businessstatus_id %>
 
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_allocated') %>
-  </div>
 <% end %>
-<%= link_to 'Back', engineorders_path %>

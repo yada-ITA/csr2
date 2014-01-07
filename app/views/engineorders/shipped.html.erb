@@ -29,16 +29,35 @@
   </div>
 
   <div class="field">
-    <%= f.label :issue_no %><br>
-    <%=  @engineorder.issue_no %>
+    <%= f.label :issue_no %>：<%=  @engineorder.issue_no %>
   </div>
-
 
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title, :disabled=>disabled_data[:title] %>
   </div>
+<br>
 
+  <div class="field">
+    <%= f.label :invoice_no_new %><br>
+    <%= f.text_field :invoice_no_new %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shipped_date %><br>
+    <%= f.date_select :shipped_date, :use_month_numbers => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shipped_comment %><br>
+    <%= f.text_area :shipped_comment %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit  :value => t('views.buttun_shipped') %>
+  </div>
+<%= link_to 'Back', engineorders_path %>
+<hr>
   <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date, :use_month_numbers => true, :disabled=>disabled_data[:inquiry_date] %>
@@ -67,14 +86,6 @@
     <br>
     </div>
   <% end %>
-
-  <div class="field">
-    エンジンS/# <br>
-    <%= text_field_tag 'serialno', @engineorder.new_engine.serialno, :disabled=> true %><br>
-    エンジン型式 <br>
-    <%= text_field_tag 'engine_model_name', @engineorder.new_engine.engine_model_name, :disabled=> true %><br>
-  <br>
-  </div>
 
 <!--
   <div class="field">
@@ -108,34 +119,23 @@
   
   
   <%= render "location", {f: f, attr_name: "sending_place", location: @engineorder.sending_place } %>
-
-  <div class="field">
-    <%= f.label :invoice_no_new %><br>
-    <%= f.text_field :invoice_no_new %>
-  </div>
-
+  
   <div class="field">
     <%= f.label :sending_comment %><br>
     <%= f.text_area :sending_comment, :disabled=>disabled_data[:sending_comment] %>
   </div>
-  
-  <div class="field">
-    <%= f.label :shipped_date %><br>
-    <%= f.date_select :shipped_date, :use_month_numbers => true %>
-  </div>
 
-  <div class="field">
-    <%= f.label :shipped_comment %><br>
-    <%= f.text_area :shipped_comment %>
-  </div>
-  
   <div class="field">
     <%= f.label :allocated_date %><br>
     <%= f.date_select :allocated_date, :use_month_numbers => true %>
   </div>
-  
-  <div class="actions">
-    <%= f.submit  :value => t('views.buttun_shipped') %>
+
+  <div class="field">
+    新規エンジンS/# <br>
+    <%= text_field_tag 'serialno', @engineorder.new_engine.serialno, :disabled=> true %><br>
+    新規エンジン型式 <br>
+    <%= text_field_tag 'engine_model_name', @engineorder.new_engine.engine_model_name, :disabled=> true %><br>
+  <br>
   </div>
+
 <% end %>
-<%= link_to 'Back', engineorders_path %>
