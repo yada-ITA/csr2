@@ -1,4 +1,5 @@
 company1:
+  id: 1
   name: YES本社
   category: YES本社
   postcode: 123-4567
@@ -9,6 +10,7 @@ company1:
   updated_at: 2013-12-03 00:30:03.963604
 
 company2:
+  id: 2
   name: 西宮戎リペア
   category: 整備会社
   postcode: 123-4567
@@ -19,6 +21,7 @@ company2:
   updated_at: 2013-12-03 00:31:07.980266
 
 company3:
+  id: 3
   name: 大須観音工機
   category: 整備会社
   postcode: 123-4567
@@ -29,6 +32,7 @@ company3:
   updated_at: 2013-12-03 00:32:02.993412
 
 company4:
+  id: 4
   name: 川口住宅設備
   category: 工事会社
   postcode: 123-4568
@@ -39,6 +43,7 @@ company4:
   updated_at: 2013-12-03 00:33:26.271175
 
 company5:
+  id: 5
   name: 巣鴨空調設備
   category: 工事会社
   postcode: 123-4567
@@ -49,6 +54,7 @@ company5:
   updated_at: 2013-12-03 00:35:01.316612
 
 company6:
+  id: 6
   name: 聖路加病院
   category: 顧客
   postcode: 333-4567
@@ -59,6 +65,7 @@ company6:
   updated_at: 2013-12-03 00:36:44.574518
 
 company7:
+  id: 7
   name: 法華倶楽部
   category: 顧客
   postcode: 333-4567
@@ -69,6 +76,7 @@ company7:
   updated_at: 2013-12-03 00:39:10.158845
 
 company8:
+  id: 8
   name: YES名古屋営業
   category: YES拠点
   postcode: 432-1111
@@ -79,6 +87,7 @@ company8:
   updated_at: 2013-12-03 00:40:17.084673
 
 company9:
+  id: 9
   name: YES大阪営業
   category: YES拠点
   postcode: 123-4568

@@ -9,7 +9,8 @@ module Constants
     ID_FINISHED_REPAIR = 4 # 完成品
     ID_BEFORE_SHIPPING = 5 # 出荷準備中
     ID_AFTER_SHIPPING  = 6 # 出荷済
-    ID_ABOLISHED       = 7 # 廃却済
+    ID_ABOUT_TO_RETURN = 7 # 返却予定
+    ID_ABOLISHED       = 9 # 廃却済
   end
 
   module Businessstatus

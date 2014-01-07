@@ -10,5 +10,6 @@ class Enginestatus < ActiveRecord::Base
   def self.of_finished_repair; find(ID_FINISHED_REPAIR) end
   def self.of_before_shipping; find(ID_BEFORE_SHIPPING) end
   def self.of_after_shipping;  find(ID_AFTER_SHIPPING) end
+  def self.of_about_to_return; find(ID_ABOUT_TO_RETURN) end
   def self.of_abolished;       find(ID_ABOLISHED) end
 end
