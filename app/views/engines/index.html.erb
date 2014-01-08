@@ -64,11 +64,12 @@
           <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
         <% end %>
         </td>
+      <% if current_user.yesOffice? %>
         <td>.....</td>
         <td><%= link_to '詳細', engine %></td>
         <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
         <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
+      <% end %>  
       </tr>
     <% end %>
   </tbody>
