@@ -192,8 +192,8 @@ class EngineordersController < ApplicationController
     when params[:commit] == t('views.buttun_inquiry')
       # 引合登録の場合
       # 流通ステータスを、「引合」にセットする。
-      @engineorder.status = Businessstatus.of_inquiry
       setOldEngine
+      @engineorder.status = Businessstatus.of_inquiry
     when params[:commit] == t('views.buttun_ordered')
       # 受注登録の場合
       # 流通ステータスを、「受注」にセットする。
@@ -237,7 +237,6 @@ class EngineordersController < ApplicationController
   def setOldEngine
     engine_id = params[:engineorder][:old_engine_id]
     unless engine_id.blank?
-      puts '-----*------old engine changed'
       @engineorder.old_engine = Engine.find(engine_id)
     end
   end
