@@ -35,6 +35,12 @@ enginestatus6:
   updated_at: 2013-11-20 11:30:24.732343
 
 enginestatus7:
+  id: 7
+  name: 廃却済
+  created_at: 2013-12-10 12:13:58.347085
+  updated_at: 2013-12-10 12:13:58.347085
+
+enginestatus9:
   id: 9
   name: 廃却済
   created_at: 2013-12-10 12:13:58.347085
