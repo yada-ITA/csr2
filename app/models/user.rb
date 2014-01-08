@@ -39,4 +39,14 @@ class User < ActiveRecord::Base
     return self.company.category == "整備会社"
   end
 
+  # 会社を指定して、その会社のユーザのアドレスを全て;つながりで返す。
+  def self.collect_emails_by_company(company)
+    emails = ""
+    users = self.where(:company => company)
+    users.each do | user |
+      emails = emails + user.email + ';'
+    end
+    return emails
+  end
+  
 end
