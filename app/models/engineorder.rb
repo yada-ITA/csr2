@@ -45,7 +45,7 @@ class Engineorder < ActiveRecord::Base
     if old_engine && old_engine != engine
       # 旧エンジンが指定済みの場合は、その旧エンジンをサスペンド状態に変更する
       old_engine.suspend!
-      old_engine.save
+      old_engine.save!
     end
     _orig_old_engine = engine
   end
