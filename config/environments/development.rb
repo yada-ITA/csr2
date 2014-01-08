@@ -28,6 +28,32 @@ R2::Application.configure do
   config.assets.debug = true
   
   # for Devise
+  config.assets.initialize_on_precompile = false
+  
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # メール送信機能
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.raise_delivery_errors = true
+
+  # gmail用の定義
+  #config.action_mailer.smtp_settings = {
+  #  :address => 'smtp.gmail.com',
+  #  :port => 587,
+  #  :domain => 'localhost',
+  #  :authentication => :login,
+  #  :user_name => 'xxx@gmail.com',
+  #  :password  => 'ppppppp'
+  #}
+
+  # ローカルテスト用（オージス社内メール環境）の定義
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.ogis-ri.co.jp',
+    :port => 25,
+    :authentication => :login,
+    :user_name => 'p9999999',
+    :password => 'pppppppp',
+  }
   
 end
