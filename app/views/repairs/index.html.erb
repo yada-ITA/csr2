@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>ステータス</th>
       <th>発行No</th>
       <th>発行日</th>
       <th>返却日</th>
@@ -13,7 +14,6 @@
       <th>出荷日</th>
       <th>エンジン型式</th>
       <th>エンジンS/#</th>
-      <th>ステータス</th>
       <th></th>
       <th></th>
       <th></th>
@@ -27,6 +27,7 @@
   <tbody>
     <% @repairs.each do |repair| %>
       <tr>
+        <td><%= repair.engine.status.name %></td>
         <td><%= repair.issue_no %></td>
         <td><%= repair.issue_date %></td>
         <td><%= repair.returning_date %></td>
@@ -37,7 +38,6 @@
         <td><%= repair.shipped_date %></td>
         <td><%= repair.engine.engine_model_name %></td>
         <td><%= repair.engine.serialno %></td>
-        <td><%= repair.engine.status.name %></td>
         <td>
           <% if current_user.yes? %>
             <%= link_to '整備依頼', order_repair_path(repair) %>
