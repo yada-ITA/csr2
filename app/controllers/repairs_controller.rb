@@ -66,6 +66,7 @@ class RepairsController < ApplicationController
     if @reapir.nil?
       @repair = Repair.new(repair_params)  
       @repair.issue_no = Repair.createIssueNo
+      @repair.issue_date = Date.today
       @repair.engine = engine
     end
 

@@ -50,10 +50,12 @@
             <%= link_to '出荷登録', shipped_path(repair.engine.current_order_as_new) %>
           <% end %>
         </td>
-        <td>.....</td>
-        <td><%= link_to '詳細', repair %></td>
-        <td><%= link_to '訂正(仮)', edit_repair_path(repair) %></td>
-        <td><%= link_to '削除(仮)', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.yesOffice? %>
+          <td>.....</td>
+          <td><%= link_to '詳細', repair %></td>
+          <td><%= link_to '訂正(仮)', edit_repair_path(repair) %></td>
+          <td><%= link_to '削除(仮)', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

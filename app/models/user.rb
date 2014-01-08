@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     return self.company.category == "YES拠点"
   end
 
-  # このユーザーがYES拠点の人かどうか
+  # このユーザーがYES本社、または拠点の人かどうか
   def yes?
     return (self.yesOffice?) || (self.yesBranch?)
   end
