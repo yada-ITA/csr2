@@ -99,7 +99,7 @@ class Engine < ActiveRecord::Base
 
   # サスペンド状態かどうか確認する。
   def suspended?
-    suspended
+    return self.suspended
   end
 
   # サスペンド状態にする
@@ -108,12 +108,12 @@ class Engine < ActiveRecord::Base
   # Ruby 界隈では、自分の状態を破壊的に更新するようなメソッドには ! を付ける慣
   # 習があります。
   def suspend!
-    suspended = true
+    self.suspended = true
   end
 
   # サスペンド状態を解除する
   def release!
-    suspended = false
+    self.suspended = false
   end
 
   # Engine#displaySuspend_orNot メソッドは、エンジンの状態をビューでどう表現す
