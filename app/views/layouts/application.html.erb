@@ -16,9 +16,9 @@
       <div class="collapse navbar-collapse">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li> ログインユーザー：<%= current_user.name %></li>　
             <li><%= link_to 'メインメニュー', root_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
+            <li><a href="/users/edit"><b>ログインユーザー：<%= current_user.name %></b></a></li>
           </ul>
         <% end %>
       </div>

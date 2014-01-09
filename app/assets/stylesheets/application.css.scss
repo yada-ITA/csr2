@@ -53,3 +53,11 @@ h1{
      border-bottom:1px dashed #CCCCCC;
      padding:0px 0px 0px 10px;
 }
+
+textarea {
+   width: 300px;
+   min-width: 300px;
+   min-height: 80px;
+   max-width:  350px;
+   max-height: 200px;
+}
