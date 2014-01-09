@@ -4,18 +4,11 @@
 
 
 <%= form_for(@engineorder) do |f| %>
-  <% if @engineorder.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@engineorder.errors.count, "error") %> prohibited this engineorder from being saved:</h2>
 
-      <ul>
-      <% @engineorder.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render "errormsg" , modeldata: @engineorder %>
+  
+<div class="row">
+<div class="col-sm-5">
   <div class="field">
     <%= f.label :registered_user_id %>：
     <% if @engineorder.registered_user_id.nil? %>
@@ -55,8 +48,8 @@
   </div>
   <%= link_to 'Back', engineorders_path %>
 
-<hr>
-
+</div>
+<div class="well col-sm-7">
   <div class="field">
     <%= f.label :inquiry_date %><br>
     <%= f.date_select :inquiry_date, :use_month_numbers => true %>
@@ -125,5 +118,7 @@
   
 
   <%= f.hidden_field :businessstatus_id %>
+</div>
+</div>
 
 <% end %>

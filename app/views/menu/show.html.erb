@@ -1,8 +1,7 @@
 <h1>メインメニュー</h1>
 <br>
 <% if Engine.suspended.exists? %>
- <b>サスペンド状態のエンジンがあります。</b>
- <br>
+ <div class="alert alert-danger">サスペンド状態のエンジンがあります。</div>
 <% end %>
 <h3>業務</h3>
 <p><%= link_to 'エンジン一覧', engines_path %></p>

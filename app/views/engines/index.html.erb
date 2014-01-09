@@ -1,46 +1,44 @@
 <h1 class="title">エンジン一覧</h1>
-<h3><b>検索条件</b></h3>
+
+<h3>検索条件</h3>
 <%= form_tag engines_index_path, :method => :get do %>
-<table id = "square">
-  <% if current_user.yesOffice? %>
+<div class="well">
+  <table>
+    <% if current_user.yesOffice? %>
+      <tr>
+        <td width="80" >所轄会社     </td>
+        <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched[:company_id]) %></td>
+      </tr>
+    <% else %>
+      <%= hidden_field(:search, :company_id, :value => current_user.company_id) %>
+    <% end %>
     <tr>
-      <td width="80" >所轄会社     </td>
-      <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched[:company_id]) %></td>
+      <td width="80" >エンジン型式</td>
+      <td width="120"><%= text_field :search, :engine_model_name, :value => @searched[:engine_model_name] %><br /></td>
+      <td width="80" >エンジンS/#</td>
+      <td width="120"><%= text_field :search, :serialno, :value => @searched[:serialno] %><br /></td>
     </tr>
-  <% else %>
-    <%= hidden_field(:search, :company_id, :value => current_user.company_id) %>
-  <% end %>
-  <tr>
-    <td width="80" >エンジン型式</td>
-    <td width="120"><%= text_field :search, :engine_model_name, :value => @searched[:engine_model_name] %><br /></td>
-    <td width="80" >エンジンS/#</td>
-    <td width="120"><%= text_field :search, :serialno, :value => @searched[:serialno] %><br /></td>
-  </tr>
-  <tr>
+    <tr>
       <td width="80" >ステータス     </td>
       <td width="120"><%= collection_select(:search, :enginestatus_id, Enginestatus.all, :id, :name, :include_blank => true, :selected => @searched[:enginestatus_id]) %></td>
-  </tr>
+    </tr>
 </table>
+
 <%= submit_tag "検索" %>
 <% end %>
+</div>
 
 <br />
-<br />
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
   <thead>
     <tr>
       <th>ステータス</th>      
       <th>エンジン型式</th>
       <th>エンジンS/#</th>
       <th>管轄</th>      
-      <th>返却日</th>	      
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>返却日</th>
+      <th>サスペンド</th>
     </tr>
   </thead>
 
@@ -53,24 +51,24 @@
         <td><%= engine.company.name %></td>
         <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
         <td><%= display_suspended_or_not(engine) %></td>
+       <% unless current_user.tender? %>
         <td>
-          <% unless current_user.tender? %>
-            <%= link_to '引合登録', new_inquiry_path(engine) %>
+          <%= link_to '引合登録', new_inquiry_path(engine) %>
+        </td>
           <% end %>
-        </td>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
-        <td>
         <% if  engine.before_shipping?  %>
-          <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
+　　        <td>
+  　　        <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
+    　　    </td>
         <% end %>
-        </td>
-      <% if current_user.yesOffice? %>
-        <td>.....</td>
-        <td><%= link_to '詳細', engine %></td>
-        <td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
-        <td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>  
-      </tr>
+      　　<% if current_user.yesOffice? %>
+        　　<td>.....</td>
+        　　<td><%= link_to '詳細', engine %></td>
+        　　<td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
+        　　<td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     　　 <% end %>  
+      　　</tr>
     <% end %>
   </tbody>
 </table>

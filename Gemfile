@@ -77,3 +77,6 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov'
 end
+
+#Use Bootstrap3
+gem 'bootstrap-sass', '~> 3.0.3.0'

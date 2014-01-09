@@ -3,18 +3,9 @@
 <h1>返却登録</h1>
 
 <%= form_for(@engineorder) do |f| %>
-  <% if @engineorder.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@engineorder.errors.count, "error") %> prohibited this engineorder from being saved:</h2>
 
-      <ul>
-      <% @engineorder.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render "errormsg" , modeldata: @engineorder %>
+  
   <div class="field">
     <%= f.label :registered_user_id %>：
     <% if @engineorder.registered_user_id.nil? %>

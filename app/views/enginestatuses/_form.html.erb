@@ -1,15 +1,6 @@
 <%= form_for(@enginestatus) do |f| %>
-  <% if @enginestatus.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@enginestatus.errors.count, "error") %> prohibited this enginestatus from being saved:</h2>
 
-      <ul>
-      <% @enginestatus.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "errormsg" , modeldata: @enginestatus %>
 
   <div class="field">
     <%= f.label :name %><br>

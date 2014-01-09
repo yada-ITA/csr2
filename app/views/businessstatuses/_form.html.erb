@@ -1,15 +1,6 @@
 <%= form_for(@businessstatus) do |f| %>
-  <% if @businessstatus.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@businessstatus.errors.count, "error") %> prohibited this businessstatus from being saved:</h2>
 
-      <ul>
-      <% @businessstatus.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "errormsg" , modeldata: @businessstatus %>
 
   <div class="field">
     <%= f.label :name %><br>

@@ -7,16 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if user_signed_in? %>
-  　<b>　ログインユーザー：<%= current_user.name %>　</b>
-    <%= link_to "メインメニューへ戻る", "/" %>
-    <%= link_to "サインアウト", destroy_user_session_path, :method => :delete %>
-  <hr class="header">
-  <% end %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
-<%= yield %>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "R2システム", '/', id: "logo", class: "navbar-brand" %>
+      </div>
+      <div class="collapse navbar-collapse">
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li> ログインユーザー：<%= current_user.name %></li>　
+            <li><%= link_to 'メインメニュー', root_path %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <% unless notice.blank? %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% unless alert.blank? %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

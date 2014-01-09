@@ -1,16 +1,8 @@
 <h1>整備依頼</h1>
 
 <%= form_for(@repair) do |f| %>
-  <% if @repair.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@repair.errors.count, "error") %> prohibited this repair from being saved:</h2>
-      <ul>
-      <% @repair.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "errormsg" , modeldata: @repair %>
+
   
   <%= render 'engineInfo' %>
   <% disabled_data = getDisabled_RepairOrder %>
