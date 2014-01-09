@@ -1,5 +1,21 @@
 class CreateInitialSchema < ActiveRecord::Migration
   def change
+    drop_table :businessstatuses
+
+    drop_table :companies
+
+    drop_table :enginemodels
+
+    drop_table :engineorders
+
+    drop_table :engines
+
+    drop_table :enginestatuses
+
+    drop_table :repairs
+
+    drop_table :users
+    
     create_table :businessstatuses do |t|
       t.string   :name
       t.timestamps
