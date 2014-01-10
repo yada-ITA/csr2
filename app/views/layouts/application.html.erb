@@ -16,16 +16,16 @@
       <div class="collapse navbar-collapse">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
+          <% unless request.path_info=="/" %>
             <li><%= link_to 'メインメニュー', root_path %></li>
+          <% end %>
             <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
-            <li><a href="/users/edit"><b>ログインユーザー：<%= current_user.name %></b></a></li>
+            <li><a href="/users/edit"><b>ログイン：<%= current_user.name %></b></a></li>
           </ul>
         <% end %>
       </div>
     </div>
   </div>
-
-
   <div class="container">
     <% unless notice.blank? %>
       <div class="alert alert-success"><%= notice %></div>

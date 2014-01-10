@@ -46,8 +46,13 @@ class EngineordersController < ApplicationController
     @engineorder.issue_no = Engineorder.createIssueNo
     # エンジンのステータスを返却予定にする
     setOldEngine
-    @engineorder.old_engine.status = Enginestatus.of_about_to_return
-    @engineorder.old_engine.save
+
+    #old_engine_idのvalidateチェックを実行させるため、
+    #old_engine_idがある場合のみ、エンジンステータス変更を実施するように変更する。
+    unless @engineorder.old_engine_id.blank?
+      @engineorder.old_engine.status = Enginestatus.of_about_to_return
+      @engineorder.old_engine.save
+    end
     
     respond_to do |format|
       if @engineorder.save

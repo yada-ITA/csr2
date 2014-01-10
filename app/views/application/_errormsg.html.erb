@@ -1,7 +1,7 @@
   <% if modeldata.errors.any? %>
     <div  class="panel panel-danger">
     <div class="panel-heading">
-      <h2 class="panel-title"><%= pluralize(modeldata.errors.count, "error") %> prohibited this engine from being saved:</h2>
+      <h2 class="panel-title"> <%= modeldata.errors.count %>つのエラーがあります</h2>
     </div>
       <ul>
       <% modeldata.errors.full_messages.each do |msg| %>

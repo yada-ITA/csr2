@@ -1,23 +1,32 @@
-<p>
-  <strong>Enginemodelname:</strong>
-  <%= @engine.engine_model_name %>
-</p>
-<p>
-  <strong>serialno:</strong>
-  <%= @engine.serialno %>
-</p>
-<p>
-  <strong>Salesmodelname:</strong>
-  <%= @engine.sales_model_name %>
-</p>
-<p>
-  <strong>Company:</strong>
-  <%= @engine.company.name %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= @engine.status.name %>
-</p>
+  <div class="field">
+      <% if @engine.suspended %>
+         ******サスペンド中******
+      <% end %>
+   </div>
 
-<%= link_to 'Edit', edit_engine_path(@engine) %> |
+  <div class="field">
+  <%= Engine.human_attribute_name('engine_model_name') %>
+  <%= @engine.engine_model_name %>
+  </div>
+
+  <div class="field">
+    <%= Engine.human_attribute_name('serialno') %>
+  <%= @engine.serialno %>
+  </div>
+
+  <div class="field">
+    <%= Company.human_attribute_name('name') %>
+  <%= @engine.company.name %>
+</div>
+
+
+  <div class="field">
+    <%= Engine.human_attribute_name('status') %>
+    <%= @engine.status.name %>
+  </div>
+
+
+<% if current_user.yesOffice? %>
+  <%= link_to 'Edit', edit_engine_path(@engine) %> |
+<% end %>
 <%= link_to 'Back', engines_path %>

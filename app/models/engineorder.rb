@@ -23,6 +23,10 @@ class Engineorder < ActiveRecord::Base
   # けています。
   scope :opened, -> { where returning_date: nil }
 
+
+  #旧エンジンは必ず流通登録に必要なので、必須項目とする。
+  validates :old_engine_id, presence: true
+
   # 新エンジンをセットする
   # 独自の setNewEngine メソッドではなく、そのまま order.new_engine = engine と
   # 書けるように、ActiveRecord が定義する new_engine= メソッドを拡張しました。

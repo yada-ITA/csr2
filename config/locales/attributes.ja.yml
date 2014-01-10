@@ -16,8 +16,8 @@ ja:
         suspended: サスペンド
         status: 'ステータス'
       repair:
-        issue_no: 発行No
-        issue_date: 発行日
+        issue_no: 依頼No
+        issue_date: 整備依頼日
         time_of_running: エンジン運転時間
         day_of_test: 試運転日
         years_of_use: 使用年数

@@ -47,7 +47,7 @@
         <td  rowspan="2"><%= link_to '返却', returning_path(engineorder) %></td>
         <td  rowspan="2"><%= link_to '詳細', engineorder %></td>
         <td  rowspan="2"><%= link_to '修正', edit_engineorder_path(engineorder) %></td>
-        <td  rowspan="2"><%= link_to '削除', engineorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td  rowspan="2"><%= link_to '削除', engineorder, method: :delete, data: { confirm: '削除してもよろしいですか？' } %></td>
 </tr>
 <tr> 
         <td><%= Engine.find(engineorder.old_engine_id).engine_name unless engineorder.old_engine_id.nil?%></td>
