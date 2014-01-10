@@ -4,7 +4,7 @@ class RepairsController < ApplicationController
   # GET /repairs
   # GET /repairs.json
   def index
-    @repairs = Repair.all.order(:updated_at).reverse_order
+    @repairs = Repair.all.order(:updated_at).reverse_order.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /repairs/1

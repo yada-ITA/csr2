@@ -4,7 +4,7 @@ class EngineordersController < ApplicationController
   # GET /engineorders
   # GET /engineorders.json
   def index
-    @engineorders = Engineorder.all.order(:updated_at).reverse_order
+    @engineorders = Engineorder.all.order(:updated_at).reverse_order.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /engineorders/1

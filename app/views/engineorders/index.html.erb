@@ -58,7 +58,9 @@
     <% end %>
   </tbody>
 </table>
-
+<br>
+<%= will_paginate @engines, :previous_label=>'≪前', :next_label=>'次≫' %>
+<br>
 <br>
 <!--
 <%= link_to '新規登録', new_engineorder_path %>

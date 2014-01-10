@@ -53,20 +53,19 @@
         <td><%= display_suspended_or_not(engine) %></td>
        <% unless current_user.tender? %>
         <td>
-          <%= link_to '引合登録', new_inquiry_path(engine) %>
+          <%= link_to '引合', new_inquiry_path(engine) %>
         </td>
           <% end %>
-        <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
+        <td><%= link_to '受領', engine_arrived_path(engine) %></td>
         <% if  engine.before_shipping?  %>
 　　        <td>
-  　　        <%= link_to '出荷登録', shipped_path(engine.current_order_as_new) %>
+  　　        <%= link_to '出荷', shipped_path(engine.current_order_as_new) %>
     　　    </td>
         <% end %>
       　　<% if current_user.yesOffice? %>
-        　　<td>.....</td>
         　　<td><%= link_to '詳細', engine %></td>
-        　　<td><%= link_to '修正(仮)', edit_engine_path(engine) %></td>
-        　　<td><%= link_to '削除(仮)', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        　　<td><%= link_to '修正', edit_engine_path(engine) %></td>
+        　　<td><%= link_to '削除', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
      　　 <% end %>  
       　　</tr>
     <% end %>
@@ -81,6 +80,7 @@
   <hr>
     <%= form_tag import_engines_path, multipart: true do %>
       <%= file_field_tag :file %>
+      <br>
       <%= submit_tag "インポート" %>
     <% end %>
   <br>
