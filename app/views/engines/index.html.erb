@@ -6,7 +6,7 @@
   <table>
     <% if current_user.yesOffice? %>
       <tr>
-        <td width="80" >所轄会社     </td>
+        <td width="80" >管轄     </td>
         <td width="120"><%= collection_select(:search, :company_id, Company.all, :id, :name, :include_blank => true, :selected => @searched[:company_id]) %></td>
       </tr>
     <% else %>
@@ -15,7 +15,7 @@
     <tr>
       <td width="80" >エンジン型式</td>
       <td width="120"><%= text_field :search, :engine_model_name, :value => @searched[:engine_model_name] %><br /></td>
-      <td width="80" >エンジンS/#</td>
+      <td width="80" >エンジンNo.</td>
       <td width="120"><%= text_field :search, :serialno, :value => @searched[:serialno] %><br /></td>
     </tr>
     <tr>
@@ -35,9 +35,12 @@
     <tr>
       <th>ステータス</th>      
       <th>エンジン型式</th>
-      <th>エンジンS/#</th>
-      <th>管轄</th>      
+      <th>エンジンNo.</th>
+      <% if current_user.yesOffice? %>
+        <th>管轄</th>
+      <% end %>
       <th>返却日</th>
+      <th>受領日</th>
       <th>サスペンド</th>
     </tr>
   </thead>
@@ -48,15 +51,19 @@
         <td><%= engine.status.name %></td>
         <td><%= engine.engine_model_name	 %></td>
         <td><%= engine.serialno %></td>
-        <td><%= engine.company.name %></td>
+        <% if current_user.yesOffice? %>
+          <td><%= engine.company.name %></td>
+        <% end %>
         <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
+        <td><%= engine.current_repair.arrive_date unless engine.current_repair.nil? %></td>
         <td><%= display_suspended_or_not(engine) %></td>
+
        <% unless current_user.tender? %>
         <td>
-          <%= link_to '引合', new_inquiry_path(engine) %>
+          <%= link_to '引合登録', new_inquiry_path(engine) %>
         </td>
           <% end %>
-        <td><%= link_to '受領', engine_arrived_path(engine) %></td>
+        <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
         <% if  engine.before_shipping?  %>
 　　        <td>
   　　        <%= link_to '出荷', shipped_path(engine.current_order_as_new) %>
@@ -65,7 +72,7 @@
       　　<% if current_user.yesOffice? %>
         　　<td><%= link_to '詳細', engine %></td>
         　　<td><%= link_to '修正', edit_engine_path(engine) %></td>
-        　　<td><%= link_to '削除', engine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        　　<td><%= link_to '削除', engine, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %></td>
      　　 <% end %>  
       　　</tr>
     <% end %>

@@ -6,10 +6,6 @@
       <th>ステータス</th>
       <th>依頼No</th>
       <th>整備依頼日</th>
-      <!--
-      <th>返却日</th>
-      -->
-      <th>受領日</th>
       <th>完成希望日</th>
       <th>整備開始日</th>
       <th>整備完了日</th>
@@ -17,7 +13,7 @@
       <th>出荷日</th>
       -->
       <th>エンジン型式</th>
-      <th>エンジンS/#</th>
+      <th>エンジンNo.</th>
     </tr>
   </thead>
 
@@ -25,12 +21,8 @@
     <% @repairs.each do |repair| %>
       <tr>
         <td><%= repair.engine.status.name %></td>
-        <td><%= repair.issue_no %></td>
-        <td><%= repair.issue_date %></td>
-        <!--
-        <td><%= repair.returning_date %></td>
-        -->
-        <td><%= repair.arrive_date %></td>
+        <td><%= repair.order_no %></td>
+        <td><%= repair.order_date %></td>
         <td><%= repair.desirable_finish_date %></td>
         <td><%= repair.start_date %></td>
         <td><%= repair.finish_date %></td>
@@ -41,7 +33,7 @@
         <td><%= repair.engine.serialno %></td>
           <% if current_user.yes? %>
           <td>
-            <%= link_to '整備依頼', order_repair_path(repair) %>
+            <%= link_to '依頼', order_repair_path(repair) %>
           </td>
           <% end %>
         <td><%= link_to '開始', start_repair_path(repair) %></td>
@@ -51,10 +43,10 @@
             <%= link_to '出荷', shipped_path(repair.engine.current_order_as_new) %>
             </td>
           <% end %>
-         <td><%= link_to '詳細', repair %></td>
         <% if current_user.yesOffice? %>
+          <td><%= link_to '詳細', repair %></td>
           <td><%= link_to '訂正', edit_repair_path(repair) %></td>
-          <td><%= link_to '削除', repair, method: :delete, data: { confirm: '削除してもよろしいですか？' } %></td>
+          <td><%= link_to '削除', repair, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %></td>
         <% end %>
       </tr>
     <% end %>

@@ -130,9 +130,9 @@ ja:
     select:
       prompt: 選択してください。
     submit:
-      create: 登録する
-      submit: 保存する
-      update: 更新する
+      create: 登録
+      submit: 保存
+      update: 更新
   number:
     currency:
       format:
@@ -197,4 +197,20 @@ ja:
   activerecord:
     errors:
       <<: *errors
-      
+  will_paginate:
+    page_gap: …
+  controller_msg:
+    engine_created: エンジン情報が登録されました。
+    #Engine was successfully created.
+    engine_updated: エンジン情報が更新されました。
+    #Engine was successfully updated.
+    engine_imported: エンジン情報をインポートしました。
+    #Imported
+    engineorder_created: 流通情報を登録しました。
+    #Engineorder was successfully created.
+    engineorder_updated: 流通情報を更新しました。
+    #Engineorder was successfully updated.
+    repair_created: エンジンを受領しました。
+    #Repair was successfully created.
+    repair_updated: 整備情報を更新しました。
+    #Repair was successfully updated.

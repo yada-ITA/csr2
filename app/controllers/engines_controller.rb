@@ -97,7 +97,7 @@ class EnginesController < ApplicationController
 
     respond_to do |format|
       if @engine.save
-        format.html { redirect_to @engine, notice: 'Engine was successfully created.' }
+        format.html { redirect_to @engine, notice: t('controller_msg.engine_created') }
         format.json { render action: 'show', status: :created, location: @engine }
       else
         format.html { render action: 'new' }
@@ -111,7 +111,7 @@ class EnginesController < ApplicationController
   def update
     respond_to do |format|
       if @engine.update(engine_params)
-        format.html { redirect_to @engine, notice: 'Engine was successfully updated.' }
+        format.html { redirect_to @engine, notice: t('controller_msg.engine_updated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -133,7 +133,7 @@ class EnginesController < ApplicationController
   #インポートする
   def import
     Engine.import(params[:file])
-    redirect_to action: "index", notice: "Imported."
+    redirect_to action: "index", notice: t("controller_meg.engine_imported")
   end
 
   private

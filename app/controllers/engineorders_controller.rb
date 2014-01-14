@@ -56,7 +56,7 @@ class EngineordersController < ApplicationController
     
     respond_to do |format|
       if @engineorder.save
-        format.html { redirect_to @engineorder, notice: 'Engineorder was successfully created.' }
+        format.html { redirect_to @engineorder, notice: t('controller_msg.engineorder_created') }
         format.json { render action: 'show', status: :created, location: @engineorder }
       else
         format.html { render action: 'new' }
@@ -75,7 +75,7 @@ class EngineordersController < ApplicationController
       if @engineorder.update(engineorder_params)
         # 受注オブジェクトの状況などから、単純な画面項目のセット以外の、各種編集を行う
         self.editByStatus
-        format.html { redirect_to @engineorder, notice: 'Engineorder was successfully updated.' }
+        format.html { redirect_to @engineorder, notice: t('controller_msg.engineorder_updated')}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

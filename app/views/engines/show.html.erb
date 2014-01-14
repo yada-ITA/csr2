@@ -14,11 +14,12 @@
   <%= @engine.serialno %>
   </div>
 
+<% if current_user.yesOffice? %>
   <div class="field">
-    <%= Company.human_attribute_name('name') %>
+    <%= Engine.human_attribute_name('company') %>
   <%= @engine.company.name %>
 </div>
-
+<% end %>
 
   <div class="field">
     <%= Engine.human_attribute_name('status') %>
@@ -27,6 +28,6 @@
 
 
 <% if current_user.yesOffice? %>
-  <%= link_to 'Edit', edit_engine_path(@engine) %> |
+  <%= link_to t('views.link_edit'), edit_engine_path(@engine) %> |
 <% end %>
-<%= link_to 'Back', engines_path %>
+<%= link_to t('views.link_back'), engines_path %>

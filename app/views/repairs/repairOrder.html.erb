@@ -3,7 +3,6 @@
 <%= form_for(@repair) do |f| %>
   <%= render "errormsg" , modeldata: @repair %>
 
-  
   <%= render 'engineInfo' %>
   <% disabled_data = getDisabled_RepairOrder %>
 
@@ -24,18 +23,24 @@
   </div>
 
   <div class="field">
+    <%= label_tag 'コメント(交換理由)' %><br>
+    <%= f.text_area :change_comment, :disabled=> true %>
+  </div>
+
+  <div class="field">
     <%= f.label :arrive_date %><br>
     <%=  f.date_select :arrive_date, :use_month_numbers => true, :disabled=>disabled_data[:arrive_date] %>
   </div>
 
   <div class="field">
     <%= f.label :order_no %><br>
-    <%= f.text_field :order_no, :disabled=>disabled_data[:order_no] %>
+    <%= f.text_field :order_no, :disabled=> true %>
   </div>
   <div class="field">
     <%= f.label :order_date %><br>
-    <%= f.date_select :order_date, :use_month_numbers => true, :disabled=>disabled_data[:order_date] %>
+    <%= f.text_field :order_date, :disabled=> true %>
   </div>
+
   <div class="field">
     <%= f.label :construction_no %><br>
     <%= f.text_field :construction_no, :disabled=>disabled_data[:construction_no] %>
@@ -50,18 +55,7 @@
       <%= f.submit  :value => t('views.buttun_repairOrdered') %>
     </div>
   <% end %>
-<%= link_to 'Back', repairs_path %>
-
-<hr>
-  <div class="field">
-    <%= f.label :issue_no %><br>
-    <%= f.text_field :issue_no, :disabled=> true %>
-  </div>
-  <div class="field">
-    <%= f.label :issue_date %><br>
-    <%= f.text_field :issue_date, :disabled=> true %>
-  </div>
-
+<%= link_to t('views.link_back'), repairs_path %>
 
 <% end %>
 

@@ -60,6 +60,24 @@ class Repair < ActiveRecord::Base
     end
   end
 
+  #コメント（交換理由）
+  def change_comment
+    unless self.engine.current_order_as_old.nil?
+      return self.engine.current_order_as_old.change_comment
+    end
+    return nil
+  end
+  def change_comment=(change_comment_value)
+    #新規作成時はself.engineがnilなので、いったん確認する。
+    unless self.engine.nil?
+      unless self.engine.current_order_as_old.nil? 
+        self.engine.current_order_as_old.change_comment = change_comment_value
+      end
+    end
+  end
+
+
+
   # opened? 問い合わせメソッドを削除しました。
   # DB からフェッチしたデータをアプリ内でふるいにかけることになるので、opened
   # スコープを使って DB 検索時に予め作業中のレコードのみに絞るように変更しまし
@@ -78,6 +96,17 @@ class Repair < ActiveRecord::Base
     return issuedate + "-" + issueseq
   end
 
+
+  #現時点での依頼Noの生成 (年月-枝番3桁)
+  def self.createOrderNo
+    orderdate = Date.today.strftime("%Y%m") 
+    maxseq = self.where("order_no like ?", orderdate + "%").max()
+    orderseq = '001'
+    unless maxseq.nil?
+      orderseq = sprintf("%03d", maxseq.order_no.split('-')[1].to_i + 1)
+    end
+    return orderdate + "-" + orderseq
+  end
   
   
   #試運転日から運転年数を求める。(運転年数は、切り上げ)

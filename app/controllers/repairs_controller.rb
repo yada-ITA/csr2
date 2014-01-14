@@ -4,7 +4,14 @@ class RepairsController < ApplicationController
   # GET /repairs
   # GET /repairs.json
   def index
-    @repairs = Repair.all.order(:updated_at).reverse_order.paginate(page: params[:page], per_page: 10)
+    #Yes本社の場合全件表示、それ以外の場合は自社の管轄のエンジンの整備依頼に対してのみ表示する。
+    #※管轄が変わると表示されなくなるので注意が必要…
+    if current_user.yesOffice?
+      @repairs = Repair.all.order(:updated_at).reverse_order.paginate(page: params[:page], per_page: 10)
+    else
+      engines = Engine.where(company_id: current_user.company_id).pluck(:id)
+      @repairs = Repair.where(engine_id: engines).order(:updated_at).reverse_order.paginate(page: params[:page], per_page: 10)
+    end
   end
 
   # GET /repairs/1
@@ -76,7 +83,7 @@ class RepairsController < ApplicationController
     
     respond_to do |format|
       if @repair.save
-        format.html { redirect_to @repair, notice: 'Repair was successfully created.' }
+        format.html { redirect_to @repair, notice: t("controller_msg.repair_created") }
         format.json { render action: 'show', status: :created, location: @repair }
       else
         format.html { render action: 'new' }
@@ -88,11 +95,17 @@ class RepairsController < ApplicationController
   # PATCH/PUT /repairs/1
   # PATCH/PUT /repairs/1.json
   def update
+    #依頼Noがない場合、新規に依頼Noと整備依頼日を取得する
+    if params[:order_no].blank?
+      @repair.order_no = Repair.createOrderNo
+      @repair.order_date = Date.today
+    end
+
     respond_to do |format|
       if @repair.update(repair_params)
         # パラメータにenginestatus_idがあれば、エンジンのステータスを設定し、所轄をログインユーザの会社に変更する
         self.setEngineStatus
-        
+
 		    #if !(params[:enginestatus_id].nil?)
 		    #  @repair.engine.enginestatus = Enginestatus.find(params[:enginestatus_id].to_i)
 		    #  if params[:enginestatus_id].to_i == 1
@@ -101,12 +114,14 @@ class RepairsController < ApplicationController
 		    #end
 		    
 		    # もし整備依頼の場合は、その整備会社のユーザに整備依頼メールを送信する。
-		    if params[:commit] == t('views.buttun_repairOrdered')
-           R2mailer.sendRepairOrderMail(User.collect_emails_by_company(@repair.engine.company)  , @repair).deliver
-        end
+#
+#		    if params[:commit] == t('views.buttun_repairOrdered')
+#           R2mailer.sendRepairOrderMail(User.collect_emails_by_company(@repair.engine.company)  , @repair).deliver
+#        end
+
 		    @repair.engine.save
 		    
-        format.html { redirect_to @repair, notice: 'Repair was successfully updated.' }
+        format.html { redirect_to @repair, notice: t("controller_msg.repair_updated") }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

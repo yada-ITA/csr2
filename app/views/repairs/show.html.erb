@@ -8,18 +8,7 @@
     <%= @repair.engine.serialno %>
 </div>
 
- <div class="field">
-    <%= Repair.human_attribute_name('issue_no') %>
-    <%= @repair.issue_no %>
-  </div>
-  <div class="field">
-    <%= Repair.human_attribute_name('issue_date') %>
-    <%= @repair.issue_date %>
-  </div>
-  <div class="field">
-    <%= Repair.human_attribute_name('arrive_date') %>
-    <%=  @repair.arrive_date %>
-  </div>
+
   <div class="field">
     <%= Repair.human_attribute_name('order_no') %>
     <%= @repair.order_no %>
@@ -28,6 +17,13 @@
     <%= Repair.human_attribute_name('order_date') %>
     <%= @repair.order_date %>
   </div>
+
+  <div class="field">
+    <%= Repair.human_attribute_name('arrive_date') %>
+    <%=  @repair.arrive_date %>
+  </div>
+
+
   <div class="field">
     <%= Repair.human_attribute_name('construction_no') %>
     <%= @repair.construction_no %>
@@ -58,7 +54,7 @@
   </div>
 
 <% if current_user.yesOffice? %>
-  <%= link_to 'Edit', edit_repair_path(@repair) %> |
+  <%= link_to t('views.link_edit'), edit_repair_path(@repair) %> |
 <% end %>
 
-<%= link_to 'Back', repairs_path %>
+<%= link_to t('views.link_back'), repairs_path %>

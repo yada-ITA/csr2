@@ -25,9 +25,8 @@
   <div class="actions">
     <%= f.submit  :value => t('views.buttun_repairStarted') %>
   </div>
-  <%= link_to 'Back', repairs_path %>
+  <%= link_to t('views.link_back'), repairs_path %>
 </div>
-
 
   <div class="well col-md-8">
   <div class="field">
@@ -38,7 +37,9 @@
     <%= f.label :issue_date %><br>
     <%= f.text_field :issue_date, :disabled=> true %>
   </div>
-  
+
+
+<% if false %>
   <div class="field">
     <%= f.label :order_no %><br>
     <%= f.text_field :order_no, :use_month_numbers => true, :disabled=> disabled_data[:order_no] %>
@@ -47,6 +48,9 @@
     <%= f.label :order_date %><br>
     <%= f.date_select :order_date, :use_month_numbers => true, :disabled=> disabled_data[:order_date] %>
   </div>
+<% end %>
+
+
   <div class="field">
     <%= f.label :construction_no %><br>
     <%= f.text_field :construction_no, :disabled=> disabled_data[:construction_no] %>
@@ -55,6 +59,12 @@
     <%= f.label :desirable_finish_date %><br>
     <%= f.date_select :desirable_finish_date, :use_month_numbers => true, :disabled=>disabled_data[:desirable_finish_date] %>
   </div>
+
+  <div class="field">
+    <%= label_tag 'コメント(交換理由)' %><br>
+    <%= f.text_area :change_comment, :disabled=> true %>
+  </div>
+
   </div>
 </div>
 <% end %>
