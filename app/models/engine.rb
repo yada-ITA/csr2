@@ -159,7 +159,12 @@ class Engine < ActiveRecord::Base
 
   # 出荷準備中状態かどうか？
   def before_shipping?
-    status == Enginestatus.of_before_shipping
+    #status == Enginestatus.of_before_shipping
+    if status == Enginestatus.of_before_shipping
+      return true
+    else
+      return false
+    end
   end
 
   # 出荷済状態かどうか？

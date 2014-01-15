@@ -31,18 +31,19 @@
         -->
         <td><%= repair.engine.engine_model_name %></td>
         <td><%= repair.engine.serialno %></td>
-          <% if current_user.yes? %>
+        <% if current_user.yes? %>
           <td>
             <%= link_to '依頼', order_repair_path(repair) %>
           </td>
-          <% end %>
+        <% end %>
         <td><%= link_to '開始', start_repair_path(repair) %></td>
         <td><%= link_to '完了', finish_repair_path(repair) %></td>
-          <% if repair.engine.before_shipping? %>
-            <td>
+     <% if repair.engine.before_shipping? %>
+          <td>
             <%= link_to '出荷', shipped_path(repair.engine.current_order_as_new) %>
-            </td>
-          <% end %>
+          </td>
+        <% end %>
+
         <% if current_user.yesOffice? %>
           <td><%= link_to '詳細', repair %></td>
           <td><%= link_to '訂正', edit_repair_path(repair) %></td>
