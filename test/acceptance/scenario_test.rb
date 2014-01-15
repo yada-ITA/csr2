@@ -258,7 +258,7 @@ class ScenarioTest < AcceptanceTest
     save_screenshot "scenario1-8_3_2.png"
     click_button "出荷登録"
     # 8.4. 引合一覧画面に移動する
-    click_link "Back"
+    click_link "戻る"
     within "tbody > tr" do
       assert_equal "出荷済", nth_tag(:td, 1).text # ステータス
       assert_equal "1GPH00-KS ( 5 )", nth_tag(:td, 9).text # 返却エンジン

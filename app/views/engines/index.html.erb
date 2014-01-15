@@ -52,7 +52,7 @@
         <td><%= engine.engine_model_name	 %></td>
         <td><%= engine.serialno %></td>
         <% if current_user.yesOffice? %>
-          <td><%= engine.company.name %></td>
+          <td><%= engine.company.name unless engine.company.blank? %></td>
         <% end %>
         <td><%= engine.current_order_as_old.returning_date unless engine.current_order_as_old.nil? %></td>
         <td><%= engine.current_repair.arrive_date unless engine.current_repair.nil? %></td>
@@ -64,11 +64,11 @@
         </td>
           <% end %>
         <td><%= link_to '受領登録', engine_arrived_path(engine) %></td>
-        <% if  engine.before_shipping?  %>
-　　        <td>
-  　　        <%= link_to '出荷', shipped_path(engine.current_order_as_new) %>
-    　　    </td>
-        <% end %>
+          <% if  engine.before_shipping?  %>
+           <td>
+            <%= link_to '出荷', shipped_path(engine.current_order_as_new) %>
+           </td>
+            <% end %>
       　　<% if current_user.yesOffice? %>
         　　<td><%= link_to '詳細', engine %></td>
         　　<td><%= link_to '修正', edit_engine_path(engine) %></td>

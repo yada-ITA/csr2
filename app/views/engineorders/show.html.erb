@@ -1,92 +1,111 @@
-<p>
-  <strong>Issue no:</strong>
-  <%= @engineorder.issue_no %>
-</p>
 
-<p>
-  <strong>Inquiry date:</strong>
+ <div class="field">
+   <%= Engineorder.human_attribute_name('issue_no') %>：
+    <%= @engineorder.issue_no %>
+  </div>
+
+
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('inquiry_date') %>：
   <%= @engineorder.inquiry_date %>
-</p>
+</div>
 
-<p>
-  <strong>Registered user:</strong>
-  <%= @engineorder.registered_user_id %>
-</p>
 
-<p>
-  <strong>Updated user:</strong>
-  <%= @engineorder.updated_user_id %>
-</p>
+ <div class="field">
+   <%= Engineorder.human_attribute_name('registered_user_id') %>：
+  <%= User.find(@engineorder.registered_user_id).name unless @engineorder.registered_user_id.blank? %>
+</div>
 
-<p>
-  <strong>Branch:</strong>
-  <%= @engineorder.branch_id %>
-</p>
 
-<p>
-  <strong>Salesman:</strong>
-  <%= @engineorder.salesman_id %>
-</p>
+ <div class="field">
+   <%= Engineorder.human_attribute_name('updated_user_id') %>：
+  <%= User.find(@engineorder.updated_user_id).name unless @engineorder.updated_user_id.blank? %>
+</div>
 
-<p>
-  <strong>Install place:</strong>
-  <%= @engineorder.install_place_id %>
-</p>
 
-<p>
-  <strong>Orderer:</strong>
+ <div class="field">
+   <%= Engineorder.human_attribute_name('branch_id') %>：
+  <%= Company.find(@engineorder.branch_id).name unless @engineorder.branch_id.blank? %>
+</div>
+
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('salesman_id') %>：
+  <%= User.find(@engineorder.salesman_id).name unless @engineorder.salesman_id.blank? %>
+</div>
+
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('install_place_id') %>：
+  <%= Company.find(@engineorder.install_place_id).name unless @engineorder.install_place_id.blank? %>
+</div>
+
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('orderer') %>：
   <%= @engineorder.orderer %>
-</p>
+</div>
 
-<p>
-  <strong>Machine no:</strong>
-  <%= @engineorder.machine_no %>
-</p>
 
-<p>
-  <strong>Time of running:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('time_of_running') %>：
   <%= @engineorder.time_of_running %>
-</p>
+</div>
 
-<p>
-  <strong>Change comment:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('change_comment') %>：
   <%= @engineorder.change_comment %>
-</p>
+</div>
 
-<p>
-  <strong>Order date:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('order_date') %>：
   <%= @engineorder.order_date %>
-</p>
+</div>
 
-<p>
-  <strong>Sending place:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('issue_no') %>：
   <%= @engineorder.sending_place_id %>
-</p>
+</div>
 
-<p>
-  <strong>Sending comment:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('sending_comment') %>：
   <%= @engineorder.sending_comment %>
-</p>
+</div>
 
-<p>
-  <strong>Desirable delivery date:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('desirable_delivery_date') %>：
   <%= @engineorder.desirable_delivery_date %>
-</p>
+</div>
 
-<p>
-  <strong>Businessstatus:</strong>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('businessstatus_id') %>：
   <%= @engineorder.businessstatus_id %>
-</p>
+</div>
 
-<p>
-  <strong>New engine:</strong>
-  <%= @engineorder.new_engine_id %>
-</p>
 
-<p>
-  <strong>Old engine:</strong>
-  <%= @engineorder.old_engine_id %>
-</p>
+ <div class="field">
+   <%= Engineorder.human_attribute_name('new_engine_id') %>：
+   <%= Engine.find(@engineorder.new_engine_id).engine_name unless @engineorder.new_engine_id.blank? %>
+</div>
 
-<%= link_to 'Edit', edit_engineorder_path(@engineorder) %> |
-<%= link_to 'Back', engineorders_path %>
+
+ <div class="field">
+   <%= Engineorder.human_attribute_name('old_engine_id') %>：
+   <%= Engine.find(@engineorder.old_engine_id).engine_name unless @engineorder.old_engine_id.blank? %>
+</div>
+
+
+<% if current_user.yesOffice? %>
+  <%= link_to 'Edit', edit_engineorder_path(@engineorder) %> |
+  <%= link_to t('views.link_back'), engineorders_path %>
+<% else %>
+  <%= link_to t('views.link_back'), engines_path %>
+<% end %>

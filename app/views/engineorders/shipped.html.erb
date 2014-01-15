@@ -48,7 +48,11 @@
     <div class="actions">
       <%= f.submit  :value => t('views.buttun_shipped') %>
     </div>
-    <%= link_to 'Back', engineorders_path %>
+    <% if current_user.yesOffice? %>
+      <%= link_to t('views.link_back'), engineorders_path %>
+    <% else %>
+      <%= link_to t('views.link_back'), engines_path %>
+    <% end %>
   </div>
 
   <div class="well col-sm-7">
